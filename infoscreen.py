@@ -74,7 +74,7 @@ def run_program_for_a_while(progname, args, a_while):
                             close_fds=True)
     time.sleep(a_while)
     proc.send_signal(15) # SIGTERM
-    time.sleep(5)
+    time.sleep(1)
     proc.send_signal(9) # SIGKILL
 
 def show_in_browser(filename):
