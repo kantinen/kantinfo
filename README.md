@@ -1,0 +1,1 @@
+Kantinens infoskærmssystem.
