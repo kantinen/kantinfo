@@ -10,7 +10,7 @@ import subprocess
 content_directory='content'
 
 # Whether or not to Git pull after each content switch.
-pull_after_switch=False
+pull_after_switch=True
 
 # If x is an element of xs, return its index.  Otherwise, return None.
 def index_or_none(x, xs):
