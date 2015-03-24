@@ -37,25 +37,29 @@ blink {
       showTime();
 
       function timeLeft() {
-        var deadline = new Date(1427461200*1000);
+        var deadline = new Date(2015, 3, 27, 14);
         var diff = new Date(deadline - new Date());
 
         return {
-          days: diff.getDate(),
+          days: diff.getDate() - 1, // fordi vi starter på 1
           hours: diff.getHours(),
           minutes: diff.getMinutes()
         };
+      }
+      function randomMotivator() {
+        return "kun";
       }
       function showTime() {
         var toShow = timeLeft(); 
         var timeDiv = document.getElementById("time");
 
         timeDiv.innerHTML = "".concat(
-          "Har du afleveret OSM eksamen endnu?<br/><br/>Der er</br><br/>",
-          "<blink>",
+          "Har du afleveret OSM eksamen endnu?<br/><br/>Der er ",
+          randomMotivator(),
+          "</br><br/><blink>",
           toShow.days, " dage, ",
           toShow.hours, " timer, og ",
-          toShow.minutes, " minutter",
+          toShow.minutes - 5, " minutter",
           "</blink><br/><br/>tilbage!");
       }
     </script>
