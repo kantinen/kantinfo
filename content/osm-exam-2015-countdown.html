@@ -38,12 +38,16 @@ blink {
       var DEADLINE = new Date(2015, 2, 27, 13, 55);
       showTime();
 
+      function localTimeNow() {
+        return Date.now() - DEADLINE.getTimezoneOffset() * 60 * 1000;
+      }
+
       function timeLeft() {
-        var diff = new Date(DEADLINE.getTime() - Date.now());
+        var diff = new Date(DEADLINE.getTime() - localTimeNow());
 
         return {
           days: diff.getDate() - 1, // fordi vi starter på 1
-          hours: diff.getHours(),
+          hours: diff.getHours(), // tidszone
           minutes: diff.getMinutes()
         };
       }
@@ -53,7 +57,7 @@ blink {
       }
 
       function pctLeft() {
-        var diff_now = DEADLINE.getTime() - Date.now();
+        var diff_now = DEADLINE.getTime() - localTimeNow();
         var diff_deadline = DEADLINE.getTime() - HANDOUT.getTime();
 
         return pct((diff_deadline - diff_now) / diff_deadline);
