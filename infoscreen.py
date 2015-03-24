@@ -63,7 +63,8 @@ def find_next(old_selection, old_list, new_list):
       return new_list[0]
 
 def find_next_content(old_selection, old_content):
-    new_content = os.listdir(content_directory)
+    new_content = [ f for f in os.listdir(content_directory)
+                    if os.path.isfile(os.path.join(content_directory,f)) ]
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program_for_a_while(progname, args, a_while):
