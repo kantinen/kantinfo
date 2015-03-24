@@ -34,11 +34,12 @@ blink {
 }
     </style>
     <script>
+      var HANDOUT = new Date(2015, 3, 23, 9);
+      var DEADLINE = new Date(2015, 3, 27, 13, 55);
       showTime();
 
       function timeLeft() {
-        var deadline = new Date(2015, 3, 27, 13, 55);
-        var diff = new Date(deadline.getTime() - Date.now());
+        var diff = new Date(DEADLINE.getTime() - Date.now());
 
         return {
           days: diff.getDate() - 1, // fordi vi starter på 1
@@ -49,11 +50,9 @@ blink {
 
       function pctLeft() {
         var handout = new Date(2015, 3, 23, 9);
-        var deadline = new Date(2015, 3, 27, 14);
-        var diff_now = Date.now() - handout;
+        var deadline = new Date(2015, 3, 27, 13, 55);
+        var diff_now = deadline - Date.now();
         var diff_deadline = deadline - handout;
-
-        alert([Date.now(), (new Date(2015,3,24,19)).getTime()]);
 
         return Math.round((diff_now / diff_now)*100*100)/100;
       }
@@ -77,11 +76,11 @@ blink {
         timeDiv.innerHTML = "".concat(
           "Har du afleveret OSM eksamen endnu?<br/><br/>Der er ",
           randomMotivator(),
-          "</br><br/><blink>",
+          "</br><br/><b>",
           toShow.days, " dage, ",
           toShow.hours, " timer, og ",
           toShow.minutes, " minutter",
-          "</blink><br/><br/>tilbage!<br/><br/>");
+          "</b><br/><br/>tilbage!<br/><br/>");
 //          "Du burde nu være ", pctLeft(), "% igennem..");
       }
     </script>
