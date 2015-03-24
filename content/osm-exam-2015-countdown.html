@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OSM Exam 2015 Countdown</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div id="time" class="blink"></div>
+    <style>
+      #time {
+        margin:auto;
+        margin-top:30%;
+        text-align:center;
+        font-size:5vw;
+        position:relative;
+        top:50%
+      }
+
+/* http://stackoverflow.com/questions/4894488/blinking-text-cross-browser */
+@-webkit-keyframes blink {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+blink {
+    -webkit-animation-name: blink;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 1s;
+}
+    </style>
+    <script>
+      showTime();
+
+      function timeLeft() {
+        var deadline = new Date(1427461200*1000);
+        var diff = new Date(deadline - new Date());
+
+        return {
+          days: diff.getDate(),
+          hours: diff.getHours(),
+          minutes: diff.getMinutes()
+        };
+      }
+      function showTime() {
+        var toShow = timeLeft(); 
+        var timeDiv = document.getElementById("time");
+
+        timeDiv.innerHTML = "".concat(
+          "Har du afleveret OSM eksamen endnu?<br/><br/>Du har</br>",
+          "<blink>",
+          toShow.days, " dage, ",
+          toShow.hours, " timer, og ",
+          toShow.minutes, " minutter",
+          "</blink> endnu!");
+      }
+    </script>
+  </body>
+</html>
