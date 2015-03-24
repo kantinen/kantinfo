@@ -61,11 +61,20 @@ blink {
         return items[Math.floor(Math.random()*items.length)];
       }
 
+      function randomIntro() {
+        return randomItem([
+          "Har du afleveret OSM eksamen endnu?",
+          "Jyrki vil gerne rette din OSM eksamen!",
+          "Er der heisenbugs din kerne?",
+          "Får du dræbt dine processer?"]);
+      }
+
       function randomMotivator() {
         return randomItem([
          "<b>?!KUN!?</b>",
          "<i>HELE</i>",
          "round robin",
+         "heldigvis",
          "sådan cirkus"]);
       }
 
@@ -74,7 +83,8 @@ blink {
         var timeDiv = document.getElementById("time");
 
         timeDiv.innerHTML = "".concat(
-          "Har du afleveret OSM eksamen endnu?<br/><br/>Der er ",
+          randomIntro(),
+          "<br/><br/>Der er ",
           randomMotivator(),
           "</br><br/><b>",
           toShow.days, " dage, ",
