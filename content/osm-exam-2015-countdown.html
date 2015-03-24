@@ -9,7 +9,7 @@
     <style>
       #time {
         margin:auto;
-        margin-top:15%;
+        margin-top:10%;
         text-align:center;
         font-size:10vw;
         position:relative;
@@ -34,8 +34,8 @@ blink {
 }
     </style>
     <script>
-      var HANDOUT = new Date(2015, 3, 23, 9);
-      var DEADLINE = new Date(2015, 3, 27, 13, 55);
+      var HANDOUT = new Date(2015, 2, 23, 9);
+      var DEADLINE = new Date(2015, 2, 27, 13, 55);
       showTime();
 
       function timeLeft() {
@@ -48,13 +48,15 @@ blink {
         };
       }
 
-      function pctLeft() {
-        var handout = new Date(2015, 3, 23, 9);
-        var deadline = new Date(2015, 3, 27, 13, 55);
-        var diff_now = deadline - Date.now();
-        var diff_deadline = deadline - handout;
+      function pct(decimal) {
+        return Math.round(decimal*100*100)/100;
+      }
 
-        return Math.round((diff_now / diff_now)*100*100)/100;
+      function pctLeft() {
+        var diff_now = DEADLINE.getTime() - Date.now();
+        var diff_deadline = DEADLINE.getTime() - HANDOUT.getTime();
+
+        return pct((diff_deadline - diff_now) / diff_deadline);
       }
 
       function randomItem(items) {
@@ -65,7 +67,7 @@ blink {
         return randomItem([
           "Har du afleveret #osm eksamen endnu?",
           "#jyrki vil gerne rette din #osm eksamen!",
-          "Er der #heisenbugs din kerne?",
+          "Er der #heisenbugs din #kerne?",
           "Får du dræbt dine processer?"]);
       }
 
@@ -90,8 +92,8 @@ blink {
           toShow.days, " dage, ",
           toShow.hours, " timer, og ",
           toShow.minutes, " minutter",
-          "</b><br/><br/>tilbage!<br/><br/>");
-//          "Du burde nu være ", pctLeft(), "% igennem..");
+          "</b><br/><br/>tilbage!<br/><br/>",
+          "Du burde nu være ", pctLeft(), "% igennem..");
       }
     </script>
   </body>
