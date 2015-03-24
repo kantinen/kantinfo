@@ -37,8 +37,8 @@ blink {
       showTime();
 
       function timeLeft() {
-        var deadline = new Date(2015, 3, 27, 14);
-        var diff = new Date(deadline - new Date());
+        var deadline = new Date(2015, 3, 27, 13, 55);
+        var diff = new Date(deadline.getTime() - Date.now());
 
         return {
           days: diff.getDate() - 1, // fordi vi starter på 1
@@ -46,15 +46,30 @@ blink {
           minutes: diff.getMinutes()
         };
       }
-      function randomMotivator() {
-        var items = [
-         "<b>?!KUN!?</b>",
-         "<i>HELE</i>",
-         "måske",
-         "sådan cirkus"];
 
+      function pctLeft() {
+        var handout = new Date(2015, 3, 23, 9);
+        var deadline = new Date(2015, 3, 27, 14);
+        var diff_now = Date.now() - handout;
+        var diff_deadline = deadline - handout;
+
+        alert([Date.now(), (new Date(2015,3,24,19)).getTime()]);
+
+        return Math.round((diff_now / diff_now)*100*100)/100;
+      }
+
+      function randomItem(items) {
         return items[Math.floor(Math.random()*items.length)];
       }
+
+      function randomMotivator() {
+        return randomItem([
+         "<b>?!KUN!?</b>",
+         "<i>HELE</i>",
+         "round robin",
+         "sådan cirkus"]);
+      }
+
       function showTime() {
         var toShow = timeLeft(); 
         var timeDiv = document.getElementById("time");
@@ -65,8 +80,9 @@ blink {
           "</br><br/><blink>",
           toShow.days, " dage, ",
           toShow.hours, " timer, og ",
-          toShow.minutes - 5, " minutter",
-          "</blink><br/><br/>tilbage!");
+          toShow.minutes, " minutter",
+          "</blink><br/><br/>tilbage!<br/><br/>");
+//          "Du burde nu være ", pctLeft(), "% igennem..");
       }
     </script>
   </body>
