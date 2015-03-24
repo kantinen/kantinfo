@@ -9,7 +9,7 @@
     <style>
       #time {
         margin:auto;
-        margin-top:10%;
+        margin-top:15%;
         text-align:center;
         font-size:10vw;
         position:relative;
@@ -47,7 +47,13 @@ blink {
         };
       }
       function randomMotivator() {
-        return "kun";
+        var items = [
+         "<b>?!KUN!?</b>",
+         "<i>HELE</i>",
+         "måske",
+         "sådan cirkus"];
+
+        return items[Math.floor(Math.random()*items.length)];
       }
       function showTime() {
         var toShow = timeLeft(); 
