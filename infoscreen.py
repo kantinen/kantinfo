@@ -82,6 +82,12 @@ def show_in_browser(filename):
                              'file://' + os.path.join(os.getcwd(), filename)],
                             20)
 
+def run_in_terminal(filename):
+    run_program_for_a_while('lxterminal',
+                            ['-e', # Start program
+                             os.path.join(os.getcwd(), filename)],
+                            20)
+
 def show_content(filename):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
@@ -89,6 +95,8 @@ def show_content(filename):
         return show_in_browser(filename)
     if extension == '.jpg':
         return show_in_browser(filename)
+    if extension == '.sh':
+        return run_in_terminal(filename)
     raise Exception("I have no idea how to show a %s file." % extension)
 
 # Main command line entry point.
