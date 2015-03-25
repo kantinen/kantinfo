@@ -12,6 +12,8 @@ odroid med bruger `odroid` og løsen `odroid`.
 
 Når maskinen starter op kører den lightdm, som automatisk logger
 brugeren `odroid` ind i en session, der kører scriptet `.xinitrc`.
+Vi har vedhæftet vores `.xinitrc` i dette repo.
+
 Dette scripts primære ansvar er at starte en `tmux`-session der kører
 infoskærmsscriptet, samt starte en enkelt window manager.
 
