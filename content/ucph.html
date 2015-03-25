@@ -3,12 +3,53 @@
   <head>
     <title>UCPH.DK</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+h1 {
+  font-size: 100px;
+}
+
+h2 {
+  font-size: 70px;
+}
+
+h3 {
+  font-size: 50px;
+}
+
+#panda {
+  width: 256px;
+  height: 256px;
+  animation: panda 3s infinite;
+}
+
+@keyframes panda {
+  0% {
+    margin-left: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    margin-left: calc(100% - 256px - 10px);
+    transform: rotate(720deg);
+  }
+  100% {
+    margin-left: 0;
+    transform: rotate(0deg);
+  }
+}
+    </style>
   </head>
   <body>
-    <h1 style="font-size:100px">UCPH.DK</h1>
+    <h1>UCPH.DK</h1>
 
-    <span style="font-size:70px">Danmarks bedste DIKU-portal!</span>
-    <hr />
-    <span style="font-size:50px">Bidrag med indhold og få et bolsje!</span>
+    <h2>Danmarks bedste DIKU-portal!</h2>
+    <hr>
+    <h3>Bidrag med indhold og få et bolsje!</h3>
+
+    <p>
+      <img src="res/pandahoved-cirkel.png"
+           alt="Panda siger velkommen" title="Panda siger velkommen"
+           id="panda" />
+    </p>
+
   </body>
 </html>
