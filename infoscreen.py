@@ -75,7 +75,7 @@ def run_program_for_a_while(progname, args, a_while):
                             stdin=None,
                             close_fds=True)
     if a_while == -1:
-        proc.communicate() # Wait for it to finish
+        proc.wait()
     else:
         time.sleep(a_while)
         proc.kill() # SIGKILL (or similar on other platforms)
@@ -92,7 +92,7 @@ def run_in_terminal(filename, dur):
                              os.path.join(os.getcwd(), filename)],
                             dur)
 
-def show_content(filename, dur=20):
+def show_content(filename, dur=2):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
     if extension == '.html':
@@ -103,6 +103,9 @@ def show_content(filename, dur=20):
         return run_in_terminal(filename, dur)
     raise Exception("I have no idea how to show a %s file." % extension)
 
+def set_random_bg_color():
+    subprocess.call([os.path.join(os.getcwd(), 'set-random-bg-color.sh')])
+    
 # Main command line entry point.
 def infoscreen():
     content, content_list = find_next_content(None, [])
@@ -113,6 +116,7 @@ def infoscreen():
             print("Failed to show %s:\n%s" % (content, str(e)))
             print("Sleeping for two seconds.")
             time.sleep(2)
+        set_random_bg_color()
         try:
             if pull_after_switch:
                 subprocess.call(["git", "pull"])
