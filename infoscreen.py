@@ -99,6 +99,8 @@ def show_content(filename, dur=20):
         return show_in_browser(filename, dur)
     if extension == '.jpg':
         return show_in_browser(filename, dur)
+    if extension == '.png':
+        return show_in_browser(filename, dur)
     if extension == '.sh':
         return run_in_terminal(filename, dur)
     raise Exception("I have no idea how to show a %s file." % extension)
