@@ -91,12 +91,17 @@ blink {
         var toShow = timeLeft(); 
         var timeDiv = document.getElementById("time");
 
+        var daysText = "dage";
+        if (toShow.days === 1) {
+          daysText = "dag";
+        }
+
         timeDiv.innerHTML = "".concat(
           randomIntro(),
           "<br/><br/>Der er ",
           randomMotivator(),
           "</br><br/><b>",
-          toShow.days, " dage, ",
+          toShow.days, " ", daysText, ", ",
           toShow.hours, " timer, og ",
           toShow.minutes, " minutter",
           "</b><br/><br/>tilbage!<br/><br/>",
