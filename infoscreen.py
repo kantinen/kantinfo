@@ -92,7 +92,7 @@ def run_in_terminal(filename, dur):
                              os.path.join(os.getcwd(), filename)],
                             dur)
 
-def show_content(filename, dur=2):
+def show_content(filename, dur=20):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
     if extension == '.html':
