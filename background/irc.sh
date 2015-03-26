@@ -32,11 +32,13 @@ ircloop() {
 in=$(mktemp)
 touch $in
 
+channel="#diku"
+
 # Kør klienten i baggrunden.
 {
     tail -f $in \
 	| ircloop \
-	| grep --line-buffered -E '^\#hongabar' \
+	| grep --line-buffered -E "^\$channel" \
 	| sed -ur 's/[^<]+(.+)/\1/' \
 	| while IFS='' read line; do
 	echo "$line" | fmt -75 | color_usermsg >> $irc_out
@@ -45,7 +47,7 @@ touch $in
 } &
 
 # Join #diku.
-echo ':j #hongabar' > $in
+echo ":j $channel" > $in
 
 # Wait for the client to finish.
 wait
