@@ -2,6 +2,12 @@
 
 irc_out=/tmp/diku_irc_out
 
-echo 'Kom på IRC på #diku på irc.freenode.net!  Spørg din nabo om hjælp.' | toilet -f term --gay
+velkommen() {
+    tput cup 0 0
+    echo 'Kom på IRC på #diku på irc.freenode.net!  Spørg din nabo om hjælp.' | toilet -f term --gay
+}
 
-tail -f -n 17 $irc_out
+tail -f $irc_out | while read line; do
+    velkommen
+    tail -n 16 $irc_out
+done
