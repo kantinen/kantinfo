@@ -38,7 +38,7 @@ channel="#diku"
 {
     tail -f $in \
 	| ircloop \
-	| grep --line-buffered -E "^\$channel" \
+	| grep --line-buffered -E "^$channel" \
 	| sed -ur 's/[^<]+(.+)/\1/' \
 	| while IFS='' read line; do
 	echo "$line" | fmt -75 | color_usermsg >> $irc_out
