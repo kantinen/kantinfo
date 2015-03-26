@@ -133,7 +133,10 @@ if __name__ == '__main__':
 
     if filename is not None:
         # Test a file instead of waiting for it to show.
-        show_content(filename, -1)
+        try:
+            show_content(filename, -1)
+        except KeyboardInterrupt:
+            pass
     else:
         # Run the slideshow.
         while True:
