@@ -2,7 +2,7 @@
 
 trap 'killall sic; exit' INT QUIT TERM EXIT
 
-irc_out=$HOME/diku_irc_out
+irc_out=/tmp/diku_irc_out
 
 in=$(mktemp)
 touch $in

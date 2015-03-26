@@ -2,6 +2,7 @@
 #
 # Infoscreen control script.
 
+import sys
 import os
 import time
 import subprocess
@@ -73,32 +74,38 @@ def run_program_for_a_while(progname, args, a_while):
                             stderr=None,
                             stdin=None,
                             close_fds=True)
-    time.sleep(a_while)
-    proc.send_signal(9) # SIGKILL
+    if a_while == -1:
+        proc.wait()
+    else:
+        time.sleep(a_while)
+        proc.kill() # SIGKILL (or similar on other platforms)
 
-def show_in_browser(filename):
+def show_in_browser(filename, dur):
     run_program_for_a_while('surf',
                             ['-p', # Disable plugins.
                              'file://' + os.path.join(os.getcwd(), filename)],
-                            20)
+                            dur)
 
-def run_in_terminal(filename):
+def run_in_terminal(filename, dur):
     run_program_for_a_while('lxterminal',
                             ['-e', # Start program
                              os.path.join(os.getcwd(), filename)],
-                            20)
+                            dur)
 
-def show_content(filename):
+def show_content(filename, dur=20):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
     if extension == '.html':
-        return show_in_browser(filename)
+        return show_in_browser(filename, dur)
     if extension == '.jpg':
-        return show_in_browser(filename)
+        return show_in_browser(filename, dur)
     if extension == '.sh':
-        return run_in_terminal(filename)
+        return run_in_terminal(filename, dur)
     raise Exception("I have no idea how to show a %s file." % extension)
 
+def set_random_bg_color():
+    subprocess.call([os.path.join(os.getcwd(), 'set-random-bg-color.sh')])
+    
 # Main command line entry point.
 def infoscreen():
     content, content_list = find_next_content(None, [])
@@ -109,6 +116,7 @@ def infoscreen():
             print("Failed to show %s:\n%s" % (content, str(e)))
             print("Sleeping for two seconds.")
             time.sleep(2)
+        set_random_bg_color()
         try:
             if pull_after_switch:
                 subprocess.call(["git", "pull"])
@@ -118,10 +126,23 @@ def infoscreen():
         content, content_list = find_next_content(content, content_list)
 
 if __name__ == '__main__':
-    while True:
+    try:
+        filename = sys.argv[1]
+    except IndexError:
+        filename = None
+
+    if filename is not None:
+        # Test a file instead of waiting for it to show.
         try:
-            infoscreen()
-        except Exception as e:
-            print("Failed in or before main loop:\n%s" % e)
-            print("Sleeping for two seconds.")
-            time.sleep(2)
+            show_content(filename, -1)
+        except KeyboardInterrupt:
+            pass
+    else:
+        # Run the slideshow.
+        while True:
+            try:
+                infoscreen()
+            except Exception as e:
+                print("Failed in or before main loop:\n%s" % e)
+                print("Sleeping for two seconds.")
+                time.sleep(2)
