@@ -80,11 +80,19 @@ def run_program_for_a_while(progname, args, a_while):
         time.sleep(a_while)
         proc.kill() # SIGKILL (or similar on other platforms)
 
-def show_in_browser(filename, dur):
+def show_url_in_browser(url, dur):
     run_program_for_a_while('surf',
                             ['-p', # Disable plugins.
-                             'file://' + os.path.join(os.getcwd(), filename)],
+                             url],
                             dur)
+
+def open_url_in_browser(urlfile, dur):
+    with open(urlfile) as f:
+        url = f.read().strip()
+    show_url_in_browser(url, dur)
+
+def show_in_browser(filename, dur):
+    show_url_in_browser('file://' + os.path.join(os.getcwd(), filename), dur)
 
 def run_in_terminal(filename, dur):
     run_program_for_a_while('lxterminal',
@@ -101,6 +109,8 @@ def show_content(filename, dur=20):
         return show_in_browser(filename, dur)
     if extension == '.png':
         return show_in_browser(filename, dur)
+    if extension == '.url':
+        return open_url_in_browser(filename, dur)
     if extension == '.sh':
         return run_in_terminal(filename, dur)
     raise Exception("I have no idea how to show a %s file." % extension)
@@ -141,10 +151,13 @@ if __name__ == '__main__':
             pass
     else:
         # Run the slideshow.
-        while True:
-            try:
-                infoscreen()
-            except Exception as e:
-                print("Failed in or before main loop:\n%s" % e)
-                print("Sleeping for two seconds.")
-                time.sleep(2)
+        try:
+            while True:
+                try:
+                    infoscreen()
+                except Exception as e:
+                    print("Failed in or before main loop:\n%s" % e)
+                    print("Sleeping for two seconds.")
+                    time.sleep(2)
+        except KeyboardInterrupt:
+            pass
