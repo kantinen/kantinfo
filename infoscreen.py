@@ -89,6 +89,10 @@ def open_url_in_browser(urlfile):
 def show_in_browser(filename):
     return show_url_in_browser('file://' + os.path.join(os.getcwd(), filename))
 
+def show_image(filename):
+    return run_program('feh',
+                       ['-F', '-Z', os.path.join(os.getcwd(), filename)])
+
 def run_in_terminal(filename):
     return run_program('lxterminal',
                        ['-e', # Start program
@@ -100,9 +104,9 @@ def show_content(filename):
     if extension == '.html':
         return show_in_browser(filename)
     if extension == '.jpg':
-        return show_in_browser(filename)
+        return show_image(filename)
     if extension == '.png':
-        return show_in_browser(filename)
+        return show_image(filename)
     if extension == '.url':
         return open_url_in_browser(filename)
     if extension == '.sh':
