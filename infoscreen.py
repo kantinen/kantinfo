@@ -68,51 +68,45 @@ def find_next_content(old_selection, old_content):
                     if os.path.isfile(os.path.join(content_directory,f)) ]
     return (find_next(old_selection, old_content, new_content), new_content)
 
-def run_program_for_a_while(progname, args, a_while):
+def run_program(progname, args):
     proc = subprocess.Popen([progname] + args,
                             stdout=None,
                             stderr=None,
                             stdin=None,
                             close_fds=True)
-    if a_while == -1:
-        proc.wait()
-    else:
-        time.sleep(a_while)
-    return lambda: proc.kill() # SIGKILL (or similar on other platforms)
+    return proc
 
-def show_url_in_browser(url, dur):
-    return run_program_for_a_while('surf',
-                                   ['-p', # Disable plugins.
-                                    url],
-                                   dur)
+def show_url_in_browser(url):
+    return run_program('surf',
+                       ['-p', # Disable plugins.
+                        url])
 
-def open_url_in_browser(urlfile, dur):
+def open_url_in_browser(urlfile):
     with open(urlfile) as f:
         url = f.read().strip()
-    return show_url_in_browser(url, dur)
+    return show_url_in_browser(url)
 
-def show_in_browser(filename, dur):
-    return show_url_in_browser('file://' + os.path.join(os.getcwd(), filename), dur)
+def show_in_browser(filename):
+    return show_url_in_browser('file://' + os.path.join(os.getcwd(), filename))
 
-def run_in_terminal(filename, dur):
-    return run_program_for_a_while('lxterminal',
-                                   ['-e', # Start program
-                                    os.path.join(os.getcwd(), filename)],
-                                   dur)
+def run_in_terminal(filename):
+    return run_program('lxterminal',
+                       ['-e', # Start program
+                        os.path.join(os.getcwd(), filename)])
 
-def show_content(filename, dur=20):
+def show_content(filename):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
     if extension == '.html':
-        return show_in_browser(filename, dur)
+        return show_in_browser(filename)
     if extension == '.jpg':
-        return show_in_browser(filename, dur)
+        return show_in_browser(filename)
     if extension == '.png':
-        return show_in_browser(filename, dur)
+        return show_in_browser(filename)
     if extension == '.url':
-        return open_url_in_browser(filename, dur)
+        return open_url_in_browser(filename)
     if extension == '.sh':
-        return run_in_terminal(filename, dur)
+        return run_in_terminal(filename)
     raise Exception("I have no idea how to show a %s file." % extension)
 
 def set_random_bg_color():
@@ -121,13 +115,25 @@ def set_random_bg_color():
 # Main command line entry point.
 def infoscreen():
     content, content_list = find_next_content(None, [])
+    proc_prev = None
+    dur = 3
     while True:
         try:
-            end = show_content(os.path.join(content_directory, content))
+            proc = show_content(os.path.join(content_directory, content))
         except Exception as e:
             print("Failed to show %s:\n%s" % (content, str(e)))
             print("Sleeping for two seconds.")
             time.sleep(2)
+
+        # Kill the previous process after the current one has started.
+        time.sleep(1)
+        if proc_prev is not None:
+            proc_prev.kill() # SIGKILL (or similar on other platforms)
+        proc_prev = proc
+
+        # Sleep more.
+        time.sleep(max(0, dur - 1))
+
         set_random_bg_color()
         try:
             if pull_after_switch:
@@ -136,7 +142,6 @@ def infoscreen():
             print("Failed to git pull:\n%s" % str(e))
             time.sleep(2)
         content, content_list = find_next_content(content, content_list)
-        end()
 
 if __name__ == '__main__':
     try:
