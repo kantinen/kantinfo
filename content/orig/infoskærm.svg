@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1920"
+   height="1080"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="infoskærm.svg"
+   inkscape:export-filename="/home/niels/infoskærm.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3770">
+      <stop
+         style="stop-color:#ff00ff;stop-opacity:1;"
+         offset="0"
+         id="stop3772" />
+      <stop
+         style="stop-color:#ffd3ff;stop-opacity:1;"
+         offset="1"
+         id="stop3774" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3770"
+       id="linearGradient3776"
+       x1="0"
+       y1="512.36218"
+       x2="1920"
+       y2="512.36218"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.73489583"
+     inkscape:cx="960"
+     inkscape:cy="540"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,27.637817)">
+    <rect
+       style="fill:url(#linearGradient3776);fill-opacity:1;stroke:none"
+       id="rect3000"
+       width="1920"
+       height="1080"
+       x="0"
+       y="-27.637817" />
+    <text
+       xml:space="preserve"
+       style="font-size:97.64286804px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="38.653187"
+       y="296.62967"
+       id="text3004"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3006"
+         x="38.653187"
+         y="296.62967">Vil du have dit snask her? Så send en pull request til </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:64.16699219px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="59.874363"
+       y="379.52615"
+       id="text3008"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3010"
+         x="59.874363"
+         y="379.52615"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium">https://github.com/datalogisk-kantineforening/infoscreen</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:114.41129303px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="42.973927"
+       y="204.05899"
+       id="text3032"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3034"
+         x="42.973927"
+         y="204.05899"
+         style="font-size:257.42541504px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Gentium;-inkscape-font-specification:Gentium">Hil infoskærmen!</tspan></text>
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3036"
+       sodipodi:sides="5"
+       sodipodi:cx="214.7933"
+       sodipodi:cy="621.45251"
+       sodipodi:r1="200.32739"
+       sodipodi:r2="100.16369"
+       sodipodi:arg1="-2.5101392"
+       sodipodi:arg2="-1.8818206"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 53.094971,503.19554 184.13982,526.09462 277.29484,431.12484 296.0116,562.83211 415.11971,622.08052 295.64246,680.58101 276.1003,812.16832 183.54253,716.61634 52.356701,738.69335 114.63011,621.1385 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-18.944899"
+       inkscape:transform-center-y="0.19406853" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3038"
+       sodipodi:sides="5"
+       sodipodi:cx="853.13966"
+       sodipodi:cy="590.07821"
+       sodipodi:r1="124.85742"
+       sodipodi:r2="62.428708"
+       sodipodi:arg1="0.60676716"
+       sodipodi:arg2="1.2350857"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 955.70949,661.27372 -82.00332,-12.25182 -56.58168,60.60663 -13.68824,-81.77581 -75.12503,-35.08389 73.54351,-38.28841 10.15186,-82.28967 59.14064,58.11227 81.39922,-15.77392 -36.99259,74.20377 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="11.129294"
+       inkscape:transform-center-y="0.83145365" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3040"
+       sodipodi:sides="5"
+       sodipodi:cx="614.21229"
+       sodipodi:cy="743.32961"
+       sodipodi:r1="227.34763"
+       sodipodi:r2="113.67381"
+       sodipodi:arg1="-2.4917222"
+       sodipodi:arg2="-1.8634037"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 433.2067,605.76534 148.2164,28.72214 107.68675,-105.81412 18.48501,149.8378 133.91225,69.71783 -136.79204,63.88272 -24.92443,148.9021 -103.02714,-110.3561 -149.31639,22.30873 73.11776,-132.08655 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-20.264828"
+       inkscape:transform-center-y="1.5139973" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3042"
+       sodipodi:sides="5"
+       sodipodi:cx="1067.933"
+       sodipodi:cy="669.72067"
+       sodipodi:r1="196.5298"
+       sodipodi:r2="98.264897"
+       sodipodi:arg1="-2.5263396"
+       sodipodi:arg2="-1.898021"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 907.44136,556.29048 128.90774,20.37939 89.8677,-94.63768 20.4528,128.89608 117.7764,56.22469 -116.2672,59.28277 -17.0779,129.38645 -92.3098,-92.25731 -128.33125,23.74053 59.21662,-116.30092 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-18.010704"
+       inkscape:transform-center-y="-0.79345495" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3044"
+       sodipodi:sides="5"
+       sodipodi:cx="1397.3631"
+       sodipodi:cy="625.07263"
+       sodipodi:r1="191.0407"
+       sodipodi:r2="95.520349"
+       sodipodi:arg1="2.6835947"
+       sodipodi:arg2="3.3119132"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 1226.0112,709.5419 77.2137,-100.6598 -39.1475,-120.67241 119.5936,42.32903 102.669,-74.52131 -3.3009,126.82058 102.6005,74.61571 -121.6336,36.0504 -39.2585,120.63636 -71.8728,-104.54022 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-8.462241"
+       inkscape:transform-center-y="10.006302" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3046"
+       sodipodi:sides="5"
+       sodipodi:cx="1700.2458"
+       sodipodi:cy="691.44134"
+       sodipodi:r1="53.341227"
+       sodipodi:r2="26.670613"
+       sodipodi:arg1="-2.4845177"
+       sodipodi:arg2="-1.8561992"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 1658.0112,658.86034 34.7257,6.98926 25.4441,-24.64387 4.0836,35.18589 31.3004,16.58342 -32.2018,14.75681 -6.0994,34.89298 -23.9855,-26.06568 -35.0701,4.98164 17.3781,-30.86629 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-4.6407877"
+       inkscape:transform-center-y="0.47393644" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3048"
+       sodipodi:sides="5"
+       sodipodi:cx="1618.1899"
+       sodipodi:cy="597.31844"
+       sodipodi:r1="156.63928"
+       sodipodi:r2="78.319638"
+       sodipodi:arg1="2.7711002"
+       sodipodi:arg2="3.3994188"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 1472.1788,654.03351 70.2802,-76.68497 -23.3283,-101.36907 94.6496,43.14355 89.1989,-53.51129 -11.7837,103.34915 78.4563,68.29728 -101.9323,20.72974 -40.7102,95.72133 -51.214,-90.53747 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-2.7253186"
+       inkscape:transform-center-y="12.342061" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:1;stroke:none"
+       id="path3050"
+       sodipodi:sides="5"
+       sodipodi:cx="1246.5251"
+       sodipodi:cy="819.35196"
+       sodipodi:r1="89.540357"
+       sodipodi:r2="44.770178"
+       sodipodi:arg1="-2.2223835"
+       sodipodi:arg2="-1.594065"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 1192.2235,748.15646 53.26,26.43747 51.9725,-28.88653 -8.6853,58.82292 43.5331,40.50234 -58.6278,9.9171 -25.0676,53.91835 -27.5487,-52.69382 -59.0257,-7.17897 41.6018,-42.48366 z"
+       transform="translate(0,-27.637817)"
+       inkscape:transform-center-x="-0.64377378"
+       inkscape:transform-center-y="7.9357634" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3020"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       transform="matrix(1.457017,0,0,1.457017,31.3949,24.278071)"><flowRegion
+         id="flowRegion3022"><rect
+           id="rect3024"
+           width="970.18994"
+           height="212.37988"
+           x="130.32402"
+           y="579.2179" /></flowRegion><flowPara
+         id="flowPara3028"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Bold Italic">Hvis du er i tvivl om hvordan du skal komme i gang, så snak med nogen der forstår GitHub.</flowPara></flowRoot>  </g>
+</svg>
