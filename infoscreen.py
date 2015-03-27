@@ -116,7 +116,7 @@ def set_random_bg_color():
 def infoscreen():
     content, content_list = find_next_content(None, [])
     proc_prev = None
-    dur = 3
+    dur = 20
     while True:
         try:
             proc = show_content(os.path.join(content_directory, content))
