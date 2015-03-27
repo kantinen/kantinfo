@@ -1,6 +1,19 @@
-Kantinens infoskærmssystem.
+Kantinens infoskærmssystem
+==========================
 
-infoscreen.py kører i en tmux på infoskærmsmaskinen.
+`infoscreen.py` kører i en tmux på infoskærmsmaskinen.
+
+Indhold
+-------
+
+Alt indhold der bliver vist ligger i `content`-mappen.
+
+Understøttede filer:
+
+  * .html: Vises i en browser
+  * .jpg, .png: Vises
+  * .url: Hjemmesidelinket i filen åbnes i en browser
+  * .sh: Programmet køres i en grafisk terminal på infoskærmen
 
 Opsætning
 ---------
