@@ -78,29 +78,29 @@ def run_program_for_a_while(progname, args, a_while):
         proc.wait()
     else:
         time.sleep(a_while)
-        proc.kill() # SIGKILL (or similar on other platforms)
+    return lambda: proc.kill() # SIGKILL (or similar on other platforms)
 
 def show_url_in_browser(url, dur):
-    run_program_for_a_while('surf',
-                            ['-p', # Disable plugins.
-                             url],
-                            dur)
+    return run_program_for_a_while('surf',
+                                   ['-p', # Disable plugins.
+                                    url],
+                                   dur)
 
 def open_url_in_browser(urlfile, dur):
     with open(urlfile) as f:
         url = f.read().strip()
-    show_url_in_browser(url, dur)
+    return show_url_in_browser(url, dur)
 
 def show_in_browser(filename, dur):
-    show_url_in_browser('file://' + os.path.join(os.getcwd(), filename), dur)
+    return show_url_in_browser('file://' + os.path.join(os.getcwd(), filename), dur)
 
 def run_in_terminal(filename, dur):
-    run_program_for_a_while('lxterminal',
-                            ['-e', # Start program
-                             os.path.join(os.getcwd(), filename)],
-                            dur)
+    return run_program_for_a_while('lxterminal',
+                                   ['-e', # Start program
+                                    os.path.join(os.getcwd(), filename)],
+                                   dur)
 
-def show_content(filename, dur=20):
+def show_content(filename, dur=3):
     print("Attempting to show %s" % filename)
     extension = os.path.splitext(filename)[1]
     if extension == '.html':
@@ -123,7 +123,7 @@ def infoscreen():
     content, content_list = find_next_content(None, [])
     while True:
         try:
-            show_content(os.path.join(content_directory, content))
+            end = show_content(os.path.join(content_directory, content))
         except Exception as e:
             print("Failed to show %s:\n%s" % (content, str(e)))
             print("Sleeping for two seconds.")
@@ -136,6 +136,7 @@ def infoscreen():
             print("Failed to git pull:\n%s" % str(e))
             time.sleep(2)
         content, content_list = find_next_content(content, content_list)
+        end()
 
 if __name__ == '__main__':
     try:
