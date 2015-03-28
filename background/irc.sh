@@ -1,20 +1,23 @@
 #!/bin/bash
 
-trap 'killall -s 9 sic; exit' INT QUIT TERM EXIT
-
 irc_out=/tmp/diku_irc_out
 
+timecolor='\e[0;31m'
 usercolor='\e[0;32m'
 msgcolor='\e[0;37m'
+name=infoskaerm2
 
 color_usermsg() {
     # Første linje af fmt-uddataen.
     read line
-    start=$(echo "$line" | cut -d '>' -f 1)
+    time=$(echo "$line" | cut -d ' ' -f 1)
+    user=$(echo "$line" | cut -d ' ' -f 2- | cut -d '>' -f 1)
     end=$(echo "$line" | cut -d '>' -f 2-)
     {
+        echo -en "$timecolor"
+        echo -en "$time "
 	echo -en "$usercolor"
-	echo -n "$start>"
+	echo -n "$user>"
 	echo -en "$msgcolor"
 	echo "$end"
     }
@@ -24,7 +27,8 @@ color_usermsg() {
 
 ircloop() {
     while true; do
-	sic -h irc.freenode.net -n infoskaerm
+	sic -h irc.freenode.net -n $name
+        sleep 2
     done
 }
 
@@ -34,20 +38,16 @@ touch $in
 
 channel="#diku"
 
-# Kør klienten i baggrunden.
-{
-    tail -f $in \
-	| ircloop \
-	| grep --line-buffered -E "^$channel" \
-	| sed -ur 's/[^<]+(.+)/\1/' \
-	| while IFS='' read line; do
-	echo "$line" | fmt -75 | color_usermsg >> $irc_out
-    done
-
-} &
-
 # Join #diku.
-echo ":j $channel" > $in
+(echo ":j $channel" > $in) &
 
-# Wait for the client to finish.
-wait
+# Kør klienten i baggrunden.
+tail -f $in \
+    | ircloop \
+    | grep --line-buffered -E "^$channel" \
+    | gawk '{$1=$2=$3=""; print; fflush();}' \
+    | tee /dev/stderr \
+    | sed -u 's/^ *//' \
+    | while IFS='' read line; do
+	  echo "$line" | fmt -75 | color_usermsg >> $irc_out
+      done
