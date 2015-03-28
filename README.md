@@ -15,6 +15,8 @@ Understøttede filer:
   * `.url`: Hjemmesidelinket i filen åbnes i en browser
   * `.sh`: Programmet køres i en grafisk terminal på infoskærmen
 
+Design efter en opløsning på 1920x1080.
+
 Opsætning
 ---------
 
