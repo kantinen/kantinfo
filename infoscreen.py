@@ -157,7 +157,7 @@ if __name__ == '__main__':
     if filename is not None:
         # Test a file instead of waiting for it to show.
         try:
-            show_content(filename, -1)
+            show_content(filename)
         except KeyboardInterrupt:
             pass
     else:
