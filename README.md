@@ -10,10 +10,10 @@ Alt indhold der bliver vist ligger i `content`-mappen.
 
 Understøttede filer:
 
-  * .html: Vises i en browser
-  * .jpg, .png: Vises
-  * .url: Hjemmesidelinket i filen åbnes i en browser
-  * .sh: Programmet køres i en grafisk terminal på infoskærmen
+  * `.html`, `.gif`: Vises i en browser
+  * `.jpg`, `.png`: Vises i en billedfremviser
+  * `.url`: Hjemmesidelinket i filen åbnes i en browser
+  * `.sh`: Programmet køres i en grafisk terminal på infoskærmen
 
 Opsætning
 ---------

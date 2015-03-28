@@ -100,18 +100,19 @@ def run_in_terminal(filename):
 
 def show_content(filename):
     print("Attempting to show %s" % filename)
-    extension = os.path.splitext(filename)[1]
-    if extension == '.html':
-        return show_in_browser(filename)
-    if extension == '.jpg':
-        return show_image(filename)
-    if extension == '.png':
-        return show_image(filename)
-    if extension == '.url':
-        return open_url_in_browser(filename)
-    if extension == '.sh':
-        return run_in_terminal(filename)
-    raise Exception("I have no idea how to show a %s file." % extension)
+    extension = os.path.splitext(filename)[1][1:]
+    try:
+        f = {
+            'html': lambda: show_in_browser(filename),
+            'jpg': lambda: show_image(filename),
+            'png': lambda: show_image(filename),
+            'gif': lambda: show_in_browser(filename),
+            'url': lambda: open_url_in_browser(filename),
+            'sh': lambda: run_in_terminal(filename)
+        }[extension]
+    except KeyError:
+        raise Exception("I have no idea how to show a %s file." % extension)
+    return f()
 
 def set_random_bg_color():
     subprocess.call([os.path.join(os.getcwd(), 'set-random-bg-color.sh')])
