@@ -122,6 +122,7 @@ def infoscreen():
     content, content_list = find_next_content(None, [])
     proc_prev = None
     dur = 20
+    start_sleep = 1
     while True:
         try:
             proc = show_content(os.path.join(content_directory, content))
@@ -131,13 +132,13 @@ def infoscreen():
             time.sleep(2)
 
         # Kill the previous process after the current one has started.
-        time.sleep(1)
+        time.sleep(start_sleep)
         if proc_prev is not None:
             proc_prev.kill() # SIGKILL (or similar on other platforms)
         proc_prev = proc
 
         # Sleep more.
-        time.sleep(max(0, dur - 1))
+        time.sleep(max(0, dur - start_sleep))
 
         set_random_bg_color()
         try:
@@ -157,7 +158,8 @@ if __name__ == '__main__':
     if filename is not None:
         # Test a file instead of waiting for it to show.
         try:
-            show_content(filename)
+            proc = show_content(filename)
+            proc.wait()
         except KeyboardInterrupt:
             pass
     else:
