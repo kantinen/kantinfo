@@ -40,6 +40,10 @@ lager, som er verdens mest langso^Wgrundige Micro-SD-kort.  Hvis det
 virker som om den hænger, så er det sandsynligvis bare fordi den læser
 fra disken.
 
+Et cronjob (`sudo crontab -e`) sørger for at genstarte maskinen hver
+morgen klokken 6.  Dette er for at sikre at der aldrig sniger sig
+noget ind i opsætningen der ikke kan overleve en genstart.
+
 Sådan gør man manuelt
 ---------------------
 
