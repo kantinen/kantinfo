@@ -30,15 +30,13 @@ brugeren `odroid` ind i en session, der kører scriptet `.xinitrc`.
 Vi har vedhæftet vores `.xinitrc` i dette repo.
 
 Dette scripts primære ansvar er at starte en `tmux`-session der kører
-infoskærmsscriptet, samt starte en enkelt window manager.
-
-Disse dele er pt. ikke i Git, så lad være med at slette dem med mindre
-du ved hvordan man erstatter dem.
+infoskærmsscriptet, samt starte en enkel window manager.  Hvis du vil
+tilføje andre baggrundsprocesser og deslige, så start dem her.
 
 `odroid` er en rimeligt hurtig maskine, *bortset* fra dens faste
 lager, som er verdens mest langso^Wgrundige Micro-SD-kort.  Hvis det
 virker som om den hænger, så er det sandsynligvis bare fordi den læser
-fra disken.
+fra kortet.
 
 Et cronjob (`sudo crontab -e`) sørger for at genstarte maskinen hver
 morgen klokken 6.  Dette er for at sikre at der aldrig sniger sig
@@ -46,6 +44,8 @@ noget ind i opsætningen der ikke kan overleve en genstart.
 
 Sådan gør man manuelt
 ---------------------
+
+*Lad være med at gøre det her.  Genstart maskinen i stedet.*
 
 Grundet vor sofistikerede og fremskredne teknologi er det ikke enkelt
 at starte infoskærmen.  Her er den nutids-kompatible procedure:
