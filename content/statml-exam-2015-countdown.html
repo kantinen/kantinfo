@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <title>StatML Exam 2015 Countdown</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div id="time" class="blink"></div>
+    <style>
+      #time {
+        margin:auto;
+        margin-top:7%;
+        text-align:center;
+        font-size:10vw;
+        position:relative;
+        top:50%
+      }
+
+/* http://stackoverflow.com/questions/4894488/blinking-text-cross-browser */
+@-webkit-keyframes blink {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+blink {
+    -webkit-animation-name: blink;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 2s;
+    font-weight:bold;
+}
+    </style>
+    <script>
+      var HANDOUT = new Date(2015, 2, 16, 9);
+      var DEADLINE = new Date(2015, 3, 7, 23, 55);
+      showTime();
+
+      function localTimeNow() {
+        return Date.now() - DEADLINE.getTimezoneOffset() * 60 * 1000;
+      }
+
+      function timeLeft() {
+        var diff = new Date(DEADLINE.getTime() - localTimeNow());
+
+        return {
+          days: diff.getDate() - 1, // fordi vi starter på 1
+          hours: diff.getHours(), // tidszone
+          minutes: diff.getMinutes()
+        };
+      }
+
+      function pct(decimal) {
+        return Math.round(decimal*100);
+      }
+
+      function pctLeft() {
+        var diff_now = DEADLINE.getTime() - localTimeNow();
+        var diff_deadline = DEADLINE.getTime() - HANDOUT.getTime();
+
+        return pct((diff_deadline - diff_now) / diff_deadline);
+      }
+
+      function randomItem(items) {
+        return items[Math.floor(Math.random()*items.length)];
+      }
+
+      function randomIntro() {
+        return randomItem([
+          "Har du afleveret StatML-eksamen endnu?",
+          "#PCA",
+          "#kNN",
+          "#SVM",
+          "Er der nok lag dit neurale netværk?",
+          "Får du maksimeret dine margin?",
+          "Har du glemt dine outliers?",
+          "Får du testet på dit træningssæt?"]);
+      }
+
+      function randomMotivator() {
+        return randomItem([
+         "<b>?!KUN!?</b>",
+         "<i>HELE</i>",
+         "med salt på",
+         "heldigvis",
+         "sådan cirkus",
+         "cirkus sådan",
+         "cirkus cirkus cirkus",
+         "AAAAAAAAAAAA"]);
+      }
+
+      function showTime() {
+        var toShow = timeLeft(); 
+        var timeDiv = document.getElementById("time");
+
+        var daysText = "dage";
+        if (toShow.days === 1) {
+          daysText = "dag";
+        }
+
+        timeDiv.innerHTML = "".concat(
+          randomIntro(),
+          "<br/><br/>Der er ",
+          randomMotivator(),
+          "</br><br/><b>",
+          toShow.days, " ", daysText, ", ",
+          toShow.hours, " timer, og ",
+          toShow.minutes, " minutter",
+          "</b><br/><br/>tilbage!<br/><br/>",
+          "Du burde nu være ", pctLeft(), "% igennem..");
+      }
+    </script>
+  </body>
+</html>
