@@ -83,7 +83,7 @@ def show_url_in_browser(url):
 
 def open_url_in_browser(urlfile):
     with open(urlfile) as f:
-        url = f.read().strip()
+        url = filter(lambda s: not s.startswith('#'), f.read().strip().split('\n'))[0]
     return show_url_in_browser(url)
 
 def show_in_browser(filename):
