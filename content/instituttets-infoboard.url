@@ -1,0 +1,4 @@
+# DIKU opdaterer selv denne.  Man skal dog logge ind for at kunne se den, så vi
+# har et script der på odroiden der logger ind en gang hver halve time og gemmer
+# en ASP session cookie.
+http://ku.infoboard.dk/boardview/boardplanner.aspx?boardid=3&preview=yes
