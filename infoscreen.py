@@ -114,9 +114,6 @@ def show_content(filename):
         raise Exception("I have no idea how to show a %s file." % extension)
     return f()
 
-def set_random_bg_color():
-    subprocess.call([os.path.join(os.getcwd(), 'set-random-bg-color.sh')])
-    
 # Main command line entry point.
 def infoscreen():
     content, content_list = find_next_content(None, [])
@@ -140,7 +137,6 @@ def infoscreen():
         # Sleep more.
         time.sleep(max(0, dur - start_sleep))
 
-        set_random_bg_color()
         try:
             if pull_after_switch:
                 subprocess.call(["git", "pull"])
