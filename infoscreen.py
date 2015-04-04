@@ -81,10 +81,38 @@ def show_url_in_browser(url):
                        ['-p', # Disable plugins.
                         url])
 
-def open_url_in_browser(urlfile):
+def play_video(url):
+    '''
+    Udkommentér hvis det er for langsomt at streame video.
+    '''
+    # cache_dir = os.path.join(os.path.expanduser("~"), '.infoscreen-cache')
+    # if not os.path.isdir(cache_dir):
+    #     os.mkdir(cache_dir)
+    # local = os.path.join(cache_dir, base64.b64encode(url, '+-'))
+    # if not os.path.exists(local):
+    #     ensure_download_video(url, local) # Takes time, but probably not too much time.
+    # return run_program('mpv', ['--fullscreen', local])
+    return run_program('mpv', [url])
+
+# def ensure_download_video(url, local):
+#     if url.startswith('https://youtube.com/'):
+#         p = run_program('youtube-dl', ['--output', local, '--format', 'best', url])
+#     else:
+#         p = run_program('wget', ['--output-document', local, url])
+#     p.wait()
+
+def url_handler(url):
+    if url.endswith('.mkv') or url.endswith('.webm') or url.endswith('.mp4') \
+       or url.endswith('.avi') or url.endswith('.mpg') or url.endswith('.ogv') \
+       or url.startswith('https://youtube.com/'):
+        return play_video
+    else:
+        return show_url_in_browser
+
+def open_url(urlfile):
     with open(urlfile) as f:
         url = filter(lambda s: not s.startswith('#'), f.read().strip().split('\n'))[0]
-    return show_url_in_browser(url)
+    return url_handler(url)(url)
 
 def show_in_browser(filename):
     return show_url_in_browser('file://' + os.path.join(os.getcwd(), filename))
@@ -107,7 +135,7 @@ def show_content(filename):
             'jpg': lambda: show_image(filename),
             'png': lambda: show_image(filename),
             'gif': lambda: show_in_browser(filename),
-            'url': lambda: open_url_in_browser(filename),
+            'url': lambda: open_url(filename),
             'sh': lambda: run_in_terminal(filename)
         }[extension]
     except KeyError:
