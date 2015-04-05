@@ -20,6 +20,7 @@ h3 {
   width: 256px;
   height: 256px;
   animation: panda 3s infinite;
+  -webkit-animation: panda 3s infinite;
 }
 
 @keyframes panda {
@@ -36,6 +37,21 @@ h3 {
     transform: rotate(0deg);
   }
 }
+
+@-webkit-keyframes panda {
+  0% {
+    margin-left: 0;
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    margin-left: calc(100% - 256px - 10px);
+    -webkit-transform: rotate(720deg);
+  }
+  100% {
+    margin-left: 0;
+    -webkit-transform: rotate(0deg);
+  }
+}
     </style>
   </head>
   <body>
@@ -46,11 +62,9 @@ h3 {
     <h3>Bidrag med indhold og få et bolsje!</h3>
 
     <p>
-      <marquee>
       <img src="res/pandahoved-cirkel.png"
            alt="Panda siger velkommen" title="Panda siger velkommen"
            id="panda" />
-      </marquee>
     </p>
 
   </body>
