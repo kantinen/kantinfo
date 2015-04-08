@@ -27,13 +27,6 @@ h3 {
   font-size: 50px;
 }
 
-img {
-  position: absolute;
-  right: 60px;
-  margin-top: -130px;
-  width: 1000px;
-}
-
 ul {
   margin-left: 100px;
   float: left;
@@ -49,6 +42,24 @@ li {
 
 div {
   margin-bottom: 70px;
+}
+
+img {
+  position: absolute;
+  right: 60px;
+  margin-top: -130px;
+  width: 1000px;
+  -webkit-animation: rotate 3s linear infinite;
+
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
     </style>
   </head>
