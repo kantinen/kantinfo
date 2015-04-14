@@ -15,7 +15,7 @@ body {
   left: -500px;
   z-index: 0;
   margin: 0;
-  animation: background 1s infinite;
+  -webkit-animation: background 1s infinite;
 }
 
 @keyframes background {
@@ -30,12 +30,25 @@ body {
   }
 }
 
+@-webkit-keyframes background {
+  0% {
+    -webkit-transform: skew(-30deg);
+  }
+  50% {
+    -webkit-transform: skew(30deg);
+  }
+  100% {
+    -webkit-transform: skew(-30deg);
+  }
+}
+
 #foreground {
   position: absolute;
   left: 50%;
   top: 50%;
   z-index: 1;
   animation: foreground 3s infinite;
+  -webkit-animation: foreground 3s infinite;
   white-space: nowrap;
   margin-left: 0;
   margin-top: 0;
@@ -55,17 +68,29 @@ body {
   0% {
     color: red;
     font-size: 20px;
-    margin-left: 0;
   }
   50% {
     color: yellow;
     font-size: 100px;
-    margin-left: 0;
   }
   100% {
     color: red;
     font-size: 20px;
-    margin-left: 0;
+  }
+}
+
+@-webkit-keyframes foreground {
+  0% {
+    color: red;
+    font-size: 20px;
+  }
+  50% {
+    color: yellow;
+    font-size: 100px;
+  }
+  100% {
+    color: red;
+    font-size: 20px;
   }
 }
 
@@ -84,6 +109,24 @@ body {
   }
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes foreground-text {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(10deg);
+  }
+  50% {
+    -webkit-transform: rotate(0deg);
+  }
+  75% {
+    -webkit-transform: rotate(-10deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
   }
 }
     </style>
