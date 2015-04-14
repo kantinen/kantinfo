@@ -62,3 +62,13 @@ at starte infoskærmen.  Her er den nutids-kompatible procedure:
   4) Kør: dbus-launch ./infoscreen.py
 
   5) Vent til maskinen crasher, gå derefter til 0.
+
+Afhængigheder
+-------------
+
+Installér følgende programmer:
+
+  + `matchbox`
+  + `surf`
+  + `feh`
+  + `sic`
