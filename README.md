@@ -72,3 +72,4 @@ Installér følgende programmer:
   + `surf`
   + `feh`
   + `sic`
+  + `xdotool`
