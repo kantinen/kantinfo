@@ -73,3 +73,4 @@ Installér følgende programmer:
   + `feh`
   + `sic`
   + `xdotool`
+  + `tmux`
