@@ -74,3 +74,4 @@ Installér følgende programmer:
   + `sic`
   + `xdotool`
   + `tmux`
+  + `toilet`
