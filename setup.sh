@@ -22,4 +22,9 @@ EOF
 # Set window manager to matchbox, and make it run .xinitrc on startup.
 # Set crontab to reboot at 6 in the morning.
 
+# What I did:
+# sudo dpkg-reconfigure x11-common -> Set to 'Anybody'.
+# Add '@reboot xinit' to 'odroid' crontab.
+# Add '@reboot service lightdm stop' to 'root' crontab.
+
 reboot
