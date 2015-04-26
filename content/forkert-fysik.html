@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+                
+                font-family: sans-serif;
+            }
+            #content {
+                position: absolute;
+                width: 1920px;
+                height: 1080px;
+            }
+            
+            #heading {
+                margin-top: 100px;
+                margin-bottom: 100px;
+                text-align: center;
+                font-size: 72pt;
+            }
+            
+            #love div, #konstanter div {
+                display: none;
+                text-align: center;
+                height: 500px;
+                font-size: 100pt;
+            }
+            
+            #love, #konstanter {
+                display: none;
+            }
+        </style>
+        <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+    </head>
+    <body>
+        <div id="content">
+            <h1 id="heading"></h1>
+            <!-- XXX: KEEP SAME ORDER AS NAMES -->
+            <div id="love">
+                <div>$$ \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} $$</div>
+                <div>$$ \nabla \cdot \mathbf{B} = 0 $$</div>
+                <div>$$ \nabla \times \mathbf{E} = -\frac{d \mathbf{B}} {d t} $$</div>
+                <div>$$ \nabla \times \mathbf{B} = \mu_0\mathbf{J} + \mu_0\varepsilon_0\frac{\partial \mathbf{E}} {\partial t} $$ </div>
+                <div>$$ p V = n R T $$ </div>
+                <div>$$ U = R I $$ </div>
+                <div>$$ E = h c \tilde \nu $$</div>
+                <div>$$ \sum F = 0 \Leftrightarrow \frac{\mathrm{d}\mathbf{v}}{\mathrm{d}t} = 0 $$</div>
+                <div>$$ F = m a $$</div>
+                <div>$$ F_{ab} = -F_{ba} $$</div>
+            </div>
+            <!-- XXX: KEEP SAME ORDER AS NAMES -->
+            <div id="konstanter">
+                <div>$$ c = 3 \times 10^8 \frac{m}{s} $$</div>
+                <div>$$ h = 6.63 \times 10^{-34} J \cdot s $$</div>
+                <div>$$ \hbar = \frac{h}{2 \pi} $$</div>
+                <div>$$ e = 1.602 \times 10^{-19} C $$</div>
+                <div>$$ N_A = 6.02 \times 10^{23} mol^{-1} $$</div>
+                <div>$$ R = 8.31 \frac{J}{mol \cdot K} $$</div>
+                <div>$$ k_B = 1.380 \times 10^{-23} $$</div>
+                <div>$$ \mu_0 = 1.257 \times 10^{-6} \frac{V \cdot s}{A \cdot M} $$</div>
+                <div>$$ G = 6.67 \times 10^{-11} \frac{N \cdot m^2}{kg^2} $$</div>               
+            </div>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        var section = Math.random() * 2;
+        var pickTwo = function(es) {
+            var i = Math.floor(Math.random()*es.length);
+            var j = i;
+            while (j == i) {
+                j = Math.floor(Math.random()*es.length);
+            }
+            return [i, j];
+        };
+        
+        var names;
+        
+        if (section < 1) {  
+            // XXX: KEEP SAME ORDER AS FORMULAS      
+            names = [
+                "Gauss' lov",
+                "Gauss' lov om magnetisme",
+                "Faradays induktionslov",
+                "Ampères lov",
+                "Idealgasligningen",
+                "Ohms lov",
+                "Planck-Einstein relationen",
+                "Newtons første lov",
+                "Newtons anden lov",
+                "Newtons tredje lov"
+            ];
+            
+            var section = "#love";
+        } else {
+            // XXX: KEEP SAME ORDER AS FORMULAS
+            names = [
+                "Lysets hastighed",
+                "Plancks konstant",
+                "Diracs konstant",
+                "Elementarladningen",
+                "Avogadros konstant",
+                "Gaskonstanten",
+                "Boltzmanns konstant",
+                "Den magnetiske feltkonstant",
+                "Den universelle gravitationskonstant"
+            ];       
+            
+            var section = "#konstanter";
+        }
+        
+        var idx = pickTwo(names);
+        
+        $('#heading').html( names[idx[0]] );
+        
+        var formel = $(section + ' div')[idx[1]];
+        $(formel).css({"display":"block"});
+        
+        $(section).css({"display":"block"});
+    </script>
+</html>
