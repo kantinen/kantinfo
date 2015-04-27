@@ -137,7 +137,8 @@ def show_content(filename):
             'png': lambda: show_image(filename),
             'gif': lambda: show_in_browser(filename),
             'url': lambda: open_url(filename),
-            'sh': lambda: run_in_terminal(filename)
+            'sh': lambda: run_program(filename, []),
+            'terminal': lambda: run_in_terminal(filename)
         }[extension]
     except KeyError:
         raise Exception("I have no idea how to show a %s file." % extension)

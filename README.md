@@ -14,7 +14,8 @@ Understøttede filer:
   * `.jpg`, `.png`: Vises i en billedfremviser
   * `.mkv`, `.webm`, `.mp4`, `.avi`, `.mp4`, `.ogv`: Vises i en videoafspiller
   * `.url`: Linket i filen åbnes
-  * `.sh`: Programmet køres i en grafisk terminal på infoskærmen
+  * `.sh`: Programmet køres
+  * `.terminal`: Programmet køres i en grafisk terminal på infoskærmen
 
 Design efter en opløsning på 1920x1080.
 
