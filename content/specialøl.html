@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Specialøl</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+body {
+  overflow: hidden;
+  text-align: center;
+}
+
+h1 {
+  font-family: Gentium;
+  font-size: 90px;
+  font-weight: bold;
+}
+
+#nej {
+  position: absolute;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Husk at lægge specialøl i bøtten for specialøl!</h1>
+
+    <p>
+    <img src="res/specialøl/nej.png" alt="Forkert" id="nej">
+    <script type="text/javascript">
+var items = ['brooklyn', 'leffe', 'stuykman'];
+var name = items[Math.floor(Math.random() * items.length)];
+document.write('<img src="res/specialøl/' + name + '.jpg" alt="Specialøl">');
+    </script>
+    </p>
+  </body>
+</html>
