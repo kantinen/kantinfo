@@ -5,7 +5,7 @@ irc_out=/tmp/diku_irc_out
 timecolor='\e[0;31m'
 usercolor='\e[0;32m'
 msgcolor='\e[0;37m'
-name=infoskaerm2
+name=infoskaerm
 
 color_usermsg() {
     # Første linje af fmt-uddataen.
