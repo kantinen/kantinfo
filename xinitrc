@@ -9,5 +9,5 @@ infoscreen/background/irc.sh &
 # be running - if so, kill it before we start a new one.
 tmux kill-session -t infoscreen
 
-dbus-launch tmux new-session -d 'cd infoscreen; ./infoscreen.py; bash' -s infoscreen
+dbus-launch tmux new-session -s infoscreen -d 'cd infoscreen; ./infoscreen.py; bash'
 exec matchbox-window-manager -use_titlebar no
