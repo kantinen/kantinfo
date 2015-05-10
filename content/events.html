@@ -132,16 +132,18 @@
             $('#calendars #rightcol').html(getHTML(sortedEvents.slice(colSize, 2*colSize)));
         }
         
-        var now = new Date();
-        now.setHours(0);
-        now.setMinutes(0);
-        now = now.toISOString();
+        var time = new Date();
+        time.setHours(0);
+        time.setMinutes(0);
+        var now = time.toISOString();
+        time.setFullYear(time.getFullYear() + 1);
+        var later = time.toISOString();
         
         for (var i = 0; i < calendars.length; i++) {
             var cal = calendars[i];
             (function (cal) {
                 $.ajax({
-                    "url": "https://www.googleapis.com/calendar/v3/calendars/" + encodeURIComponent(cal.id) + "/events?key=" + KEY + "&singleEvents=true&timeMin=" + encodeURIComponent(now)
+                    "url": "https://www.googleapis.com/calendar/v3/calendars/" + encodeURIComponent(cal.id) + "/events?key=" + KEY + "&singleEvents=true&timeMin=" + encodeURIComponent(now) + "&timeMax=" + encodeURIComponent(later)
                 }).done(function (resp) {
                     for (var j = 0; j < resp.items.length; j++) {
                         events.push({ "calendar": cal.name, "item": resp.items[j] });
