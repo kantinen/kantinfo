@@ -5,10 +5,11 @@
         <style>
             h1 {
                 font-size: 48pt;
-                position: absolute;
-                top: 0px;
-                left: 350px;
                 font-family: sans-serif;
+            }
+            .title {
+                width: 100%;
+                text-align: center;
             }
             body {
                 margin: 0;
@@ -24,8 +25,8 @@
             }
         </style>
     </head>
-    <body>        
-        <h1>Pawel glæder sig til eksamen i Algoritmer!</h1>
+    <body>    
+        <div class="title"><h1>Pawel glæder sig til eksamen i Algoritmer!</h1></div>
         <img src="res/pawel.gif" id="pawel">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -44,7 +45,7 @@
                 
                 for (var i = 0; i < russer.length; i++) {
                     var rus = russer[i];
-                    var left = rus.data('left') + 10;
+                    var left = rus.data('left') + 15;
                     rus.css({ "left": left });
                     rus.data('left', left);
                     
