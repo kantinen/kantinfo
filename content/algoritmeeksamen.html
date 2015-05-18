@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <style>
+            h1 {
+                font-size: 48pt;
+                position: absolute;
+                top: 0px;
+                left: 350px;
+                font-family: sans-serif;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            #pawel {
+                position: absolute;
+                left: 460px;
+                top: 100px;
+                z-index: 100;
+                height: 900px;
+            }
+        </style>
+    </head>
+    <body>        
+        <h1>Pawel glæder sig til eksamen i Algoritmer!</h1>
+        <img src="res/pawel.gif" id="pawel">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            var russer = [];
+            var nextSpawn = 0;
+            function move() {
+                if (nextSpawn <= 0) {
+                    var rus = $('<img src="res/rus.gif">');
+                    rus.css({ "position": "absolute", "top": 200+Math.random()*500, "left": -200, "width": 250});
+                    rus.data('left', -200);
+                    russer.push(rus);
+                    $('body').append(rus);                
+                    nextSpawn = 20 + Math.random() * 50;
+                }
+                
+                for (var i = 0; i < russer.length; i++) {
+                    var rus = russer[i];
+                    var left = rus.data('left') + 10;
+                    rus.css({ "left": left });
+                    rus.data('left', left);
+                    
+                    if (left > 1920) {
+                        russer.splice(i, 1);
+                        rus.remove();
+                        i--;
+                    }
+                }
+                nextSpawn -= 1;
+                
+                setTimeout(move, 10);
+            }
+            move();
+        </script>
+    </body>
+</html>
