@@ -22,14 +22,13 @@ Design efter en opløsning på 1920x1080.
 Opsætning
 ---------
 
-Infoskærmsmaskinen (herefter bare kaldet `odroid`) er en Odroid som er
-monteret bag skærmen i kantinen.  Man kan logge ind på maskinen via
-SSH ved først at forbinde til kantine.diku.dk, og derefter videre til
-odroid med bruger `odroid` og løsen `odroid`.
+Infoskærmsmaskinen (herefter bare kaldet `odroid`) er en Odroid som er monteret
+bag skærmen i kantinen.  Man kan logge ind på maskinen ved at ssh'e til
+`odroid@diku.kantinen.org`.  Niels skal have ens offentlige nøgle før dette
+virker.  Løsenet på maskinen er bare `odroid`.
 
-Når maskinen starter op kører den lightdm, som automatisk logger
-brugeren `odroid` ind i en session, der kører scriptet `.xinitrc`.
-Vi har vedhæftet vores `.xinitrc` i dette repo.
+Når maskinen starter op, bliver brugeren `odroid` logget ind i en session, der
+kører scriptet `.xinitrc`.  Vi har vedhæftet vores `.xinitrc` i dette repo.
 
 Dette scripts primære ansvar er at starte en `tmux`-session der kører
 infoskærmsscriptet, samt starte en enkel window manager.  Hvis du vil
