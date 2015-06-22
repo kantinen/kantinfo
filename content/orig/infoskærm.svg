@@ -24,11 +24,11 @@
     <linearGradient
        id="linearGradient3770">
       <stop
-         style="stop-color:#ff00ff;stop-opacity:1;"
+         style="stop-color:#7600ff;stop-opacity:1;"
          offset="0"
          id="stop3772" />
       <stop
-         style="stop-color:#ffd3ff;stop-opacity:1;"
+         style="stop-color:#ff62ff;stop-opacity:1;"
          offset="1"
          id="stop3774" />
     </linearGradient>
@@ -49,7 +49,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.73489583"
+     inkscape:zoom="0.696875"
      inkscape:cx="960"
      inkscape:cy="540"
      inkscape:document-units="px"
@@ -84,41 +84,50 @@
        height="1080"
        x="0"
        y="-27.637817" />
+    <path
+       transform="matrix(0.99828259,0.05858215,-0.05858215,0.99828259,0,0)"
+       style="fill:#550000;fill-opacity:1;stroke:none"
+       d="m 67.560565,227.94253 c 30.475109,-4.76715 1633.983435,5.22754 1833.204935,1.42909 8.3761,-0.1597 47.4897,59.32751 6.1538,71.84253 C 1865.5835,313.72917 113.85869,347.71638 53.659178,300.96196 -6.5403321,254.20754 37.085455,232.70968 67.560565,227.94253 z"
+       id="rect3773"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="zszzz" />
     <text
        xml:space="preserve"
-       style="font-size:97.64286804px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
-       x="38.653187"
-       y="296.62967"
+       style="font-size:70.82085419px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="346.99942"
+       y="242.28828"
        id="text3004"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3006"
-         x="38.653187"
-         y="296.62967">Vil du have dit snask her? Så send en pull request til </tspan></text>
+         x="346.99942"
+         y="242.28828"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Vahika;-inkscape-font-specification:Vahika Bold Italic">Vil du have dit snask her? Så send en pull request til... </tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:64.16699219px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
-       x="59.874363"
-       y="379.52615"
+       style="font-size:54.44840622px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffff00;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="73.244743"
+       y="286.02386"
        id="text3008"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="matrix(0.99839406,0.05665065,-0.05665065,0.99839406,0,0)"><tspan
          sodipodi:role="line"
          id="tspan3010"
-         x="59.874363"
-         y="379.52615"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium">https://github.com/datalogisk-kantineforening/infoscreen</tspan></text>
+         x="73.244743"
+         y="286.02386"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffff00;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono Bold">https://github.com/datalogisk-kantineforening/infoscreen</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:114.41129303px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
-       x="42.973927"
-       y="204.05899"
+       style="font-size:96.7598114px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ececec;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       x="72.367302"
+       y="162.61049"
        id="text3032"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3034"
-         x="42.973927"
-         y="204.05899"
-         style="font-size:257.42541504px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Gentium;-inkscape-font-specification:Gentium">Hil infoskærmen!</tspan></text>
+         x="72.367302"
+         y="162.61049"
+         style="font-size:217.70959473px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ececec;fill-opacity:1;font-family:Gentium;-inkscape-font-specification:Gentium">Jeg er infoskærmen!</tspan></text>
     <path
        sodipodi:type="star"
        style="fill:#ffff00;fill-opacity:1;stroke:none"
@@ -173,6 +182,15 @@
        transform="translate(0,-27.637817)"
        inkscape:transform-center-x="-20.264828"
        inkscape:transform-center-y="1.5139973" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:none"
+       id="rect3776"
+       width="1433.5426"
+       height="160.71742"
+       x="199.46188"
+       y="862.94507"
+       ry="43.049324"
+       rx="43.049324" />
     <path
        sodipodi:type="star"
        style="fill:#ffff00;fill-opacity:1;stroke:none"
@@ -266,14 +284,15 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3020"
-       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#550000;fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Bold Italic"
        transform="matrix(1.457017,0,0,1.457017,31.3949,24.278071)"><flowRegion
          id="flowRegion3022"><rect
            id="rect3024"
            width="970.18994"
            height="212.37988"
            x="130.32402"
-           y="579.2179" /></flowRegion><flowPara
+           y="579.2179"
+           style="fill:#550000" /></flowRegion><flowPara
          id="flowPara3028"
-         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Bold Italic">Hvis du er i tvivl om hvordan du skal komme i gang, så snak med nogen der forstår GitHub.</flowPara></flowRoot>  </g>
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#550000;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Bold Italic">Hvis du er i tvivl om hvordan du skal komme i gang, så snak med nogen der forstår GitHub!</flowPara></flowRoot>  </g>
 </svg>
