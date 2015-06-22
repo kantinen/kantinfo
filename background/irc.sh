@@ -42,6 +42,7 @@ channel="#diku"
 (echo ":j $channel" > $in) &
 
 # Kør klienten i baggrunden.
+touch $irc_out
 tail -f $in \
     | ircloop \
     | grep --line-buffered -E "^$channel" \
