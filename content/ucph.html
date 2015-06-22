@@ -17,6 +17,7 @@ h3 {
 }
 
 #panda {
+  position: absolute;
   width: 256px;
   height: 256px;
   animation: panda 3s infinite;
@@ -25,31 +26,57 @@ h3 {
 
 @keyframes panda {
   0% {
-    margin-left: 0;
+    top: 0;
+    left: 0;
     transform: rotate(0deg);
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 256px);
+    transform: rotate(360deg);
   }
   50% {
-    margin-left: calc(100% - 256px - 10px);
+    top: calc(100% - 256px);
+    left: calc(100% - 256px);
     transform: rotate(720deg);
   }
+  75% {
+    top: calc(100% - 256px);
+    left: 0;
+    transform: rotate(1080deg);
+  }
   100% {
-    margin-left: 0;
-    transform: rotate(0deg);
+    top: 0;
+    left: 0;
+    transform: rotate(1440deg);
   }
 }
 
 @-webkit-keyframes panda {
   0% {
-    margin-left: 0;
+    top: 0;
+    left: 0;
     -webkit-transform: rotate(0deg);
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 256px);
+    -webkit-transform: rotate(360deg);
   }
   50% {
-    margin-left: calc(100% - 256px - 10px);
+    top: calc(100% - 256px);
+    left: calc(100% - 256px);
     -webkit-transform: rotate(720deg);
   }
+  75% {
+    top: calc(100% - 256px);
+    left: 0;
+    -webkit-transform: rotate(1080deg);
+  }
   100% {
-    margin-left: 0;
-    -webkit-transform: rotate(0deg);
+    top: 0;
+    left: 0;
+    -webkit-transform: rotate(1440deg);
   }
 }
     </style>
@@ -61,11 +88,9 @@ h3 {
     <hr>
     <h3>Bidrag med indhold og få et bolsje!</h3>
 
-    <p>
-      <img src="res/pandahoved-cirkel.png"
-           alt="Panda siger velkommen" title="Panda siger velkommen"
-           id="panda" />
-    </p>
+    <img src="res/pandahoved-cirkel.png"
+         alt="Panda siger velkommen" title="Panda siger velkommen"
+         id="panda" />
 
   </body>
 </html>
