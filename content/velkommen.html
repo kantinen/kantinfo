@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <title>FUTURAMA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+body {
+  overflow: hidden;
+  margin: 0;
+  font-family: serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 140px;
+}
+
+h2 {
+  font-size: 70px;
+}
+
+p {
+  font-size: 40px;
+}
+
+h1, h2, h3, p {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 0;
+}
+
+#fry {  
+  width: 575px;
+  height: 818px;
+  position: absolute;
+  z-index: -1;
+  -webkit-animation: fry 5s infinite;
+}
+
+@-webkit-keyframes fry {
+  0% {
+    top: 0;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 575px);
+    -webkit-transform: rotate(360deg);
+  }
+  30% {
+    -webkit-transform: rotate(400deg);
+  }
+  35% {
+    -webkit-transform: rotate(320deg);
+  }
+  40% {
+    -webkit-transform: rotate(400deg);
+  }
+  45% {
+    -webkit-transform: rotate(320deg);
+  }
+  50% {
+    top: calc(100% - 818px);
+    left: calc(50% - 288px);
+    -webkit-transform: rotate(360deg);
+  }
+  100% {
+    top: 0;
+    left: 0;
+    -webkit-transform: rotate(-720deg);
+  }
+}
+
+#hermes {  
+  width: 706px;
+  height: 540px;
+  left: calc(50% - 353px);
+  position: absolute;
+  z-index: -2;
+  -webkit-animation: hermes 3s infinite;
+}
+
+@-webkit-keyframes hermes {
+  0% {
+    top: calc(100% - 540px);
+    margin-left: 0px;
+  }
+  10% {
+    margin-left: 100px;
+  }
+  20% {
+    margin-left: -100px;
+  }
+  30% {
+    margin-left: 100px;
+  }
+  40% {
+    margin-left: -100px;
+  }
+  50% {
+    top: 0;
+    margin-left: 0px;
+  }
+  60% {
+    margin-left: 200px;
+  }
+  70% {
+    margin-left: -200px;
+  }
+  80% {
+    margin-left: 200px;
+  }
+  90% {
+    margin-left: -200px;
+  }
+  100% {
+    top: calc(100% - 540px);
+    margin-left: 0px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <h1 style="color: red; margin-bottom: 500px;">VELKOMMEN TIL DIKU</h1>
+    <h2 style="color: green">Godmorgen, goddag, godeftermiddag, godnat</h2>
+    <h2 style="color: blue">Denne infoskærm viser nu en hat</h2>
+
+    <img src="res/kasket.jpg"
+         alt="Fry"
+         id="fry">
+    <img src="res/klovnehat.jpg"
+         alt="Hermes"
+         id="hermes">
+  </body>
+</html>
