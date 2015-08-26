@@ -196,8 +196,25 @@ def infoscreen():
         content, content_list = find_next_content(content, content_list)
 
 if __name__ == '__main__':
+    args = sys.argv[1:]
+
+    if '--help' in args:
+        print('infoscreen from git; see the README')
+        print('Options:')
+        print('  --count  Count the number of slides, print it, and exit.')
+        print('  --help   Print this text.')
+        sys.exit(0)
+
+    if '--count' in args:
+        paths = [os.path.join(content_directory, f)
+                 for f in os.listdir(content_directory)]
+        paths = [p for p in paths
+                 if os.path.isfile(p) and not p.endswith(config_ending)]
+        print(len(paths))
+        sys.exit(0)
+
     try:
-        filename = sys.argv[1]
+        filename = args[0]
     except IndexError:
         filename = None
 
