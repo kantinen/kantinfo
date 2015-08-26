@@ -7,6 +7,10 @@ import sys
 import os
 import time
 import subprocess
+import yaml
+
+# The file ending used for configuration files.
+config_ending = '.yaml'
 
 # The directory in which content is stored.
 content_directory='content'
@@ -65,8 +69,10 @@ def find_next(old_selection, old_list, new_list):
       return new_list[0]
 
 def find_next_content(old_selection, old_content):
-    new_content = [ f for f in os.listdir(content_directory)
-                    if os.path.isfile(os.path.join(content_directory,f)) ]
+    paths = [os.path.join(content_directory, f) for f in os.listdir(content_directory)]
+    new_content = [p for p in paths
+                   if os.path.isfile(p) and not p.endswith(config_ending)]
+    print(new_content)
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
@@ -148,11 +154,26 @@ def show_content(filename):
 def infoscreen():
     content, content_list = find_next_content(None, [])
     proc_prev = None
-    dur = 20
     start_sleep = 1
+
     while True:
+        content_conf = content + config_ending
+        dur = 2
+
         try:
-            proc = show_content(os.path.join(content_directory, content))
+            with open(content_conf) as f:
+                conf = f.read()
+        except IOError:
+            pass
+        else:
+            conf = yaml.load(conf)
+            try:
+                dur = conf['duration']
+            except (TypeError, KeyError):
+                pass
+
+        try:
+            proc = show_content(content)
         except Exception as e:
             print("Failed to show %s:\n%s" % (content, str(e)))
             print("Sleeping for two seconds.")

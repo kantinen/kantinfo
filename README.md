@@ -19,6 +19,21 @@ Understøttede filer:
 
 Design efter en opløsning på 1920x1080.
 
+Konfiguration af slides
+-----------------------
+
+Hvert slide kan have en konfigurationsfil.  Hvis et slide hedder
+`et-slide.endelse`, skal konfigurationsfilen hedde `et-slide.endelse.yaml`.
+Filen skrives i YAML-formatet.  Følgende felter er understøttet:
+
+  * `duration`: Tager et tal i sekunder og beskriver hvor lang tid et slide skal
+    vises.  Standard er 20 sekunder.
+    
+Eksempel på konfigurationsfil der sørger for at et slide bliver vist i kun 10
+sekunder:
+
+    duration: 10
+
 Opsætning
 ---------
 
