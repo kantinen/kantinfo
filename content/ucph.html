@@ -6,6 +6,7 @@
     <style type="text/css">
 body {
   overflow: hidden;
+  margin: 0;
 }
 
 h1 {
@@ -32,6 +33,19 @@ li {
   float: left;
   list-style: none;
   background-color: silver;
+  -webkit-animation: li 3s infinite;
+}
+
+@-webkit-keyframes li {
+  0% {
+    -webkit-transform: rotate(-20deg);
+  }
+  50% {
+    -webkit-transform: rotate(20deg);
+  }
+  100% {
+    -webkit-transform: rotate(-20deg);
+  }
 }
 
 #panda {
@@ -51,33 +65,33 @@ li {
   25% {
     top: 0;
     left: calc(100% - 256px);
-    -webkit-transform: rotate(-360deg);
+    -webkit-transform: rotate(-720deg);
   }
   50% {
     top: calc(100% - 256px);
     left: calc(100% - 256px);
-    -webkit-transform: rotate(-720deg);
+    -webkit-transform: rotate(-1080deg);
   }
   75% {
     top: calc(100% - 256px);
     left: 0;
-    -webkit-transform: rotate(-1080deg);
+    -webkit-transform: rotate(-1800deg);
   }
   100% {
     top: 0;
     left: 0;
-    -webkit-transform: rotate(-1440deg);
+    -webkit-transform: rotate(-2160deg);
   }
 }
     </style>
   </head>
   <body>
-    <h1 style="color: green;"><marquee>UCPH.DK</marquee></h1>
+    <h1 style="color: green;"><marquee behavior="alternate"><a href="http://ucph.dk/">UCPH.DK</a></marquee></h1>
 
     <h2 style="color: red;">Danmarks bedste DIKU-portal!</h2>
     <hr>
-    <h3 style="color: blue;">Bidrag med indhold og få et bolsje!</h3>
-    <h3 style="color: yellow; background-color: black;">UCPH har alle teknologierne!</h3>
+    <h3 style="color: cyan; background-color: purple;">Bidrag med indhold og få et bolsje!</h3>
+    <h3 style="color: yellow; background-color: grey;"><a href="http://ucph.dk">UCPH.DK</a> har alle teknologierne!</h3>
     <ul>
       <li>INFORMATION</li>
       <li>IRC-CHAT</li>
