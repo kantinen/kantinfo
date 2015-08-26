@@ -157,7 +157,7 @@ def infoscreen():
 
     while True:
         content_conf = content + config_ending
-        dur = 2
+        dur = 20
 
         try:
             with open(content_conf) as f:
