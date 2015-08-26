@@ -72,7 +72,6 @@ def find_next_content(old_selection, old_content):
     paths = [os.path.join(content_directory, f) for f in os.listdir(content_directory)]
     new_content = [p for p in paths
                    if os.path.isfile(p) and not p.endswith(config_ending)]
-    print(new_content)
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
