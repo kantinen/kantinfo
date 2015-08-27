@@ -25,21 +25,26 @@ color_usermsg() {
     cat # Resterende linjer.
 }
 
-ircloop() {
-    while true; do
-	sic -h irc.freenode.net -n $name
-        sleep 2
-    done
-}
-
 # Input til IRC-klienten.
 in=$(mktemp)
 touch $in
 
 channel="#diku"
 
-# Join #diku.
-(echo ":j $channel" > $in) &
+join_channel() {
+    # Join #diku.
+    (echo ":j $channel" > $in) &
+}
+
+ircloop() {
+    while true; do
+	sic -h irc.freenode.net -n $name
+        sleep 2
+        join_channel
+    done
+}
+
+join_channel
 
 # Kør klienten i baggrunden.
 touch $irc_out
