@@ -16,10 +16,10 @@ color_usermsg() {
     {
         echo -en "$timecolor"
         echo -en "$time "
-	echo -en "$usercolor"
-	echo -n "$user>"
-	echo -en "$msgcolor"
-	echo "$end"
+        echo -en "$usercolor"
+        echo -n "$user>"
+        echo -en "$msgcolor"
+        echo "$end"
     }
 
     cat # Resterende linjer.
@@ -38,7 +38,7 @@ join_channel() {
 
 ircloop() {
     while true; do
-	sic -h irc.freenode.net -n $name
+        sic -h irc.freenode.net -n $name
         sleep 2
         join_channel
     done
@@ -55,5 +55,5 @@ tail -f $in \
     | tee /dev/stderr \
     | sed -u 's/^ *//' \
     | while IFS='' read line; do
-	  echo "$line" | fmt -75 | color_usermsg >> $irc_out
+          echo "$line" | fmt -75 | color_usermsg >> $irc_out
       done
