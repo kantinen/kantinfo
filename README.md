@@ -58,6 +58,13 @@ Et cronjob (`sudo crontab -e`) sørger for at genstarte maskinen hver
 morgen klokken 6.  Dette er for at sikre at der aldrig sniger sig
 noget ind i opsætningen der ikke kan overleve en genstart.
 
+Vær i øvrigt opmærksom på at alle odroids ser ud til at komme med samme
+MAC-adresse (WTF??). Nu hvor vi har flere odroids i drift i kantinen skal bliver man
+nødt til manuelt at ændre deres MAC-adresser for at undgå konfliklter. Dette
+håndteres af et script i stil med setmac.sh. For at finde ud af hvilken maskine
+som skal have hvilken MAC-adresse kan man kikke i
+'diku.kantinen.org:/etc/dhcp/dhcpd.conf'. Scriptet kaldes fra /etc/rc.local på odroiden.
+
 Sådan gør man manuelt
 ---------------------
 
