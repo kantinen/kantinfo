@@ -1,0 +1,115 @@
+<html>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<style>
+#header, #footer {
+    background-color: rgb(235,133,24); 
+    height: 200px;
+    text-align: center;
+}
+#headline {
+    font-size: 90pt;
+    padding-top: 20px;
+    display: block;
+}
+#signup_info, #time_info {
+    padding-top: 5px;
+    display: block;
+    font-size: 50pt; 
+}
+#body {
+    height: 680px;
+    background-color: black;
+    position: relative;
+    font-size: 40pt;
+}
+body {
+    font-family: Montserrat;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+}
+
+#beer, #problems, #practice, #more_beer {
+    position: absolute;
+
+    -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes beer {
+    0% {
+        -webkit-transform: rotate(-20deg);
+    }
+    50% {
+        -webkit-transform: rotate(20deg);
+    }
+    100% {
+        -webkit-transform: rotate(-20deg);
+    }
+}
+
+#beer {
+    top: 150px; right: 330px;
+    -webkit-animation: beer 2s infinite;
+}
+
+@-webkit-keyframes problems {
+    0% {
+        -webkit-transform: rotate(25deg);
+    }
+    50% {
+        -webkit-transform: rotate(-20deg);
+    }
+    100% {
+        -webkit-transform: rotate(25deg);
+    }
+}
+#problems {
+    top: 125px; left: 100px;
+    -webkit-animation: problems 2.5s infinite;
+}
+#practice {
+    bottom: 200px; left: 50px;
+    -webkit-animation: beer 1.8s infinite;
+}
+
+@-webkit-keyframes more_beer {
+    0% {
+        -webkit-transform: rotate(15deg);
+    }
+    50% {
+        -webkit-transform: rotate(-20deg);
+    }
+    100% {
+        -webkit-transform: rotate(15deg);
+    }
+}
+#more_beer {
+    bottom: 125px; right: 100px;
+    -webkit-animation: more_beer 2.5s infinite;
+}
+
+#header {
+    top: 0px;
+}
+#footer {
+    bottom: 0px;
+}
+</style>
+</head>
+<body>
+    <div id="header">
+        <span id="headline">Jobindex Coding Competition</span>
+    </div>
+    <div id="body">
+        <span id="beer">Free food and beer</span>
+        <span id="problems">Fun coding problems</span>
+        <span id="practice">Practice for DM i Programmering</span>
+        <span id="more_beer">Did we mention free beer?</span>
+    </div>
+    <div id="footer">
+        <span id="time_info">Friday the 18th of September, 16:00 in Kantinen</span>
+        <span id="signup_info">Sign up @ http://goo.gl/3adMeq</span>
+    </div>
+</body>
+</html>
