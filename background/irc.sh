@@ -1,6 +1,6 @@
 #!/bin/bash
 
-irc_out=/tmp/diku_irc_out
+irc_out=/home/odroid/diku_irc_out
 
 timecolor='\e[0;31m'
 usercolor='\e[0;32m'
