@@ -3,9 +3,9 @@
 # Kør dette script hvis du vil se infoskærmen på din egen datamat.  Hos dig
 # selv, kør så:
 #
-#   ssh -L 5900:odroid:5900 kantine@kantine.diku.dk
+#   ssh -L 5900:localhost:5900 odroid@diku.kantinen.org
 #
-# og i en anden terminal:
+# I en anden terminal hos dig selv, kør så:
 #
 #   xtightvncviewer localhost
 
