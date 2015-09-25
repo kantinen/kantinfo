@@ -154,6 +154,8 @@ def show_content(filename):
 def infoscreen():
     proc_prev = None
     start_sleep = 1
+    content = None
+    content_list = []
 
     while True:
         try:
@@ -163,7 +165,7 @@ def infoscreen():
             print("Failed to git pull:\n%s" % str(e))
             time.sleep(2)
 
-        content, content_list = find_next_content(None, [])
+        content, content_list = find_next_content(content, content_list)
         content_conf = content + config_ending
         dur = 20
 
