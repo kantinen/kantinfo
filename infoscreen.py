@@ -8,6 +8,7 @@ import os
 import time
 import subprocess
 import yaml
+import time
 
 # The file ending used for configuration files.
 config_ending = '.yaml'
@@ -151,11 +152,18 @@ def show_content(filename):
 
 # Main command line entry point.
 def infoscreen():
-    content, content_list = find_next_content(None, [])
     proc_prev = None
     start_sleep = 1
 
     while True:
+        try:
+            if pull_after_switch:
+                subprocess.call(["git", "pull"])
+        except Exception as e:
+            print("Failed to git pull:\n%s" % str(e))
+            time.sleep(2)
+
+        content, content_list = find_next_content(None, [])
         content_conf = content + config_ending
         dur = 20
 
@@ -168,6 +176,15 @@ def infoscreen():
             conf = yaml.load(conf)
             try:
                 dur = conf['duration']
+            except (TypeError, KeyError):
+                pass
+            try:
+                start_at = conf['start_at']
+                end_at = conf['end_at']
+                now = time.localtime().tm_hour * 60 + time.localtime().tm_min
+                if not (start_at <= now < end_at):
+                   print("Not the time for %s." % content)
+                   continue
             except (TypeError, KeyError):
                 pass
 
@@ -186,14 +203,6 @@ def infoscreen():
 
         # Sleep more.
         time.sleep(max(0, dur - start_sleep))
-
-        try:
-            if pull_after_switch:
-                subprocess.call(["git", "pull"])
-        except Exception as e:
-            print("Failed to git pull:\n%s" % str(e))
-            time.sleep(2)
-        content, content_list = find_next_content(content, content_list)
 
 if __name__ == '__main__':
     args = sys.argv[1:]
