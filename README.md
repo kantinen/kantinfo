@@ -44,6 +44,7 @@ Afhængigheder
 
 Installér følgende programmer:
 
+  + `python`
   + `matchbox`: Simpel window manager
   + `surf`: Simpel browser
   + `xdotool`: Musemarkør-skjuler (mm.)
