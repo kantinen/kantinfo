@@ -179,9 +179,14 @@ def infoscreen():
                 start_at = conf['start_at']
                 end_at = conf['end_at']
                 now = time.localtime().tm_hour * 60 + time.localtime().tm_min
-                if not (start_at <= now < end_at):
-                   print("Not the time for %s." % content)
-                   continue
+                if start_at < end_at:
+                    if not (start_at <= now < end_at):
+                        print("Not the time for %s." % content)
+                        continue
+                else:
+                    if end_at <= now < start_at:
+                        print("Not the time for %s." % content)
+                        continue
             except (TypeError, KeyError):
                 pass
 
