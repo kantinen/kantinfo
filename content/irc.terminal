@@ -1,6 +1,6 @@
 #!/bin/bash
 
-irc_out=/tmp/diku_irc_out
+irc_out=$HOME/diku_irc_out
 
 top() {
     tput cup 0 0
