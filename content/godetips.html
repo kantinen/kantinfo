@@ -9,26 +9,47 @@
 }
       
 body {
+  margin: 10px;
   overflow: hidden;
+  font-family: Gentium;
+  background-color: red;
+  background-image: url('res/gambling-tips/las-vegas-strip.jpg');
 }
 
 img {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  -webkit-animation: headscroll 10s infinite;
 }
 
-p {
-    position: absolute;
-    top: 10px;
+@-webkit-keyframes headscroll {
+  0% {
     left: 10px;
-    font-size: 65px;
-    font-family: Gentium;
+  }
+  50% {
+    left: 1175px;
+  }
+  100% {
+    left: 10px;
+  }
 }
 
-span {
-    font-size: 90px;
-    font-weight: bold;
+
+#says {
+  font-size: 55px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 5px;
+  color: #333;
+  background-color: rgba(255, 255, 0, 0.8);
+}
+
+#quote {
+  font-size: 90px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: rgba(210, 210, 0, 0.8);
 }
     </style>
   </head>
@@ -66,7 +87,8 @@ var name = names[name_index];
 var quote = quotes[name_index][Math.floor(Math.random() * quotes[name_index].length)];
 
 document.write('<img src="res/gambling-tips/' + name + '.jpg" alt="' + name + '">');
-document.write('<p>' + name + ' siger:<br>"<span>' + quote + '</span>"</p>');
+document.write('<p id="says">' + name + ' siger:</p>');
+document.write('<p id="quote">&quot;' + quote + '&quot;</p>');
     </script>
   </body>
 </html>
