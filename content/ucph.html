@@ -7,7 +7,19 @@
 body {
   overflow: hidden;
   margin: 0;
+  background-image: url('res/Xiao_Liwu_im_San_Diego_Zoo_-_Foto_4.jpeg');
+  /* -webkit-animation: backgroundscroll 3s infinite; */
+  /* -webkit-animation-timing-function: linear; */
 }
+
+/* @-webkit-keyframes backgroundscroll { */
+/*   0% { */
+/*     background-position: 0 0; */
+/*   } */
+/*   100% { */
+/*     background-position: 0 -2880px; */
+/*   } */
+/* } */
 
 h1 {
   font-size: 100px;
@@ -83,11 +95,49 @@ li {
     -webkit-transform: rotate(-2160deg);
   }
 }
+
+#header {
+  display: block;
+  position: relative;
+  -webkit-animation: header 5s infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes header {
+  0% {
+    color: blue;
+    left: 0;
+    top: 0;
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    left: -300px;
+    top: 40px;
+    -webkit-transform: rotate(-10deg);
+  }
+  50% {
+    color: yellow;
+    left: 0;
+    top: 0;
+    -webkit-transform: rotate(0deg);
+    font-size: 140%;
+  }
+  75% {
+    left: 300px;
+    top: 40px;
+    -webkit-transform: rotate(10deg);
+  }
+  100% {
+    color: blue;
+    left: 0;
+    top: 0;
+    -webkit-transform: rotate(0deg);
+  }
+}
     </style>
   </head>
   <body>
-    <h1 style="color: green;"><marquee behavior="alternate"><a href="http://ucph.dk/">UCPH.DK</a></marquee></h1>
-
+    <h1><a id="header" href="http://ucph.dk/">UCPH.DK</a></h1>
     <h2 style="color: red;">Danmarks bedste DIKU-portal!</h2>
     <hr>
     <h3 style="color: cyan; background-color: purple;">Bidrag med indhold og få et bolsje!</h3>
