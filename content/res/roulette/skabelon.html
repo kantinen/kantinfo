@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Roulette</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+* {{
+  margin: 0;
+}}
+  
+body {{
+  overflow: hidden;
+  text-align: center;
+}}
+
+#hjul {{
+  -webkit-transform: rotate({end_deg}deg);
+  -webkit-animation: hjulroter {rot_time}s;
+  -webkit-animation-timing-function: linear;
+}}
+
+@-webkit-keyframes hjulroter {{
+  0% {{
+    -webkit-transform: rotate(0deg);
+  }}
+  100% {{
+    -webkit-transform: rotate({end_deg}deg);
+  }}
+}}
+
+#result {{
+  position: absolute;
+  left: 200px;
+  top: 200px;
+  font-size: 180px;
+  color: white;
+  font-family: Impact, sans;
+  background-color: blue;
+  padding: 5px;
+  -webkit-animation: resultat {rot_time}s;
+  -webkit-animation-timing-function: linear;
+}}
+
+@-webkit-keyframes resultat {{
+  0% {{
+    opacity: 0;
+  }}
+  92% {{
+    opacity: 0;
+    font-size: 50px;
+  }}
+  98% {{
+    font-size: 200px;
+  }}
+  100% {{
+    opacity: 1;
+  }}
+}}
+
+#tip {{
+  position: absolute;
+  left: 300px;
+  bottom: 100px;
+  font-size: 70px;
+  color: black;
+  font-family: Impact, sans;
+  background-color: yellow;
+  padding: 5px;
+}}
+
+#info {{
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  font-size: 100px;
+  color: black;
+  font-family: Impact, sans;
+  background-color: orange;
+  padding: 5px;
+}}
+    </style>
+  </head>
+  <body>
+    <img id="hjul" src="{imgpath}" alt="Roulettehjul">
+    <p id="info">Spå-rouletten &mdash; giver dig held i spil!</p>
+    <p id="result">Okay, sats på {end_res}!</p>
+    <p id="tip">DAGENS TIP: {tip}</p>
+  </body>
+</html>
