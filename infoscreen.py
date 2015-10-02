@@ -1,13 +1,25 @@
 #!/usr/bin/env python
-# encoding: utf8
+# -*- coding: utf-8 -*-
+
+# Copyright © 2014-2015 Infoskærms-gruppen <infoskaerm@kantinen.org>
 #
-# Infoscreen control script.
+# This work is free. You can redistribute it and/or modify it under the
+# terms of the Do What The Fuck You Want To Public License, Version 2,
+# as published by Sam Hocevar. See the COPYING file for more details.
+
+# This is the control script for the infoscreen in the DIKU canteen.  See the
+# README.md file to find out how to use it.  This Python program is independent
+# of the canteen-specific content in the repository, and you should be able to
+# copy it to your own repository and add your own content, as long as you
+# maintain the same directory structure.
+
 
 import sys
 import os
 import time
 import subprocess
 import yaml
+import time
 
 # The file ending used for configuration files.
 config_ending = '.yaml'
@@ -82,30 +94,14 @@ def run_program(progname, args):
                             close_fds=True)
     return proc
 
+def play_video(path):
+    return run_program('mplayer',
+                       [path])
+
 def show_url_in_browser(url):
     return run_program('surf',
                        ['-p', # Disable plugins.
                         url])
-
-def play_video(url):
-    '''
-    Udkommentér hvis det er for langsomt at streame video.
-    '''
-    # cache_dir = os.path.join(os.path.expanduser("~"), '.infoscreen-cache')
-    # if not os.path.isdir(cache_dir):
-    #     os.mkdir(cache_dir)
-    # local = os.path.join(cache_dir, base64.b64encode(url, '+-'))
-    # if not os.path.exists(local):
-    #     ensure_download_video(url, local) # Takes time, but probably not too much time.
-    # return run_program('mpv', ['--fullscreen', local])
-    return run_program('mpv', [url])
-
-# def ensure_download_video(url, local):
-#     if url.startswith('https://youtube.com/'):
-#         p = run_program('youtube-dl', ['--output', local, '--format', 'best', url])
-#     else:
-#         p = run_program('wget', ['--output-document', local, url])
-#     p.wait()
 
 def url_handler(url):
     if url.endswith('.mkv') or url.endswith('.webm') or url.endswith('.mp4') \
@@ -151,11 +147,20 @@ def show_content(filename):
 
 # Main command line entry point.
 def infoscreen():
-    content, content_list = find_next_content(None, [])
     proc_prev = None
     start_sleep = 1
+    content = None
+    content_list = []
 
     while True:
+        try:
+            if pull_after_switch:
+                subprocess.call(["git", "pull"])
+        except Exception as e:
+            print("Failed to git pull:\n%s" % str(e))
+            time.sleep(2)
+
+        content, content_list = find_next_content(content, content_list)
         content_conf = content + config_ending
         dur = 20
 
@@ -168,6 +173,20 @@ def infoscreen():
             conf = yaml.load(conf)
             try:
                 dur = conf['duration']
+            except (TypeError, KeyError):
+                pass
+            try:
+                start_at = conf['start_at']
+                end_at = conf['end_at']
+                now = time.localtime().tm_hour * 60 + time.localtime().tm_min
+                if start_at < end_at:
+                    if not (start_at <= now < end_at):
+                        print("Not the time for %s." % content)
+                        continue
+                else:
+                    if end_at <= now < start_at:
+                        print("Not the time for %s." % content)
+                        continue
             except (TypeError, KeyError):
                 pass
 
@@ -187,19 +206,11 @@ def infoscreen():
         # Sleep more.
         time.sleep(max(0, dur - start_sleep))
 
-        try:
-            if pull_after_switch:
-                subprocess.call(["git", "pull"])
-        except Exception as e:
-            print("Failed to git pull:\n%s" % str(e))
-            time.sleep(2)
-        content, content_list = find_next_content(content, content_list)
-
 if __name__ == '__main__':
     args = sys.argv[1:]
 
     if '--help' in args:
-        print('infoscreen from git; see the README')
+        print('infoscreen from git; see README.md for instructions')
         print('Options:')
         print('  --count  Count the number of slides, print it, and exit.')
         print('  --help   Print this text.')

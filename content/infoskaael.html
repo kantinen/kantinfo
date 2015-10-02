@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Infoskål!!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+body {
+  overflow: hidden;
+  margin: 0;
+}
+
+h1 {
+  font-size: 100px;
+  text-align: center;
+  color: white;
+  -webkit-animation: texti 30s linear;
+}
+
+@-webkit-keyframes texti {
+  from {opacity: 0;}
+
+  50% {opacity: 0;}
+  51%  {opacity: 0.5;
+        font-size: 100px}
+
+
+  100%  {opacity: 1;
+         font-size: 300px;
+         letter-spacing: 15px;
+
+        }
+}
+
+h2 {
+  font-size: 70px;
+  text-align: center;
+}
+
+h3 {
+  margin: 0 auto ;
+  font-size: 50px;
+}
+
+#mountain   { 
+    position: fixed;
+    width: 1920px;
+    height: 1080px;
+    background-image: url(./res/yuri-boyka-hd.jpg);
+    background-position: 0px 0px;
+    background-size: 150% 100%;
+    background-repeat: repeat-x;
+    -webkit-animation: animatedBackground 100s linear infinite;
+    z-index: -1;
+}
+
+#ulv {
+    position: fixed;
+    -webkit-animation: ulvi 30s linear;
+}
+
+@-webkit-keyframes ulvi {
+    from {bottom:-100px; 
+          left: -100px;
+          height: 50%;
+          opacity: 0;
+        }
+    10% {opacity: 1;}
+    50% {opacity: 1}
+    to {bottom: -1px; 
+          left: 600px;
+          height: 100%;
+        opacity : 0;
+        }
+
+@-webkit-keyframes animatedBackground {
+    from { background-position: 0px 0px; }
+    to { background-position: -950px 0px; }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="mountain"></div>
+    <img id="ulv" src="./res/ulv.png">
+    <h3 style="color: white;">Når infoskærmen skåler, skåler alle!</h3>
+    <h1>SKÅL</h1>
+    </body>
+</html>
+

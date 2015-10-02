@@ -15,7 +15,6 @@ sudo -u odroid sh <<EOF
 cd /home/odroid
 git clone http://github.com/datalogisk-kantineforening/infoscreen.git
 ln -s infoscreen/xinitrc .xinitrc
-ln -s infoscreen/bash_profile .bash_profile
 EOF
 
 # TODO:

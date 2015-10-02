@@ -10,7 +10,27 @@ body {
   text-align: center;
   background-color: black;
 }
-    </style>
+
+p {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  font-size: 150px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+}
+
+address {
+  position: absolute;
+  top: 500px;
+  left: 500px;
+  font-size: 150px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+}
+</style>
   </head>
   <body>
     <script type="text/javascript">
@@ -19,5 +39,7 @@ var items = ['dumbledore', 'fysik', 'gentoo', 'greenscreen',
 var name = items[Math.floor(Math.random() * items.length)];
 document.write('<img src="res/harlem-klub-plakater-2015/' + name + '.jpg" alt="Plakat">');
     </script>
+    <p>Det sker i dag!</p>
+    <address>Kage!</address>
   </body>
 </html>
