@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Gode tips</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+* {
+  margin: 0;
+}
+      
+body {
+  overflow: hidden;
+}
+
+img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+p {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 65px;
+    font-family: Gentium;
+}
+
+span {
+    font-size: 90px;
+    font-weight: bold;
+}
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+var names = [
+    'Gambler-Ghandi',
+    'Blackjack-Børge'
+];
+
+var quotes = [
+    // Ghandi
+    [
+        'Køb altid kun brændimprægnerede jakkesæt.'
+    ],
+
+    // Børge
+    [
+        'Nej, spis ikke barens peanuts.'
+    ]
+];
+
+var name_index = Math.floor(Math.random() * names.length);
+var name = names[name_index];
+
+var quote = quotes[name_index][Math.floor(Math.random() * quotes[name_index].length)];
+
+document.write('<img src="res/gambling-tips/' + name + '.jpg" alt="' + name + '">');
+document.write('<p>' + name + ' siger:<br>"<span>' + quote + '</span>"</p>');
+    </script>
+  </body>
+</html>
+
