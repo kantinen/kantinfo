@@ -6,7 +6,9 @@ import tempfile
 import subprocess
 
 
-with open('content/res/roulette/skabelon.html') as f:
+basedir = os.path.dirname(__file__)
+
+with open(os.path.join(basedir, 'res/roulette/skabelon.html')) as f:
     d = f.read()
 
 rot_time = random.randint(8, 12)
@@ -15,7 +17,7 @@ end_res = random.randint(0, 36)
 g, r, s = '<span style="color: green">grøn</span>', '<span style="color: red">rød</span>', '<span style="color: black">sort</span>'
 colours = [g, r, s, r, s, r, s, r, s, r, s, s, r, s, r, s, r, s, r, r, s, r, s, r, s, r, s, r, s, s, r, s, r, s, r, s, r]
 end_res = '{} {}'.format(end_res, colours[end_res])
-imgpath = os.path.abspath('content/res/roulette/hjul.png')
+imgpath = os.path.abspath(os.path.join(basedir, 'res/roulette/hjul.png'))
 tip = random.choice([
     'Sats alle pengene på sort!',
     'Brug din børneopsparing!',
