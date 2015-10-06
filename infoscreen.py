@@ -22,6 +22,7 @@ import yaml
 import time
 import random
 
+
 # The file ending used for configuration files.
 config_ending = '.yaml'
 
@@ -34,48 +35,61 @@ pull_after_switch=True
 # Default duration
 duration_default=20
 
-# If x is an element of xs, return its index.  Otherwise, return None.
+
 def index_or_none(x, xs):
+    '''
+    If x is an element of xs, return its index.  Otherwise, return None.
+    '''
+
     try:
         return xs.index(x)
     except ValueError:
         return None
 
-# Find the first element x in xs for which p(x) is True.  Returns None
-# if there is no such element.
 def find_or_none(p, xs):
+    '''
+    Find the first element x in xs for which p(x) is True.  Return None if
+    there is no such element.
+    '''
+
     try:
-        return next(x for x in xs if p(x))
-    except StopIteration:
+        return filter(p, xs)[0]
+    except IndexError:
         return None
 
-# Rotate/shift the list left by i positions.
 def rotate(i, xs):
+    '''
+    Rotate/shift the list left by i positions.
+    '''
+
     return xs[i:] + xs[:i]
 
-# If old_selection is an element of new_list, return the following
-# element in new_list.
-#
-# Otherwise, if old_selection is an element of old_list, return the
-# first following element in old_list that is also in new_list.
-#
-# Otherwise, if new_list is nonempty, the first element of new_list.
-#
-# Otherwise, return None.
 def find_next(old_selection, old_list, new_list):
+    '''
+    If old_selection is an element of new_list, return the following element in
+    new_list.
+
+    Otherwise, if old_selection is an element of old_list, return the first
+    following element in old_list that is also in new_list.
+
+    Otherwise, if new_list is nonempty, the first element of new_list.
+
+    Otherwise, return None.
+    '''
+
     # First, we try to find the index of the old selection in the new
     # list.
     i = index_or_none(old_selection, new_list)
-    if type(i) is int:
+    if i is not None:
         return new_list[(i+1) % len(new_list)]
 
     # old_selection was not in new_list.
     i = index_or_none(old_selection, old_list)
-    if type(i) is int:
+    if i is not None:
         # Find the first element following old_list[i] that is also in
         # new_list.
         next = find_or_none(lambda x: x in new_list, rotate(i, old_list))
-        if next != None:
+        if next is not None:
             return next
 
     # old_selection was not even in old_list.
@@ -118,7 +132,8 @@ def url_handler(url):
 
 def open_url(urlfile):
     with open(urlfile) as f:
-        url = filter(lambda s: not s.startswith('#'), f.read().strip().split('\n'))[0]
+        url = filter(lambda s: not s.startswith('#'),
+                     f.read().strip().split('\n'))[0]
     return url_handler(url)(url)
 
 def show_in_browser(filename):
@@ -150,8 +165,11 @@ def show_content(filename):
         raise Exception("I have no idea how to show a %s file." % extension)
     return f()
 
-# Main command line entry point.
 def infoscreen():
+    '''
+    Show the slides in succession.
+    '''
+
     proc_prev = None
     start_sleep = 1
     content = None
