@@ -32,8 +32,10 @@ Filen skrives i YAML-formatet.  Følgende felter er understøttet:
 
   * `duration`: Tager et tal i sekunder og beskriver hvor lang tid et slide skal
     vises.  Standard er 20 sekunder.
-  * `start_at` og `end_at`: beskriver det tidspunkt på dagen hvor et slide skal
-    vises.
+  * `start_at` og `end_at` (begge skal gives): Beskriver det tidspunkt på dagen
+    hvor et slide skal vises.
+  * `probability`: Beskriver sandsynligheden for at et slide vises.  Standard er
+    at et slide altid vises.  Angiv i intervallet 0 til 1.
 
 Eksempel på konfigurationsfil der sørger for at et slide bliver vist i kun 10
 sekunder:

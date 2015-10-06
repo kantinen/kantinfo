@@ -20,6 +20,7 @@ import time
 import subprocess
 import yaml
 import time
+import random
 
 # The file ending used for configuration files.
 config_ending = '.yaml'
@@ -29,6 +30,9 @@ content_directory='content'
 
 # Whether or not to Git pull after each content switch.
 pull_after_switch=True
+
+# Default duration
+duration_default=20
 
 # If x is an element of xs, return its index.  Otherwise, return None.
 def index_or_none(x, xs):
@@ -163,23 +167,39 @@ def infoscreen():
 
         content, content_list = find_next_content(content, content_list)
         content_conf = content + config_ending
-        dur = 20
-
+        dur = duration_default
         try:
             with open(content_conf) as f:
                 conf = f.read()
-        except IOError:
+            conf = yaml.load(conf)
+            conf.__getitem__
+        except (IOError, yaml.YAMLError, AttributeError):
             pass
         else:
-            conf = yaml.load(conf)
             try:
                 dur = conf['duration']
             except (TypeError, KeyError):
                 pass
+
+            try:
+                show_probability = conf['probability']
+            except (TypeError, KeyError):
+                pass
+            else:
+                if show_probability == 1:
+                    pass
+                elif random.random() >= show_probability:
+                    print("The probability was not in the favor of %s." % content)
+                    continue
+
             try:
                 start_at = conf['start_at']
                 end_at = conf['end_at']
-                now = time.localtime().tm_hour * 60 + time.localtime().tm_min
+            except (TypeError, KeyError):
+                pass
+            else:
+                tloc = time.localtime()
+                now = tloc.tm_hour * 60 + tloc.tm_min
                 if start_at < end_at:
                     if not (start_at <= now < end_at):
                         print("Not the time for %s." % content)
@@ -188,8 +208,6 @@ def infoscreen():
                     if end_at <= now < start_at:
                         print("Not the time for %s." % content)
                         continue
-            except (TypeError, KeyError):
-                pass
 
         try:
             proc = show_content(content)
