@@ -95,6 +95,7 @@ def run_program(progname, args):
     return proc
 
 def play_video(path):
+    path = os.path.expanduser(path)
     return run_program('mplayer',
                        [path])
 
