@@ -26,6 +26,8 @@ You can log in e.g. here: https://webchat.freenode.net/?channels=#diku
 EOF
 }
 
+tput civis # Hide the cursor.
+
 top
 tail -n 1 -f $irc_out | while read line; do
     clear
