@@ -2,14 +2,28 @@
 
 irc_out=$HOME/diku_irc_out
 
+brighten() {
+    toilet -f term --gay
+}
+
+randomLine() {
+    random -R | head -n 1
+}
+
 top() {
     tput cup 0 0
-    echo 'Kom på IRC på #diku på irc.freenode.net!  Spørg din nabo om hjælp.' | toilet -f term --gay
+    (randomLine | brighten) <<EOF
+Kom på IRC på #diku på irc.freenode.net!  Spørg din nabo om hjælp.
+Get on IRC on #diku at irc.freenode.net!  Ask a fellow student for help.
+EOF
 }
 
 bund() {
     tput cup 21 0
-    echo -n $(echo 'Du kan f.eks. logge ind her: https://webchat.freenode.net/?channels=#diku' | toilet -f term --gay)
+    (randomLine | brighten | tr -d $'\n') <<EOF
+Du kan f.eks. logge ind her: https://webchat.freenode.net/?channels=#diku
+You can log in e.g. here: https://webchat.freenode.net/?channels=#diku
+EOF
 }
 
 top
