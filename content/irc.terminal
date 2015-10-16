@@ -7,7 +7,7 @@ brighten() {
 }
 
 randomLine() {
-    random -R | head -n 1
+    sort -R | head -n 1
 }
 
 top() {
