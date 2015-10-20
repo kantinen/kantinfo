@@ -6,28 +6,55 @@
         <style type="text/css">
 body {
     overflow: hidden;
-    margin: 0 50px;
-    padding: 0;
-    background-color: #000;
-    color: #FFF;
-    font-family: Trebuchet;
+    margin: 0;
 }
-h1 {
-    font-size: 85px;
-}
-p {
-    font-size: 45px;
+
+canvas {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -o-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
 }
         </style>
+        <script type="text/javascript">
+window.onload = function() {
+    var img = new Image();
+    img.src = 'res/nye-kantine-kort.png';
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext('2d');
+    /// Turn off image smoothing to give the pixelated effect.
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+
+    function pixelate(size) {
+        var w = canvas.width * size;
+        var h = canvas.height * size;
+
+        /// First downscale the original image.
+        ctx.drawImage(img, 0, 0, w, h);
+
+        /// Then stretch it.
+        ctx.drawImage(canvas, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
+    }
+
+    // Fade in.
+    var visibility = 0.01;
+    var interval = setInterval(function() {
+        visibility += 0.01;
+        if (visibility >= 1) {
+            clearInterval(interval);
+            visibility = 1;
+        }
+        pixelate(visibility);
+    }, 100);
+};
+        </script>
     </head>
     <body>
-        <h1>
-            Vil du gerne købe ting i automaterne?
-        </h1>
-        <p>
-            Så kan du nu få dit helt eget kantinekort, hvis dit studiekort ikke
-            kan aktiveres i maskinen. I frokostpauserne vil kantinebestyrelsen
-            være tilgængelig, så du kan få dit helt eget kort!
-        </p>
+        <canvas id="canvas" width="1920" height="1080"></canvas>
     </body>
 </html>
