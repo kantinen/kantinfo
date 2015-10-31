@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!-- DET HER ER BR-BR-BR-BREEEAKKKKIIINNNGGGG!!!!!!!!!!! -->
+<HTML>
+  <HEAD>
+    <TITLE>BREAKING NEWS!</TITLE>
+    <META CHARSET="UTF-8">
+    <STYLE TYPE="TEXT/CSS">
+* {
+    margin: 0;
+}
+  
+body {
+    overflow: hidden;
+    background-color: #FC0FC0;
+    font-family: Comfortaa, serif;
+}
+
+/* POTENTIELT UKONVENTIONEL CSS */
+
+#A {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 3000px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+#B {
+    font-weight: bold;
+    font-size: 80px;
+
+    color: yellow;
+    background-color: black;
+    padding: 10px;
+
+    transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    animation: roter_ind 1s;
+    -webkit-animation: roter_ind 1s;
+}
+
+@keyframes roter_ind {
+    0% {
+        transform: rotate(-370deg);
+    }
+    100% {
+        transform: rotate(-10deg);
+    }
+}
+
+@-webkit-keyframes roter_ind {
+    0% {
+        -webkit-transform: rotate(-370deg);
+    }
+    100% {
+        -webkit-transform: rotate(-10deg);
+    }
+}
+
+#C {
+    width: 1600px;
+
+    position: relative;
+    left: 50%;
+    margin-left: -800px;
+}
+
+#BREAKING {
+    padding: 10px;
+    margin-right: 10px;
+    box-shadow: inset 0px 0px 20px 20px #777777;
+}
+
+#NOTE {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    padding: 10px;
+    font-size: 34px;
+    color: #FC0FC0;
+    background-color: yellow;
+    text-align: right;
+}
+    </STYLE>
+  </HEAD>
+  <BODY>
+    <DIV ID="A">
+      <DIV ID="B">
+        <DIV ID="C">
+          <SPAN ID="BREAKING">BREAKING</SPAN> {BREAKING_NEWS}
+        </DIV>
+      </DIV>
+    </DIV>
+
+    <DIV ID="NOTE">
+      HAR DU EN <STRONG>BREAKING</STRONG> NYHED?  SÅ LOG PÅ <code>#diku</code> PÅ IRC OG SKRIV:
+      <BR>
+      <CODE>infoskaerm: breaking HER ER MIN BREAKING NYHED!!!!!</CODE>
+    </DIV>
+  </BODY>
+</HTML>
