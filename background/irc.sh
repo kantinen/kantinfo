@@ -76,6 +76,6 @@ tail -f $in \
     | tee /dev/stderr \
     | sed -u 's/^ *//' \
     | while IFS='' read line; do
-    process_line "$line"
+    process_line "$line" >> "$in"
     echo "$line" | fmt -75 | color_usermsg >> $irc_out
 done
