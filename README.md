@@ -15,8 +15,8 @@ Understøttede filtyper og deres handlinger:
 
   * `.html`, `.gif`: Vises i en browser
   * `.jpg`, `.png`: Vises i en billedfremviser
-  * `.mkv`, `.webm`, `.mp4`, `.avi`, `.mp4`, `.ogv`: Vises i en videoafspiller
-  * `.url`: Linket i filen åbnes i en browser
+  * `.url`: Linket i filen åbnes enten i en browser eller i en videoafspiller,
+    afhængigt af hvordan stien ser ud
   * `.sh`: Programmet køres
   * `.terminal`: Programmet køres i en grafisk terminal på infoskærmen
 
