@@ -7,6 +7,7 @@
 # as published by Sam Hocevar. See the COPYING file for more details.
 
 irc_out=$HOME/diku_irc_out
+breaking_news=$HOME/breaking_news
 
 timecolor='\e[0;31m'
 usercolor='\e[0;32m'
@@ -50,6 +51,20 @@ ircloop() {
     done
 }
 
+set_breaking_news() {
+    news=$1
+    echo "$news" > $breaking_news
+}
+
+process_line() {
+    line=$1
+    if echo "$line" | egrep -q '<[^>]+> '$name': breaking: '; then
+        news=$(echo "$line" | sed 's/.*breaking: //')
+        set_breaking_news "$news"
+        echo "Ryd forsiden!  $news"
+    fi
+}
+
 join_channel
 
 # Kør klienten i baggrunden.
@@ -61,5 +76,6 @@ tail -f $in \
     | tee /dev/stderr \
     | sed -u 's/^ *//' \
     | while IFS='' read line; do
-          echo "$line" | fmt -75 | color_usermsg >> $irc_out
-      done
+    process_line "$line"
+    echo "$line" | fmt -75 | color_usermsg >> $irc_out
+done
