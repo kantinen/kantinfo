@@ -237,7 +237,7 @@ def infoscreen():
         # Kill the previous process after the current one has started.
         time.sleep(start_sleep)
         if proc_prev is not None:
-            proc_prev.kill() # SIGKILL (or similar on other platforms)
+            proc_prev.terminate() # SIGTERM (or similar on other platforms)
         proc_prev = proc
 
         # Sleep more.
