@@ -16,6 +16,7 @@
 
 import sys
 import os
+import signal
 import time
 import subprocess
 import yaml
@@ -109,7 +110,8 @@ def run_program(progname, args):
                             stdout=None,
                             stderr=None,
                             stdin=None,
-                            close_fds=True)
+                            close_fds=True,
+                            preexec_fn=os.setsid)
     return proc
 
 def play_video(path):
@@ -237,7 +239,7 @@ def infoscreen():
         # Kill the previous process after the current one has started.
         time.sleep(start_sleep)
         if proc_prev is not None:
-            proc_prev.terminate() # SIGTERM (or similar on other platforms)
+            os.killpg(proc_prev.pid, signal.SIGKILL) # SIGKILL (or similar on other platforms)
         proc_prev = proc
 
         # Sleep more.
