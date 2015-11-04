@@ -2,7 +2,6 @@
 
 import random
 import os.path
-import tempfile
 import subprocess
 
 
@@ -14,8 +13,8 @@ with open(os.path.expanduser('~/breaking_news')) as f:
 with open(os.path.join(basedir, 'res/breaking_news_skabelon.html')) as f:
     d = f.read()
 
-t = tempfile.NamedTemporaryFile()
-fname = t.name
+fname = '/tmp/breaking_news.html'
+
 with open(fname, 'w') as f:
     print(d.replace('{BREAKING_NEWS}', breaking_news), file=f)
 
