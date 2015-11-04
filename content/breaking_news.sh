@@ -18,4 +18,4 @@ fname = '/tmp/breaking_news.html'
 with open(fname, 'w') as f:
     print(d.replace('{BREAKING_NEWS}', breaking_news), file=f)
 
-subprocess.check_call(['surf', '-p', fname])
+subprocess.check_call(['surf', '-p', 'file://' + fname])
