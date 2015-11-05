@@ -6,6 +6,9 @@
   </head>
   <body>
     <div id="time" class="blink"></div>
+    <div id="disclaimer">
+      This is <i>not</i> written in SubScript™.
+    </div>
     <style>
       #time {
         margin:auto;
@@ -14,6 +17,12 @@
         font-size:10vw;
         position:relative;
         top:50%
+      }
+      #disclaimer {
+        margin:auto;
+        width:800px;
+        text-align:center;
+        font-size:2vw;
       }
 
 /* http://stackoverflow.com/questions/4894488/blinking-text-cross-browser */
@@ -70,18 +79,17 @@ blink {
       function randomIntro() {
         return randomItem([
           "Are you done with your AP exam yet?",
-          "#AP#Haskell#Erlang#QuickCheck",
+          "#AP #Haskell #Erlang #QuickCheck",
           "+++ OK, passed 100 tests.",
           "Did you QuickCheck your QuickCheck?",
           "Don't forget the AAD exam! #AP",
-          "Fremdriftsreform.. kan du mærke fremdriften?",
-          "Did you really think there would be Prolog at the exam?"]);
+          "Fremdriftsreform.. kan du mærke fremdriften? #AP",
+          "Did you really think there would be any Prolog?"]);
       }
 
       function randomMotivator() {
         return randomItem([
-         "<b>?!JUST!?</b>",
-         "<i>whole</i>",
+         "<b>?!ONLY!?</b>",
          "roughly",
          "luckily",
          "AAAAAAAAAAAA"]);
@@ -102,10 +110,10 @@ blink {
           randomMotivator(),
           "</br><br/><b>",
           toShow.days, " ", daysText, ", ",
-          toShow.hours, " hours ",
+          toShow.hours, " hours and ",
           toShow.minutes, " minutes",
           "</b><br/><br/>left!<br/><br/>",
-          "You should be ", pctLeft(), "% done..");
+          "You should be ", pctLeft(), "% done.");
       }
     </script>
   </body>
