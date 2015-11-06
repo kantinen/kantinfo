@@ -64,13 +64,25 @@ For at køre vores IRC-viser-slide, installér ogsa:
 Opsætning
 ---------
 
-Infoskærmen i kantinen køres på en ODroid, men en hvilken som helst datamat vil
+Infoskærmen i kantinen køres på en Odroid, men en hvilken som helst datamat vil
 være okay.
 
-Infoskærmsmaskinen (herefter bare kaldet `odroid`) er en Odroid som er monteret
-bag skærmen i kantinen.  Man kan logge ind på maskinen ved at ssh'e til
-`odroid@diku.kantinen.org`.  Niels skal have ens offentlige nøgle før dette
-virker.  Løsenet på maskinen for `odroid`-brugeren er bare `odroid`.
+Infoskærmsmaskinen (herefter bare kaldet `infoscreen`) er en Odroid som er
+monteret bag skærmen i kantinen.  Man kan logge ind på maskinen ved at ssh'e til
+`odroid@diku.kantinen.org` og derfra ssh'e videre til `infoscreen` (eftersom
+K@ntinen har mere end én Odroid).  Niels skal have ens offentlige nøgle før
+dette virker.  Løsenet på maskinen for `odroid`-brugeren er bare `odroid`.  Hvis
+du vil automatisere denne loggen ind, kan du indtaste følgende i filen
+`.ssh/config` på din egen maskine:
+
+```
+Host infoscreen
+  Hostname infoscreen
+  User odroid
+  ProxyCommand ssh -W %h:%p odroid@diku.kantinen.org
+```
+
+Så kan man logge ind ved at køre `ssh infoscreen`.
 
 Når maskinen starter op, bliver brugeren `odroid` logget ind i en session, der
 kører scriptet `.xinitrc`.  Vi har vedhæftet vores `.xinitrc` i dette repo; se
