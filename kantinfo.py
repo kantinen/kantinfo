@@ -22,6 +22,7 @@ import subprocess
 import yaml
 import time
 import random
+import re
 
 
 globs = {
@@ -117,9 +118,26 @@ def run_program(progname, args):
     return proc
 
 def play_video(path):
-    path = os.path.expanduser(path)
+    video_cache_dir = os.path.expanduser('~/video-cache')
+    try:
+        os.mkdir(video_cache_dir)
+    except OSError:
+        pass
+    if path.startswith('http://') or path.startswith('https://'):
+        cur_dir = os.getcwd()
+        os.chdir(video_cache_dir)
+        out = subprocess.check_output(['youtube-dl', path])
+        try:
+            dest = re.findall(br'\[download\] (.+?) has already been downloaded', out)[0]
+        except IndexError:
+            dest = re.findall(br'Destination: (.+)', out)[0]
+        os.chdir(cur_dir)
+        video_path = os.path.join(video_cache_dir, dest)
+    else:
+        video_path = os.path.expanduser(path)
+
     return run_program('mplayer',
-                       [path])
+                       [video_path])
 
 def show_url_in_browser(url):
     return run_program('surf',
@@ -129,7 +147,9 @@ def show_url_in_browser(url):
 def url_handler(url):
     if url.endswith('.mkv') or url.endswith('.webm') or url.endswith('.mp4') \
        or url.endswith('.avi') or url.endswith('.mpg') or url.endswith('.ogv') \
-       or url.startswith('https://youtube.com/'):
+       or url.startswith('http://youtube.com/') or url.startswith('https://youtube.com/') \
+       or url.startswith('http://www.youtube.com/') or url.startswith('https://www.youtube.com/') \
+       or url.startswith('http://youtu.be/') or url.startswith('https://youtu.be/'):
         return play_video
     else:
         return show_url_in_browser
