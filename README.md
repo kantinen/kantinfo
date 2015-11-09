@@ -1,15 +1,16 @@
 Kantinens infoskærmssystem
 ==========================
 
-`infoscreen.py` kører i en tmux på infoskærmsmaskinen.
+`kantinfo.py` kører i en tmux på `infoscreen`-maskinen og `cokepc`-maskinen i
+K@ntinen -- og måske andre steder?
+
+Se https://github.com/datalogisk-kantineforening/infoscreen og
+https://github.com/datalogisk-kantineforening/cokepc for de to vigtigste system
+der bruger `kantinfo`-programmel.
 
 
 Indhold
 -------
-
-Alt indhold der bliver vist ligger i `content`-mappen.  Der er også mapperne
-`content-disabled` og `background`, men disse er ikke vigtige for grundlæggende
-kørsel.
 
 Understøttede filtyper og deres handlinger:
 
@@ -59,54 +60,6 @@ For at køre vores IRC-viser-slide, installér ogsa:
 
   + `sic`: Simpel IRC-klient
   + `toilet`: Tekst-formatterings-program
-
-
-Opsætning
----------
-
-Infoskærmen i kantinen køres på en Odroid, men en hvilken som helst datamat vil
-være okay.
-
-Infoskærmsmaskinen (herefter bare kaldet `infoscreen`) er en Odroid som er
-monteret bag skærmen i kantinen.  Man kan logge ind på maskinen ved at ssh'e til
-`odroid@diku.kantinen.org` og derfra ssh'e videre til `infoscreen` (eftersom
-K@ntinen har mere end én Odroid).  Niels skal have ens offentlige nøgle før
-dette virker.  Løsenet på maskinen for `odroid`-brugeren er bare `odroid`.  Hvis
-du vil automatisere denne loggen ind, kan du indtaste følgende i filen
-`.ssh/config` på din egen maskine:
-
-```
-Host infoscreen
-  Hostname infoscreen
-  User odroid
-  ProxyCommand ssh -W %h:%p odroid@diku.kantinen.org
-```
-
-Så kan man logge ind ved at køre `ssh infoscreen`.
-
-Når maskinen starter op, bliver brugeren `odroid` logget ind i en session, der
-kører scriptet `.xinitrc`.  Vi har vedhæftet vores `.xinitrc` i dette repo; se
-filen `xinitrc` (den er symlinket på odroiden).
-
-Dette scripts primære ansvar er at starte en `tmux`-session der kører
-infoskærmsscriptet, samt starte en enkel window manager.  Hvis du vil tilføje
-andre baggrundsprocesser og deslige, så start dem her.
-
-Et cronjob (`sudo crontab -e`) sørger for at genstarte maskinen hver morgen
-klokken 6.  Dette er for at sikre at der aldrig sniger sig noget ind i
-opsætningen der ikke kan overleve en genstart.
-
-Vi har forsøgt at at lave et script til at sætte disse ting op automatisk på
-Debian-baserede systemer; se `setup.sh`.  Det mangler dog meget.  Vi har også et
-par andre scripts med mindre vigtige formål.
-
-Specifikt for kantinen: Vær opmærksom på at alle odroids ser ud til at komme med
-samme MAC-adresse (WTF??).  Nu hvor Kantinen har flere odroids i drift, er vi
-nødt til manuelt at ændre deres MAC-adresser for at undgå konflikter.  Dette
-håndteres af et script i stil med `setmac.sh`.  For at finde ud af hvilken
-odroid som skal have hvilken MAC-adresse, kan man kigge i
-`diku.kantinen.org:/etc/dhcp/dhcpd.conf`.  Scriptet kaldes fra `/etc/rc.local`
-på odroiden.
 
 
 Sådan gør man manuelt
