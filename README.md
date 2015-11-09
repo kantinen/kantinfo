@@ -21,8 +21,6 @@ Understøttede filtyper og deres handlinger:
   * `.sh`: Programmet køres
   * `.terminal`: Programmet køres i en grafisk terminal på infoskærmen
 
-Infoskærmen har en opløsning på 1920x1080, så design efter det.
-
 
 Konfiguration af slides
 -----------------------
