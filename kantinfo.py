@@ -27,9 +27,6 @@ import random
 # The file ending used for configuration files.
 config_ending = '.yaml'
 
-# The directory in which content is stored.
-content_directory='content'
-
 # Whether or not to Git pull after each content switch.
 pull_after_switch=True
 
@@ -250,18 +247,23 @@ if __name__ == '__main__':
 
     if '--help' in args:
         print('infoscreen from git; see README.md for instructions')
+        print()
+        print('Usage:')
+        print('  ./kantinfo.py CONTENT_DIRECTORY')
+        print()
         print('Options:')
         print('  --count  Count the number of slides, print it, and exit.')
         print('  --help   Print this text.')
         sys.exit(0)
-
-    if '--count' in args:
+    elif '--count' in args:
         paths = [os.path.join(content_directory, f)
                  for f in os.listdir(content_directory)]
         paths = [p for p in paths
                  if os.path.isfile(p) and not p.endswith(config_ending)]
         print(len(paths))
         sys.exit(0)
+    else:
+        content_directory = args[0]
 
     try:
         filename = args[0]
