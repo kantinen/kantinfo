@@ -182,7 +182,10 @@ def infoscreen():
     while True:
         try:
             if globs['pull_after_switch']:
+                cur_dir = os.getcwd()
+                os.chdir(globs['content_directory'])
                 subprocess.call(["git", "pull"])
+                os.chdir(cur_dir)
         except Exception as e:
             print("Failed to git pull:\n%s" % str(e))
             time.sleep(2)
