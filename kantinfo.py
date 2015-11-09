@@ -24,14 +24,19 @@ import time
 import random
 
 
-# The file ending used for configuration files.
-config_ending = '.yaml'
+globs = {
+    # The file ending used for configuration files.
+    'config_ending': '.yaml',
+    
+    # The directory in which content is stored.
+    'content_directory': 'content',
 
-# Whether or not to Git pull after each content switch.
-pull_after_switch=True
+    # Whether or not to Git pull after each content switch.
+    'pull_after_switch': True,
 
-# Default duration
-duration_default=20
+    # Default duration
+    'duration_default': 20
+}
 
 
 def index_or_none(x, xs):
@@ -97,9 +102,9 @@ def find_next(old_selection, old_list, new_list):
       return new_list[0]
 
 def find_next_content(old_selection, old_content):
-    paths = [os.path.join(content_directory, f) for f in os.listdir(content_directory)]
+    paths = [os.path.join(globs['content_directory'], f) for f in os.listdir(globs['content_directory'])]
     new_content = [p for p in paths
-                   if os.path.isfile(p) and not p.endswith(config_ending)]
+                   if os.path.isfile(p) and not p.endswith(globs['config_ending'])]
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
@@ -176,15 +181,15 @@ def infoscreen():
 
     while True:
         try:
-            if pull_after_switch:
+            if globs['pull_after_switch']:
                 subprocess.call(["git", "pull"])
         except Exception as e:
             print("Failed to git pull:\n%s" % str(e))
             time.sleep(2)
 
         content, content_list = find_next_content(content, content_list)
-        content_conf = content + config_ending
-        dur = duration_default
+        content_conf = content + globs['config_ending']
+        dur = globs['duration_default']
         try:
             with open(content_conf) as f:
                 conf = f.read()
@@ -246,27 +251,27 @@ if __name__ == '__main__':
     args = sys.argv[1:]
 
     if '--help' in args:
-        print('infoscreen from git; see README.md for instructions')
+        print('kantinfo from git; see README.md for instructions')
         print()
         print('Usage:')
-        print('  ./kantinfo.py CONTENT_DIRECTORY')
+        print('  ./kantinfo.py CONTENT_DIRECTORY [CONTENT_FILE]')
         print()
         print('Options:')
         print('  --count  Count the number of slides, print it, and exit.')
         print('  --help   Print this text.')
         sys.exit(0)
     elif '--count' in args:
-        paths = [os.path.join(content_directory, f)
-                 for f in os.listdir(content_directory)]
+        paths = [os.path.join(globs['content_directory'], f)
+                 for f in os.listdir(globs['content_directory'])]
         paths = [p for p in paths
-                 if os.path.isfile(p) and not p.endswith(config_ending)]
+                 if os.path.isfile(p) and not p.endswith(globs['config_ending'])]
         print(len(paths))
         sys.exit(0)
     else:
-        content_directory = args[0]
-
+        globs['content_directory'] = args[0]
+        
     try:
-        filename = args[0]
+        filename = args[1]
     except IndexError:
         filename = None
 
