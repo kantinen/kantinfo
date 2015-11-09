@@ -182,6 +182,8 @@ def infoscreen():
     while True:
         try:
             if globs['pull_after_switch']:
+                subprocess.call(["git", "pull"])
+                
                 cur_dir = os.getcwd()
                 os.chdir(globs['content_directory'])
                 subprocess.call(["git", "pull"])
