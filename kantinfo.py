@@ -118,7 +118,7 @@ def run_program(progname, args):
     return proc
 
 def play_video(path):
-    video_cache_dir = os.path.expanduser('~/video-cache')
+    video_cache_dir = os.path.expanduser('~/.kantinfo-video-cache')
     try:
         os.mkdir(video_cache_dir)
     except OSError:
