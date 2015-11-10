@@ -30,7 +30,8 @@ Hvert slide kan have en konfigurationsfil.  Hvis et slide hedder
 Filen skrives i YAML-formatet.  Følgende felter er understøttet:
 
   * `duration`: Tager et tal i sekunder og beskriver hvor lang tid et slide skal
-    vises.  Standard er 20 sekunder.
+    vises.  Standard er 20 sekunder.  Hvis `duration` er -1, vil scriptet ikke
+    terminere slidet, men i stedet vente på at slidet terminerer sig selv.
   * `start_at` og `end_at` (begge skal gives): Beskriver det tidspunkt på dagen
     hvor et slide skal vises.
   * `probability`: Beskriver sandsynligheden for at et slide vises.  Standard er

@@ -137,7 +137,7 @@ def play_video(path):
         video_path = os.path.expanduser(path)
 
     return run_program('mplayer',
-                       [video_path])
+                       ['--really-quiet', video_path])
 
 def show_url_in_browser(url):
     return run_program('surf',
@@ -195,23 +195,11 @@ def infoscreen():
     '''
 
     proc_prev = None
-    start_sleep = 1
+    sleep_dur_start = 1
     content = None
     content_list = []
 
     while True:
-        try:
-            if globs['pull_after_switch']:
-                subprocess.call(["git", "pull"])
-                
-                cur_dir = os.getcwd()
-                os.chdir(globs['content_directory'])
-                subprocess.call(["git", "pull"])
-                os.chdir(cur_dir)
-        except Exception as e:
-            print("Failed to git pull:\n%s" % str(e))
-            time.sleep(2)
-
         content, content_list = find_next_content(content, content_list)
         content_conf = content + globs['config_ending']
         dur = globs['duration_default']
@@ -263,14 +251,38 @@ def infoscreen():
             print("Sleeping for two seconds.")
             time.sleep(2)
 
-        # Kill the previous process after the current one has started.
-        time.sleep(start_sleep)
-        if proc_prev is not None:
-            os.killpg(proc_prev.pid, signal.SIGKILL) # SIGKILL (or similar on other platforms)
-        proc_prev = proc
+        time_start = time.time()
 
-        # Sleep more.
-        time.sleep(max(0, dur - start_sleep))
+        # The new process has just started.  Keep the old one running for a
+        # little while before killing it.
+        time.sleep(sleep_dur_start)
+
+        # Then kill it.
+        if proc_prev is not None:
+            # SIGKILL (or similar on other platforms)
+            os.killpg(proc_prev.pid, signal.SIGKILL)
+
+        # Do the git pull while the slide is running to minimise downtime.
+        try:
+            if globs['pull_after_switch']:
+                subprocess.call(["git", "pull"])
+                
+                cur_dir = os.getcwd()
+                os.chdir(globs['content_directory'])
+                subprocess.call(["git", "pull"])
+                os.chdir(cur_dir)
+        except Exception as e:
+            print("Failed to git pull:\n%s" % str(e))
+            time.sleep(2)
+
+        if dur == -1:
+            # Wait for the process to terminate itself.
+            proc.wait()
+            proc_prev = None
+        else:
+            # Sleep for the remaining time of the duration.
+            time.sleep(dur - (time.time() - time_start))
+            proc_prev = proc
 
 if __name__ == '__main__':
     args = sys.argv[1:]
