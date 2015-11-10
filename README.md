@@ -5,8 +5,8 @@ Kantinens infoskærmssystem
 K@ntinen -- og måske andre steder?
 
 Se https://github.com/datalogisk-kantineforening/infoscreen og
-https://github.com/datalogisk-kantineforening/cokepc for de to vigtigste system
-der bruger `kantinfo`-programmel.
+https://github.com/datalogisk-kantineforening/cokepc for de to vigtigste
+systemer der bruger `kantinfo`-programmet.
 
 
 Indhold
@@ -41,39 +41,21 @@ sekunder:
 
     duration: 10
 
+Eksempel på konfigurationsfil der sørger for at et slide bliver vist kun mellem
+13 og 14:
+
+    start_at: 13:00
+    end_at: 14:00
+
 
 Afhængigheder
 -------------
 
-Installér følgende programmer:
+`kantinfo` afhænger af følgende programmer:
 
   + `python`
-  + `matchbox`: Simpel window manager
   + `surf`: Simpel browser
-  + `xdotool`: Musemarkør-skjuler (mm.)
   + `feh`: Simpel billedfremviser
-  + `tmux`: Ligesom screen, men fra BSD
-  
-For at køre vores IRC-viser-slide, installér ogsa:
-
-  + `sic`: Simpel IRC-klient
-  + `toilet`: Tekst-formatterings-program
-
-
-Sådan gør man manuelt
----------------------
-
-*Lad være med at gøre det her.  Sæt i stedet .xinitrc op og genstart maskinen.*
-
-Grundet vor sofistikerede og fremskredne teknologi er det ikke enkelt at starte
-infoskærmen.  Her er den nutids-kompatible procedure:
-
-  0. Log ind på odroid-maskinen med brugeren `odroid`.
-  1. Start en tmux.
-  2. Gå ind i `infoscreen`-mappen.
-  3. Kør: `export DISPLAY=:0`
-  4. Kør: `dbus-launch ./infoscreen.py`
-  5. Vent til maskinen crasher, gå derefter til 0.
 
 
 Kodekopiering
