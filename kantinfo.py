@@ -265,7 +265,7 @@ def infoscreen():
         # Do the git pull while the slide is running to minimise downtime.
         try:
             if globs['pull_after_switch']:
-                subprocess.call(["git", "pull"])
+                # subprocess.call(["git", "pull"])
                 
                 cur_dir = os.getcwd()
                 os.chdir(globs['content_directory'])
