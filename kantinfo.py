@@ -262,11 +262,12 @@ def infoscreen():
             # SIGKILL (or similar on other platforms)
             os.killpg(proc_prev.pid, signal.SIGKILL)
 
-        # Do the git pull while the slide is running to minimise downtime.
+        # Do the git pull while the slide is running to minimise downtime.  Only
+        # pull the content repository, as pulling the code repository doesn't do
+        # any good unless the script is also restarted, which will just get
+        # messy.
         try:
             if globs['pull_after_switch']:
-                # subprocess.call(["git", "pull"])
-                
                 cur_dir = os.getcwd()
                 os.chdir(globs['content_directory'])
                 subprocess.call(["git", "pull"])
