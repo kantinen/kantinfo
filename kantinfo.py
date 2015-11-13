@@ -205,6 +205,7 @@ def infoscreen():
     sleep_dur_start = 1
     content = None
     content_list = []
+    pull_time_prev = 0
 
     while True:
         content, content_list = find_next_content(content, content_list)
@@ -275,15 +276,18 @@ def infoscreen():
         # pull the content repository, as pulling the code repository doesn't do
         # any good unless the script is also restarted, which will just get
         # messy.
-        try:
-            if globs['pull_after_switch']:
+        pull_time = time.time()
+        if globs['pull_after_switch'] and \
+           pull_time - pull_time_prev > 30: # Don't pull for at least 30 secs.
+            pull_time_prev = pull_time
+            try:
                 cur_dir = os.getcwd()
                 os.chdir(globs['content_directory'])
                 subprocess.call(['git', 'pull'])
                 os.chdir(cur_dir)
-        except Exception as e:
-            print('Failed to git pull:\n{}'.format(e))
-            time.sleep(2)
+            except Exception as e:
+                print('Failed to git pull:\n{}'.format(e))
+                time.sleep(2)
 
         if dur == -1:
             # Wait for the process to terminate itself.
