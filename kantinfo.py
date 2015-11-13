@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 # Copyright © 2014-2015 Infoskærms-gruppen <infoskaerm@dikumail.dk>
 #
@@ -7,11 +6,9 @@
 # terms of the Do What The Fuck You Want To Public License, Version 2,
 # as published by Sam Hocevar. See the COPYING file for more details.
 
-# This is the control script for the infoscreen in the DIKU canteen.  See the
-# README.md file to find out how to use it.  This Python program is independent
-# of the canteen-specific content in the repository, and you should be able to
-# copy it to your own repository and add your own content, as long as you
-# maintain the same directory structure.
+# This is the control script for the informational monitors in the DIKU canteen,
+# but it can be used otherwhere as well.  See the README.md file to find out how
+# to use it.
 
 
 import sys
@@ -23,6 +20,7 @@ import yaml
 import time
 import random
 import re
+import traceback
 
 
 globs = {
@@ -57,7 +55,7 @@ def find_or_none(p, xs):
     '''
 
     try:
-        return filter(p, xs)[0]
+        return next(filter(p, xs))
     except IndexError:
         return None
 
@@ -103,9 +101,11 @@ def find_next(old_selection, old_list, new_list):
       return new_list[0]
 
 def find_next_content(old_selection, old_content):
-    paths = [os.path.join(globs['content_directory'], f) for f in os.listdir(globs['content_directory'])]
+    paths = [os.path.join(globs['content_directory'], f)
+             for f in os.listdir(globs['content_directory'])]
     new_content = [p for p in paths
-                   if os.path.isfile(p) and not p.endswith(globs['config_ending'])]
+                   if os.path.isfile(p) and
+                   not p.endswith(globs['config_ending'])]
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
@@ -156,8 +156,8 @@ def url_handler(url):
 
 def open_url(urlfile):
     with open(urlfile) as f:
-        url = filter(lambda s: not s.startswith('#'),
-                     f.read().strip().split('\n'))[0]
+        url = next(filter(lambda s: not s.startswith('#'),
+                          f.read().strip().split('\n')))
     return url_handler(url)(url)
 
 def show_in_browser(filename):
@@ -173,7 +173,7 @@ def run_in_terminal(filename):
                         os.path.join(os.getcwd(), filename)])
 
 def show_content(filename):
-    print("Attempting to show %s" % filename)
+    print('Attempting to show {}'.format(filename))
     extension = os.path.splitext(filename)[1][1:]
     try:
         f = {
@@ -186,8 +186,15 @@ def show_content(filename):
             'terminal': lambda: run_in_terminal(filename)
         }[extension]
     except KeyError:
-        raise Exception("I have no idea how to show a %s file." % extension)
+        raise Exception('I have no idea how to show a {} file.'.format(extension))
     return f()
+
+def time_to_min(t):
+    if isinstance(t, int):
+        return t
+    else:
+        h, m = map(int, t.split(':'))
+        return h * 60 + m
 
 def infoscreen():
     '''
@@ -224,7 +231,7 @@ def infoscreen():
                 if show_probability == 1:
                     pass
                 elif random.random() >= show_probability:
-                    print("The probability was not in the favor of %s." % content)
+                    print('The probability was not in the favor of {}.'.format(content))
                     continue
 
             try:
@@ -233,22 +240,24 @@ def infoscreen():
             except (TypeError, KeyError):
                 pass
             else:
+                start_at = time_to_min(start_at)
+                end_at = time_to_min(end_at)
                 tloc = time.localtime()
                 now = tloc.tm_hour * 60 + tloc.tm_min
                 if start_at < end_at:
                     if not (start_at <= now < end_at):
-                        print("Not the time for %s." % content)
+                        print('Not the time for {}.'.format(content))
                         continue
                 else:
                     if end_at <= now < start_at:
-                        print("Not the time for %s." % content)
+                        print('Not the time for {}.'.format(content))
                         continue
 
         try:
             proc = show_content(content)
         except Exception as e:
-            print("Failed to show %s:\n%s" % (content, str(e)))
-            print("Sleeping for two seconds.")
+            print('Failed to show {}:\n{}'.format(content, str(e)))
+            print('Sleeping for two seconds.')
             time.sleep(2)
 
         time_start = time.time()
@@ -270,10 +279,10 @@ def infoscreen():
             if globs['pull_after_switch']:
                 cur_dir = os.getcwd()
                 os.chdir(globs['content_directory'])
-                subprocess.call(["git", "pull"])
+                subprocess.call(['git', 'pull'])
                 os.chdir(cur_dir)
         except Exception as e:
-            print("Failed to git pull:\n%s" % str(e))
+            print('Failed to git pull:\n{}'.format(e))
             time.sleep(2)
 
         if dur == -1:
@@ -282,8 +291,11 @@ def infoscreen():
             proc_prev = None
         else:
             # Sleep for the remaining time of the duration.
-            time.sleep(dur - (time.time() - time_start))
-            proc_prev = proc
+            try:
+                proc.wait(timeout=(dur - (time.time() - time_start)))
+                proc_prev = None
+            except subprocess.TimeoutExpired:
+                proc_prev = proc
 
 if __name__ == '__main__':
     args = sys.argv[1:]
@@ -326,9 +338,10 @@ if __name__ == '__main__':
             while True:
                 try:
                     infoscreen()
-                except Exception as e:
-                    print("Failed in or before main loop:\n%s" % e)
-                    print("Sleeping for two seconds.")
+                except Exception:
+                    print('Failed in or before main loop:\n')
+                    traceback.print_exc()
+                    print('Sleeping for two seconds.')
                     time.sleep(2)
         except KeyboardInterrupt:
             pass

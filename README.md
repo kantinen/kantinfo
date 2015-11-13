@@ -55,6 +55,7 @@ Afhængigheder
 `kantinfo` afhænger af følgende programmer:
 
   + `python`
+  + `pyyaml`: YAML-bibliotek til Python
   + `surf`: Simpel browser
   + `feh`: Simpel billedfremviser
 
