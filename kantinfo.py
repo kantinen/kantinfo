@@ -131,6 +131,7 @@ def play_video(path):
             dest = re.findall(br'\[download\] (.+?) has already been downloaded', out)[0]
         except IndexError:
             dest = re.findall(br'Destination: (.+)', out)[0]
+        dest = dest.decode()
         os.chdir(cur_dir)
         video_path = os.path.join(video_cache_dir, dest)
     else:
@@ -257,7 +258,8 @@ def infoscreen():
         try:
             proc = show_content(content)
         except Exception as e:
-            print('Failed to show {}:\n{}'.format(content, str(e)))
+            print('Failed to show {}:\n'.format(content))
+            traceback.print_exc()
             print('Sleeping for two seconds.')
             time.sleep(2)
 
