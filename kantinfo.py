@@ -138,7 +138,7 @@ def play_video(path):
         video_path = os.path.expanduser(path)
 
     return run_program('mplayer',
-                       [ '--zoom', '--really-quiet', video_path])
+                       ['--really-quiet', video_path])
 
 def show_url_in_browser(url):
     return run_program('surf',
