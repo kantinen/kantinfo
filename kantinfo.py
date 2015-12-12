@@ -150,7 +150,7 @@ def url_handler(url):
        or url.endswith('.avi') or url.endswith('.mpg') or url.endswith('.ogv') \
        or url.startswith('http://youtube.com/') or url.startswith('https://youtube.com/') \
        or url.startswith('http://www.youtube.com/') or url.startswith('https://www.youtube.com/') \
-       or url.startswith('http://youtu.be/') or url.startswith('https://youtu.be/')
+       or url.startswith('http://youtu.be/') or url.startswith('https://youtu.be/') \
        or url.startswith('http://imgur.com/'):
         return play_video
     else:
