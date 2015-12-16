@@ -17,7 +17,6 @@ import signal
 import time
 import subprocess
 import yaml
-import time
 import random
 import re
 import traceback
@@ -26,7 +25,7 @@ import traceback
 globs = {
     # The file ending used for configuration files.
     'config_ending': '.yaml',
-    
+
     # The directory in which content is stored.
     'content_directory': 'content',
 
@@ -326,7 +325,7 @@ if __name__ == '__main__':
         sys.exit(0)
     else:
         globs['content_directory'] = args[0]
-        
+
     try:
         filename = args[1]
     except IndexError:
