@@ -37,6 +37,8 @@ globs = {
 }
 
 
+base_dir = os.path.dirname(__file__)
+
 def index_or_none(x, xs):
     '''
     If x is an element of xs, return its index.  Otherwise, return None.
@@ -136,8 +138,8 @@ def play_video(path):
     else:
         video_path = os.path.expanduser(path)
 
-    return run_program('mplayer',
-                       ['--really-quiet', video_path, '-fs', '-vo', 'sdl'])
+    return run_program(os.path.join(base_dir, 'scripts/play-video.sh'),
+                       [video_path])
 
 def show_url_in_browser(url):
     return run_program('surf',
