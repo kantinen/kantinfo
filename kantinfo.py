@@ -144,6 +144,8 @@ def play_video(path):
 def show_url_in_browser(url):
     return run_program('surf',
                        ['-p', # Disable plugins.
+                        '-b', # Disable scrollbars.
+                        '-F', # Run in fullscreen.
                         url])
 
 def url_handler(url):
