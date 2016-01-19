@@ -33,7 +33,10 @@ globs = {
     'pull_after_switch': True,
 
     # Default duration
-    'duration_default': 20
+    'duration_default': 20,
+
+    # Current conf
+    'current_conf': {}
 }
 
 
@@ -110,6 +113,7 @@ def find_next_content(old_selection, old_content):
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
+    print(args)
     proc = subprocess.Popen([progname] + args,
                             stdout=None,
                             stderr=None,
@@ -120,6 +124,19 @@ def run_program(progname, args):
 
 def play_video(path):
     video_cache_dir = os.path.expanduser('~/.kantinfo-video-cache')
+    try:
+        raw_start_pos = globs['current_conf']['start_pos']
+        start_in_seconds = time_to_sec(raw_start_pos)
+        start_pos = ["-ss " + str(start_in_seconds)]
+    except(TypeError, KeyError):
+        start_pos = ['']
+    try:
+        raw_end_pos = globs['current_conf']['end_pos']
+        end_in_seconds = time_to_sec(raw_end_pos)
+        end_pos = ["-endpos " + str(end_in_seconds - start_in_seconds)]
+    except(TypeError, KeyError):
+        end_pos= ['']
+
     try:
         os.mkdir(video_cache_dir)
     except OSError:
@@ -139,7 +156,7 @@ def play_video(path):
         video_path = os.path.expanduser(path)
 
     return run_program(os.path.join(base_dir, 'scripts/play-video.sh'),
-                       [video_path])
+                       [video_path] + start_pos + end_pos)
 
 def show_url_in_browser(url):
     return run_program('surf',
@@ -201,6 +218,15 @@ def time_to_min(t):
         h, m = map(int, t.split(':'))
         return h * 60 + m
 
+def time_to_sec(t):
+    if isinstance(t, int):
+        return t
+    else:
+        m, s = map(int, t.split(':'))
+        return m * 60 + s
+
+
+
 def infoscreen():
     '''
     Show the slides in succession.
@@ -221,6 +247,7 @@ def infoscreen():
                 conf = f.read()
             conf = yaml.load(conf)
             conf.__getitem__
+            globs['current_conf'] = conf
         except (IOError, yaml.YAMLError, AttributeError):
             pass
         else:
