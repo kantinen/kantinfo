@@ -255,7 +255,9 @@ def infoscreen():
                 dur = conf['duration']
             except (TypeError, KeyError):
                 pass
-
+        # An end-point will always overrule duration
+            if 'end_pos' in conf:
+                dur = -1
             try:
                 show_probability = conf['probability']
             except (TypeError, KeyError):
