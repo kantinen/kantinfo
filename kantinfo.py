@@ -122,21 +122,33 @@ def run_program(progname, args):
                             preexec_fn=os.setsid)
     return proc
 
+
 def play_video(path):
     video_cache_dir = os.path.expanduser('~/.kantinfo-video-cache')
-    try:
-        raw_start_pos = globs['current_conf']['start_pos']
-        start_in_seconds = time_to_sec(raw_start_pos)
-        start_pos = ["-ss " + str(start_in_seconds)]
-    except(TypeError, KeyError):
-        start_pos = ['']
-    try:
-        raw_end_pos = globs['current_conf']['end_pos']
-        end_in_seconds = time_to_sec(raw_end_pos)
-        end_pos = ["-endpos " + str(end_in_seconds - start_in_seconds)]
-    except(TypeError, KeyError):
-        end_pos= ['']
+    start_pos = ['']
+    end_pos= ['']
 
+    try:
+        intervals = globs['current_conf']['intervals']
+        [raw_start_pos, raw_end_pos] = random.sample(intervals, 1)[0]
+        start_in_seconds = time_to_sec(raw_start_pos)
+        end_in_seconds = time_to_sec(raw_end_pos)
+        start_pos = ["-ss " + str(start_in_seconds)]
+        end_pos = ["-ss " + str(end_in_seconds)]
+
+    except(TypeError, KeyError):
+        try:
+            raw_start_pos = globs['current_conf']['start_pos']
+            start_in_seconds = time_to_sec(raw_start_pos)
+            start_pos = ["-ss " + str(start_in_seconds)]
+        except(TypeError, KeyError):
+            pass
+        try:
+            raw_end_pos = globs['current_conf']['end_pos']
+            end_in_seconds = time_to_sec(raw_end_pos)
+            end_pos = ["-endpos " + str(end_in_seconds - start_in_seconds)]
+        except(TypeError, KeyError):
+            pass
     try:
         os.mkdir(video_cache_dir)
     except OSError:
