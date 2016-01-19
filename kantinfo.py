@@ -127,14 +127,14 @@ def play_video(path):
     video_cache_dir = os.path.expanduser('~/.kantinfo-video-cache')
     start_pos = ['']
     end_pos= ['']
-
     try:
         intervals = globs['current_conf']['intervals']
+        print(globs['current_conf'])
         [raw_start_pos, raw_end_pos] = random.sample(intervals, 1)[0]
         start_in_seconds = time_to_sec(raw_start_pos)
-        end_in_seconds = time_to_sec(raw_end_pos)
+        end_in_seconds = time_to_sec(raw_end_pos) - start_in_seconds
         start_pos = ["-ss " + str(start_in_seconds)]
-        end_pos = ["-ss " + str(end_in_seconds)]
+        end_pos = ["-endpos " + str(end_in_seconds)]
 
     except(TypeError, KeyError):
         try:
@@ -234,7 +234,7 @@ def time_to_sec(t):
     if isinstance(t, int):
         return t
     else:
-        m, s = map(int, t.split(':'))
+        m, s = map(int, str(t).split(':'))
         return m * 60 + s
 
 
@@ -268,7 +268,7 @@ def infoscreen():
             except (TypeError, KeyError):
                 pass
         # An end-point will always overrule duration
-            if 'end_pos' in conf:
+            if 'end_pos' in conf or 'intervals' in conf:
                 dur = -1
             try:
                 show_probability = conf['probability']
