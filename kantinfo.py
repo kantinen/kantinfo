@@ -19,6 +19,7 @@ import subprocess
 import yaml
 import random
 import re
+import tempfile
 import traceback
 
 
@@ -199,6 +200,19 @@ def show_image(filename):
     return run_program('feh',
                        ['-F', '-Z', os.path.join(os.getcwd(), filename)])
 
+def eval_program(filename):
+    try:
+        _, typ, eval = filename.rsplit('.', 2)
+        assert eval == 'eval'
+    except (ValueError, AssertionError):
+        print('.eval script is not proper .eval script: {}'.format(filename))
+
+    content = subprocess.check_output([filename]).decode('utf-8')
+    with tempfile.NamedTemporaryFile(suffix=('.' + typ)) as tfile:
+        with open(tfile.name, 'w') as f:
+            f.write(content)
+        return show_content(tfile.name)
+
 def run_in_terminal(filename):
     return run_program('lxterminal',
                        ['-e', # Start program
@@ -215,6 +229,7 @@ def show_content(filename):
             'gif': lambda: show_in_browser(filename),
             'url': lambda: open_url(filename),
             'sh': lambda: run_program(filename, []),
+            'eval': lambda: eval_program(filename),
             'terminal': lambda: run_in_terminal(filename)
         }[extension]
     except KeyError:

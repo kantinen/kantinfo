@@ -19,6 +19,8 @@ Understøttede filtyper og deres handlinger:
   * `.url`: Linket i filen åbnes enten i en browser eller i en videoafspiller,
     afhængigt af hvordan stien ser ud
   * `.sh`: Programmet køres
+  * `.<noget>.eval`: Programmet køres, og dets uddata gemmes i en midlertidig fil
+    med navnet `etellerandet.<noget>`, hvorefter dén fil køres
   * `.terminal`: Programmet køres i en grafisk terminal på infoskærmen
 
 
