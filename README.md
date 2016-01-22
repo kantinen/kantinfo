@@ -48,6 +48,21 @@ Eksempel på konfigurationsfil der sørger for at et slide bliver vist kun melle
     start_at: 13:00
     end_at: 14:00
 
+Eksempel på konfigurationsfil, som tilbyder afspilning af vilkårlige udsnit af et filmslide.
+Funktionen virker både med tidspunkter og hele sekunder.
+
+    intervals: [['0:00' , '0:23'] , ['1:04', '1:30'] , [0, 500]]
+
+Eksempel på konfigurationsfil, som tilbyder afspilning af bestemt udsnit af et filmslide:
+
+    start_pos: 0:10
+    end_pos: 1:40
+
+eller
+
+    start_pos: 41
+    end_pos: 100
+
 
 Afhængigheder
 -------------
