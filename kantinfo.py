@@ -113,7 +113,7 @@ def find_next_content(old_selection, old_content):
     return (find_next(old_selection, old_content, new_content), new_content)
 
 def run_program(progname, args):
-    print(args)
+    print('Runs {} with arguments {}'.format(progname, args))
     proc = subprocess.Popen([progname] + args,
                             stdout=None,
                             stderr=None,
@@ -125,29 +125,27 @@ def run_program(progname, args):
 
 def play_video(path):
     video_cache_dir = os.path.expanduser('~/.kantinfo-video-cache')
-    start_pos = ['']
-    end_pos= ['']
+    start_pos = []
+    end_pos= []
     try:
         intervals = globs['current_conf']['intervals']
-        print(globs['current_conf'])
         [raw_start_pos, raw_end_pos] = random.sample(intervals, 1)[0]
         start_in_seconds = time_to_sec(raw_start_pos)
         end_in_seconds = time_to_sec(raw_end_pos) - start_in_seconds
-        start_pos = ["-ss " + str(start_in_seconds)]
-        end_pos = ["-endpos " + str(end_in_seconds)]
-
-    except(TypeError, KeyError):
+        start_pos = ['-ss', str(start_in_seconds)]
+        end_pos = ['-endpos', str(end_in_seconds)]
+    except (TypeError, KeyError):
         try:
             raw_start_pos = globs['current_conf']['start_pos']
             start_in_seconds = time_to_sec(raw_start_pos)
-            start_pos = ["-ss " + str(start_in_seconds)]
-        except(TypeError, KeyError):
+            start_pos = ['-ss', str(start_in_seconds)]
+        except (TypeError, KeyError):
             pass
         try:
             raw_end_pos = globs['current_conf']['end_pos']
             end_in_seconds = time_to_sec(raw_end_pos)
-            end_pos = ["-endpos " + str(end_in_seconds - start_in_seconds)]
-        except(TypeError, KeyError):
+            end_pos = ['-endpos', str(end_in_seconds - start_in_seconds)]
+        except (TypeError, KeyError):
             pass
     try:
         os.mkdir(video_cache_dir)
@@ -237,9 +235,7 @@ def time_to_sec(t):
         m, s = map(int, str(t).split(':'))
         return m * 60 + s
 
-
-
-def infoscreen():
+def infoscreen(do_random=False):
     '''
     Show the slides in succession.
     '''
@@ -252,6 +248,9 @@ def infoscreen():
 
     while True:
         content, content_list = find_next_content(content, content_list)
+        if do_random:
+            content = random.choice(content_list)
+
         content_conf = content + globs['config_ending']
         dur = globs['duration_default']
         try:
@@ -348,28 +347,20 @@ def infoscreen():
             except subprocess.TimeoutExpired:
                 proc_prev = proc
 
-if __name__ == '__main__':
-    args = sys.argv[1:]
-
+def run_infoscreen(args):
+    do_random = False
     if '--help' in args:
-        print('kantinfo from git; see README.md for instructions')
-        print()
-        print('Usage:')
-        print('  ./kantinfo.py CONTENT_DIRECTORY [CONTENT_FILE]')
-        print()
-        print('Options:')
-        print('  --count  Count the number of slides, print it, and exit.')
-        print('  --help   Print this text.')
+        print_help()
         sys.exit(0)
-    elif '--count' in args:
-        paths = [os.path.join(globs['content_directory'], f)
-                 for f in os.listdir(globs['content_directory'])]
-        paths = [p for p in paths
-                 if os.path.isfile(p) and not p.endswith(globs['config_ending'])]
-        print(len(paths))
-        sys.exit(0)
-    else:
+    elif '--random' in args:
+        do_random = True
+        args.remove('--random')
+        
+    try:
         globs['content_directory'] = args[0]
+    except IndexError:
+        print_help()
+        sys.exit(0)
 
     try:
         filename = args[1]
@@ -388,7 +379,7 @@ if __name__ == '__main__':
         try:
             while True:
                 try:
-                    infoscreen()
+                    infoscreen(do_random=do_random)
                 except Exception:
                     print('Failed in or before main loop:\n')
                     traceback.print_exc()
@@ -396,3 +387,17 @@ if __name__ == '__main__':
                     time.sleep(2)
         except KeyboardInterrupt:
             pass
+
+def print_help():
+    print('kantinfo from git; see README.md for instructions')
+    print()
+    print('Usage:')
+    print('  ./kantinfo.py CONTENT_DIRECTORY [CONTENT_FILE]')
+    print()
+    print('Options:')
+    print('  --help    Print this text.')
+    print('  --random  Show the slides in random order.')
+                
+if __name__ == '__main__':
+    args = sys.argv[1:]
+    run_infoscreen(args)
