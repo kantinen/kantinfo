@@ -10,16 +10,22 @@
 # canteen, but it can be (and is) used in other places as well.  See the
 # README.md file to find out how to use it.
 
+'''
+Run an infoscreen.
+'''
 
 import sys
 import os
-import signal
 import time
 import subprocess
+import signal
+import socket
 import random
 import re
 import tempfile
 import traceback
+import atexit
+import selectors
 import yaml
 
 
@@ -41,7 +47,8 @@ globs = {
 }
 
 
-base_dir = os.path.dirname(__file__)
+_base_dir = os.path.dirname(__file__)
+_socket_filename = os.path.join(_base_dir, 'kantinfo.sock')
 
 def index_or_none(x, xs):
     '''
@@ -105,17 +112,16 @@ def find_next(old_selection, old_list, new_list):
     else:
         return new_list[0]
 
-def find_next_content(old_selection, old_content):
+def find_slides():
     '''
-    Find the next piece of content (assuming a circular walkthrough),
-    and the list of elements that should come after that.
+    Find the list of current slides.
     '''
     paths = [os.path.join(globs['content_directory'], f)
              for f in os.listdir(globs['content_directory'])]
-    new_content = [p for p in paths
-                   if os.path.isfile(p) and
-                   not p.endswith(globs['config_ending'])]
-    return (find_next(old_selection, old_content, new_content), new_content)
+    content = [p for p in paths
+               if os.path.isfile(p) and
+               not p.endswith(globs['config_ending'])]
+    return content
 
 def _time_to_min(t):
     if isinstance(t, int):
@@ -183,7 +189,7 @@ def _play_video(path):
     else:
         video_path = os.path.expanduser(path)
 
-    return _run_program(os.path.join(base_dir, 'scripts/play-video.sh'),
+    return _run_program(os.path.join(_base_dir, 'scripts/play-video.sh'),
                        [video_path] + start_pos + end_pos)
 
 def _show_url_in_browser(url):
@@ -253,116 +259,207 @@ def show_content(filename):
         raise Exception('I have no idea how to show a {} file.'.format(extension))
     return f()
 
-def infoscreen(do_random=False):
-    '''
-    Show the slides in succession.
-    '''
+class Infoscreen:
+    def __init__(self, do_random=False):
+        self.do_random = do_random
+        self.socket_filename = _socket_filename
+        
+        self.content = None
+        self.content_list = []
+        self.goto_next = None
 
-    proc_prev = None
-    sleep_dur_start = 1
-    content = None
-    content_list = []
-    pull_time_prev = 0
+    def _setup_socket(self):
+        self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+        if os.path.exists(self.socket_filename):
+            os.remove(self.socket_filename)
+        self.socket.bind(self.socket_filename)
+        atexit.register(lambda: os.remove(self.socket_filename))
+        self.socket.setblocking(False)
 
-    while True:
-        content, content_list = find_next_content(content, content_list)
-        if do_random:
-            content = random.choice(content_list)
+        self.selector = selectors.DefaultSelector()
+        self.selector.register(self.socket, selectors.EVENT_READ)
 
-        content_conf = content + globs['config_ending']
-        dur = globs['duration_default']
-        try:
-            with open(content_conf) as f:
-                conf = f.read()
-            conf = yaml.load(conf)
-            globs['current_conf'] = conf
-        except (IOError, yaml.YAMLError, AttributeError):
-            pass
+    def _check_new_messages(self):
+        # Return whether any new gotos were found.
+
+        goto = None
+        
+        events = self.selector.select(0)            
+        for key, _mask in events:
+            socket = key.fileobj
+            order = socket.recv(1024) # probably large enough
+            order = order.decode('utf-8')
+            order = order.split()
+
+            print(order)
+            if len(order) == 2 and order[0] == 'goto':
+                goto = order[1]
+
+        if goto is not None:
+            self.goto_next = goto
+        return goto is not None
+    
+    def _choose_next_content(self):
+        old_selection = self.content
+        old_list = self.content_list
+        new_list = find_slides()
+
+        if self.goto_next is not None:
+            selection = os.path.join(globs['content_directory'], self.goto_next)
+            self.goto_next = None
+        elif self.do_random:
+            selection = random.choice(new_list)
         else:
+            selection = find_next(old_selection, old_list, new_list)
+
+        self.content = selection
+        self.content_list = new_list
+        
+        return selection
+
+    def run(self):
+        '''
+        Show the slides in succession.
+        '''
+
+        self._setup_socket()
+
+        proc_prev = None
+        sleep_dur_start = 1
+        pull_time_prev = 0
+
+        while True:
+            content = self._choose_next_content()
+
+            content_conf = content + globs['config_ending']
+            dur = globs['duration_default']
             try:
-                dur = conf['duration']
-            except (TypeError, KeyError):
-                pass
-            # An end point will always overrule duration.
-            if 'end_pos' in conf or 'intervals' in conf:
-                dur = -1
-            try:
-                show_probability = conf['probability']
-            except (TypeError, KeyError):
+                with open(content_conf) as f:
+                    conf = f.read()
+                conf = yaml.load(conf)
+                globs['current_conf'] = conf
+            except (IOError, yaml.YAMLError, AttributeError):
                 pass
             else:
-                if show_probability == 1:
+                try:
+                    dur = conf['duration']
+                except (TypeError, KeyError):
                     pass
-                elif random.random() >= show_probability:
-                    print('The probability was not in the favor of {}.'.format(content))
-                    continue
-
-            try:
-                start_at = conf['start_at']
-                end_at = conf['end_at']
-            except (TypeError, KeyError):
-                pass
-            else:
-                start_at = _time_to_min(start_at)
-                end_at = _time_to_min(end_at)
-                tloc = time.localtime()
-                now = tloc.tm_hour * 60 + tloc.tm_min
-                if start_at < end_at:
-                    if not (start_at <= now < end_at):
-                        print('Not the time for {}.'.format(content))
-                        continue
+                # An end point will always overrule duration.
+                if 'end_pos' in conf or 'intervals' in conf:
+                    dur = -1
+                try:
+                    show_probability = conf['probability']
+                except (TypeError, KeyError):
+                    pass
                 else:
-                    if end_at <= now < start_at:
-                        print('Not the time for {}.'.format(content))
+                    if show_probability == 1:
+                        pass
+                    elif random.random() >= show_probability:
+                        print('The probability was not in the favor of {}.'.format(content))
                         continue
 
-        try:
-            proc = show_content(content)
-        except Exception as e:
-            print('Failed to show {}:\n'.format(content))
-            traceback.print_exc()
-            print('Sleeping for two seconds.')
-            time.sleep(2)
+                try:
+                    start_at = conf['start_at']
+                    end_at = conf['end_at']
+                except (TypeError, KeyError):
+                    pass
+                else:
+                    start_at = _time_to_min(start_at)
+                    end_at = _time_to_min(end_at)
+                    tloc = time.localtime()
+                    now = tloc.tm_hour * 60 + tloc.tm_min
+                    if start_at < end_at:
+                        if not (start_at <= now < end_at):
+                            print('Not the time for {}.'.format(content))
+                            continue
+                    else:
+                        if end_at <= now < start_at:
+                            print('Not the time for {}.'.format(content))
+                            continue
 
-        time_start = time.time()
-
-        # The new process has just started.  Keep the old one running for a
-        # little while before killing it.
-        time.sleep(sleep_dur_start)
-
-        # Then kill it.
-        if proc_prev is not None:
-            # SIGKILL (or similar on other platforms)
-            os.killpg(proc_prev.pid, signal.SIGKILL)
-
-        # Do the git pull while the slide is running to minimise downtime.  Only
-        # pull the content repository, as pulling the code repository doesn't do
-        # any good unless the script is also restarted, which will just get
-        # messy.
-        pull_time = time.time()
-        if globs['pull_after_switch'] and \
-           pull_time - pull_time_prev > 30: # Don't pull for at least 30 secs.
-            pull_time_prev = pull_time
+            if self._check_new_messages():
+                continue
+                        
             try:
-                cur_dir = os.getcwd()
-                os.chdir(globs['content_directory'])
-                subprocess.call(['git', 'pull'])
-                os.chdir(cur_dir)
+                proc = show_content(content)
             except Exception as e:
-                print('Failed to git pull:\n{}'.format(e))
-                time.sleep(2)
+                print('Failed to show {}:\n'.format(content))
+                traceback.print_exc()
+                continue
 
-        if dur == -1:
-            # Wait for the process to terminate itself.
-            proc.wait()
-            proc_prev = None
-        else:
-            # Sleep for the remaining time of the duration.
-            try:
-                proc.wait(timeout=(dur - (time.time() - time_start)))
-                proc_prev = None
-            except subprocess.TimeoutExpired:
-                proc_prev = proc
+            time_start = time.time()
+
+            # The new process has just started.  Keep the old one running for a
+            # little while before killing it.
+            time.sleep(sleep_dur_start)
+
+            # Then kill it.
+            if proc_prev is not None:
+                # SIGKILL (or similar on other platforms)
+                try:
+                    os.killpg(proc_prev.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+
+            # In the next iteration, the current process will become the
+            # previous process.
+            proc_prev = proc
+                
+            if self._check_new_messages():
+                continue
+                
+            # Do the git pull while the slide is running to minimise downtime.  Only
+            # pull the content repository, as pulling the code repository doesn't do
+            # any good unless the script is also restarted, which will just get
+            # messy.
+            pull_time = time.time()
+            if globs['pull_after_switch'] and \
+               pull_time - pull_time_prev > 30: # Don't pull for at least 30 secs.
+                pull_time_prev = pull_time
+                try:
+                    cur_dir = os.getcwd()
+                    os.chdir(globs['content_directory'])
+                    subprocess.call(['git', 'pull'])
+                    os.chdir(cur_dir)
+                except Exception as e:
+                    print('Failed to git pull:\n{}'.format(e))
+
+            if self._check_new_messages():
+                continue
+                    
+            if dur == -1:
+                # Wait for the process to terminate itself.
+                finished_waiting = False
+                while True:
+                    try:
+                        proc.wait(timeout=1)
+                        proc_prev = None
+                        finished_waiting = True
+                        break
+                    except subprocess.TimeoutExpired:
+                        pass
+                    if self._check_new_messages():
+                        break
+                if not finished_waiting:
+                    continue
+            else:
+                # Sleep for the remaining time of the duration.
+                finished_waiting = False
+                for end_cur in range(1, dur + 1):
+                    elapsed = time.time() - time_start
+                    dur = max(end_cur - elapsed, 0.5)
+                    try:
+                        proc.wait(timeout=dur)
+                        proc_prev = None
+                        finished_waiting = True
+                        break
+                    except subprocess.TimeoutExpired:
+                        pass
+                    if self._check_new_messages():
+                        break
+                if not finished_waiting:
+                    continue
 
 def run_infoscreen(args):
     '''
@@ -399,7 +496,8 @@ def run_infoscreen(args):
         try:
             while True:
                 try:
-                    infoscreen(do_random=do_random)
+                    infoscreen = Infoscreen(do_random=do_random)
+                    infoscreen.run()
                 except Exception:
                     print('Failed in or before main loop:\n')
                     traceback.print_exc()

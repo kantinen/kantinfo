@@ -66,6 +66,17 @@ eller
     end_pos: 100
 
 
+Ordre-sending
+-------------
+
+Man kan sende ordrer til en kørende `kantinfo.py` ved at køre
+`kantinfo-order.py` og give ordrer på standard in.  `kantinfo.py` forstår
+følgende ordrer:
+
+  * `goto <slide>`: afbryd hvadend der foregår og skift så hurtigt som muligt
+    til `<slide>`.
+
+
 Afhængigheder
 -------------
 
