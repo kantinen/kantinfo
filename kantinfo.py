@@ -202,10 +202,14 @@ def _show_url_in_browser(url):
 def _url_handler(url):
     if url.endswith('.mkv') or url.endswith('.webm') or url.endswith('.mp4') \
        or url.endswith('.avi') or url.endswith('.mpg') or url.endswith('.ogv') \
-       or url.startswith('http://youtube.com/') or url.startswith('https://youtube.com/') \
-       or url.startswith('http://www.youtube.com/') or url.startswith('https://www.youtube.com/') \
-       or url.startswith('http://youtu.be/') or url.startswith('https://youtu.be/') \
-       or url.startswith('http://imgur.com/'):
+       or url.startswith('http://youtube.com/') \
+       or url.startswith('https://youtube.com/') \
+       or url.startswith('http://www.youtube.com/') \
+       or url.startswith('https://www.youtube.com/') \
+       or url.startswith('http://youtu.be/') \
+       or url.startswith('https://youtu.be/') \
+       or url.startswith('http://imgur.com/') \
+       or url.startswith('https://archive.org/'):
         return _play_video
     else:
         return _show_url_in_browser
