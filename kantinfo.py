@@ -177,14 +177,16 @@ def _play_video(path):
         pass
     if path.startswith('http://') or path.startswith('https://'):
         cur_dir = os.getcwd()
-        os.chdir(video_cache_dir)
-        out = subprocess.check_output(['youtube-dl', path])
         try:
-            dest = re.findall(br'\[download\] (.+?) has already been downloaded', out)[0]
-        except IndexError:
-            dest = re.findall(br'Destination: (.+)', out)[0]
-        dest = dest.decode()
-        os.chdir(cur_dir)
+            os.chdir(video_cache_dir)
+            out = subprocess.check_output(['youtube-dl', path])
+            try:
+                dest = re.findall(br'\[download\] (.+?) has already been downloaded', out)[0]
+            except IndexError:
+                dest = re.findall(br'Destination: (.+)', out)[0]
+                dest = dest.decode()
+        finally:
+            os.chdir(cur_dir)
         video_path = os.path.join(video_cache_dir, dest)
     else:
         video_path = os.path.expanduser(path)
