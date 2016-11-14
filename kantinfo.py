@@ -211,12 +211,12 @@ def _url_handler(url):
        or url.startswith('http://youtu.be/') \
        or url.startswith('https://youtu.be/') \
        or url.startswith('http://imgur.com/') \
-       or url.startswith('https://archive.org/'):
-       or url.startswith('https://vimeo.com/'):
-       or url.startswith('http://vimeo.com/'):
-       or url.startswith('https://www.vimeo.com/'):
-       or url.startswith('http://www.vimeo.com/'):
-       or url.startswith('https://dailymotion.com/'):
+       or url.startswith('https://archive.org/') \
+       or url.startswith('https://vimeo.com/') \
+       or url.startswith('http://vimeo.com/') \
+       or url.startswith('https://www.vimeo.com/') \
+       or url.startswith('http://www.vimeo.com/') \
+       or url.startswith('https://dailymotion.com/') \
        or url.startswith('http://dailymotion.com/'):
         return _play_video
     else:
