@@ -200,7 +200,7 @@ def _show_url_in_browser(url):
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
                         '-F', # Run in fullscreen.
-                        '-r', snowstorm_filename
+                        '-r', snowstorm_filename,
                         url])
 
 def _url_handler(url):
