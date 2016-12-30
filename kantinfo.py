@@ -195,12 +195,12 @@ def _play_video(path):
                        [video_path] + start_pos + end_pos)
 
 def _show_url_in_browser(url):
-    snowstorm_filename = os.path.join(_base_dir, 'snowstorm.js')
+    # snowstorm_filename = os.path.join(_base_dir, 'snowstorm.js')
     return _run_program('surf',
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
                         '-F', # Run in fullscreen.
-                        '-r', snowstorm_filename,
+                        # '-r', snowstorm_filename,
                         url])
 
 def _url_handler(url):
