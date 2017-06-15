@@ -84,7 +84,8 @@ Afhængigheder
 
   + `python`
   + `pyyaml`: YAML-bibliotek til Python
-  + `surf`: Simpel browser
+  + `surf`: Simpel browser -- brug evt. https://github.com/Jobindex/surf
+    for pænere skift mellem slides
   + `feh`: Simpel billedfremviser
 
 
