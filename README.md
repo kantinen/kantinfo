@@ -87,6 +87,7 @@ Afhængigheder
   + `surf`: Simpel browser -- brug evt. https://github.com/Jobindex/surf
     for pænere skift mellem slides
   + `feh`: Simpel billedfremviser
+  + `lxterminal`: Simpel grafisk terminal
 
 
 Kodekopiering
