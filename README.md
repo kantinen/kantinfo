@@ -1,106 +1,106 @@
-Canteen's infrared display system
+The Canteen's Infoscreen system
 ==========================
 
-`Kantinfo.py` runs in a tmux on the` infoscreen` machine and `cokepc` machine
-K @ ntinen - and maybe elsewhere?
+`kantinfo.py` runs in an instance of tmux on the `infoscreen` machine and the `cokepc` machine in
+K@ntinen -- and maybe elsewhere?
 
 See https://github.com/datalogisk-kantineforening/infoscreen and
-Https://github.com/datalogisk-kantineforening/cokepc for the two most important
-Systems that use the `edgeinfo` program.
+https://github.com/datalogisk-kantineforening/cokepc for the two most important
+systems using the `kantinfo` software.
 
 
-Contents
+Content
 -------
 
-Supported file types and their actions:
+Supported file types and their corresponding actions:
 
-  * `.html`,` .gif`: Appears in a browser
-  * `.jpg`,` .png`: Appears in an image viewer
-  * `.url`: The link in the file is opened either in a browser or in a video player,
-    Depending on how the trail looks
-  * `.sh`: The program is running
-  * `. <Something> .eval`: The program is run and its output is saved in a temporary file
-    Called `etellering. <Something>`, after which the file is run
-  * `.terminal`: The program is run in a graphical terminal on the info screen
+  * `.html`, `.gif`: Shown in a browser
+  * `.jpg`, `.png`: Shown in an image viewe 
+  * `.url`: The URL in the file is either opened in a browser, or in a video player,
+            depending on the form of the URL.
+  * `.sh`: The script is executed
+  * `.<ext>.eval`: The executable is run, and its output is stored in  `something.<ext>`, which is then displayed
+  * `.terminal`: The programme is run in a graphical terminal on screen.
 
 
 Configuration of slides
 -----------------------
 
-Each slide can have a configuration file. If a slide is called
-`Et-slide.änd`, the configuration file must be called` et-slide.änd.yaml`.
-The file is written in YAML format. The following fields are supported:
+Each slide can have a YAML file configuring it. If a slide is called `something.ext`, then the corresponding
+configuration file is located in `something.ext.yaml`.
+If no configuration file exists, then defaults are used.
 
-  * `Duration`: Takes a number in seconds and describes how long a slide should be
-    see you. Standard is 20 seconds. If `duration` is -1, the script will not
-    Terminate the wear, but instead wait for the wearer to terminate himself.
-  * `Start_at` and` end_at` (both to be given): Describes the time of day
-    Where a slide should be displayed.
-  * `Probability`: Describes the likelihood that a slide will appear. Standard is
-    That a slide always appears. Enter in the range 0 to 1.
+The following fields are supported:
 
-Example of configuration file that ensures that a slide is displayed in only 10
-seconds:
+  * `duration`: Specifies how long to display the slide, in seconds. The default value is 20 seconds.
+    If the `duration` is `-1`, the system will not terminate the slide automatically, but rather wait for
+    the slide to terminate itself.
+  * `start_at` and `end_at` (both have to be specified, or neither):
+    Describes when to display the slide, in a 24 hour clock format.
+  * `probability`: Specifies the probability that a slide will be shown. Must be in the range 0 to 1.
+     The default value is `1`, meaning that the slides is always shown.
+  * `intervals`: For video slides only. Specifies segments from the video, one of which will play
+     when the slide is shown. Supports either timestamps or whole seconds.
+  * `start_pos` and `end_pos`: For video slides only. Specifies what part of the video to play when the
+    slide is shown. Supports either timestamps or whole seconds.
 
-    Duration: 10
+Example of a configuration that specifies, that the slide is only shown for 10 seconds:
 
-Example of configuration file that ensures that a slide is displayed only between
-13 and 14:
+    duration: 10
 
-    Start_at: 13:00
-    End_at: 14:00
+Example of a configuration that specifies, that the slide is only shown between 13 and 14:
 
-Sample configuration file that offers playback of random slices of a movie slideshow.
-The function works with both times and full seconds.
+    start_at: 13:00
+    end_at: 14:00
 
-    Intervals: [['0:00', '0:23'], ['1:04', '1:30'], [0, 500]]
+Example of a configuation that specifies segments of a video to play:
 
-Example of configuration file that offers playback of particular slices of a movie slideshow:
+    intervals: [['0:00' , '0:23'] , ['1:04', '1:30'] , [0, 500]]
 
-    Start_pos: 0:10
-    End_pos: 1:40
+Example of a configuation that specifies what part of a video to play:
+
+    start_pos: 0:10
+    end_pos: 1:40
 
 or
 
-    Start_pos: 41
-    End_pos: 100
+    start_pos: 41
+    end_pos: 100
 
 
-The order-consignment
+Command interface
 -------------
 
-You can send orders to a running `kantinfo.py` by driving
-`Kantinfo-order.py` and give orders on the default in. `Kantinfo.py` understands
-The following orders:
+You can control a running instance of `kantinfo.py`, by running `kantinfo-order.py`, and
+giving it commands on standard in. `kantinfo.py` understands the following commands:
+Man kan sende ordrer til en kørende `kantinfo.py` ved at køre
 
-  * `Goto <slide>`: interrupt what happens and change as quickly as possible
-    To `<slide>`.
+  * `goto <slide>`: Stop the current slide, and go to `<slide>`.
 
 
 Dependencies
 -------------
 
-`Edge info` depends on the following programs:
+`kantinfo` depends on the following software:
 
-  + `Python`
-  + `Pyyaml`: YAML library for Python
-  + `Surf`: Simple browser - use any. https://github.com/Jobindex/surf
-    For nicer shifts between slides
-  + `Feh`: Simple image viewer
-  + `Lxterminal`: Simple graphical terminal
+  + `python`
+  + `pyyaml`: YAML library for Python
+  + `surf`: Simple browser -- consider using https://github.com/Jobindex/surf
+    for nicer transitions between slides.
+  + `feh`: Simple image viewer
+  + `lxterminal`: Simple graphical terminal
 
 
-Code Copy
+Kodekopiering
 -------------
 
-Copyright © 2014-2017 Infoskerm Group <infoskaerm@dikumail.dk>
+Copyright © 2014-2017 The Infoscreen Group <infoskaerm@dikumail.dk>
 
-This work is free. Du kan omfordele det og / eller modify it under the
-Terms of the Do What The Fuck You Want To Public License, Version 2,
-As published by Sam Hocevar. See the COPYING file for more details.
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the COPYING file for more details.
 
-
-Infoskærms Group
+The Infoscreen Group
 ------------------
 
-Most coded by Troels and Niels.
+Mostly coded by Troels og Niels.
