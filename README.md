@@ -103,4 +103,4 @@ as published by Sam Hocevar. See the COPYING file for more details.
 The Infoscreen Group
 ------------------
 
-Mostly coded by Troels og Niels.
+Mostly coded by Troels and Niels.
