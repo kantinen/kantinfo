@@ -195,13 +195,11 @@ def _play_video(path):
                        [video_path] + start_pos + end_pos)
 
 def _show_url_in_browser(url):
-    # snowstorm_filename = os.path.join(_base_dir, 'snowstorm.js')
     return _run_program('surf',
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
                         '-d', # Disable the cache.
                         '-F', # Run in fullscreen.
-                        # '-r', snowstorm_filename,
                         url])
 
 def _url_handler(url):
@@ -278,7 +276,7 @@ class Infoscreen:
     def __init__(self, do_random=False):
         self.do_random = do_random
         self.socket_filename = _socket_filename
-        
+
         self.content = None
         self.content_list = []
         self.goto_next = None
@@ -298,8 +296,8 @@ class Infoscreen:
         # Return whether any new gotos were found.
 
         goto = None
-        
-        events = self.selector.select(0)            
+
+        events = self.selector.select(0)
         for key, _mask in events:
             socket = key.fileobj
             order = socket.recv(1024) # probably large enough
@@ -313,7 +311,7 @@ class Infoscreen:
         if goto is not None:
             self.goto_next = goto
         return goto is not None
-    
+
     def _choose_next_content(self):
         old_selection = self.content
         old_list = self.content_list
@@ -329,7 +327,7 @@ class Infoscreen:
 
         self.content = selection
         self.content_list = new_list
-        
+
         return selection
 
     def run(self):
@@ -395,7 +393,7 @@ class Infoscreen:
 
             if self._check_new_messages():
                 continue
-                        
+
             try:
                 proc = show_content(content)
             except Exception as e:
@@ -420,10 +418,10 @@ class Infoscreen:
             # In the next iteration, the current process will become the
             # previous process.
             proc_prev = proc
-                
+
             if self._check_new_messages():
                 continue
-                
+
             # Do the git pull while the slide is running to minimise downtime.  Only
             # pull the content repository, as pulling the code repository doesn't do
             # any good unless the script is also restarted, which will just get
@@ -442,7 +440,7 @@ class Infoscreen:
 
             if self._check_new_messages():
                 continue
-                    
+
             if dur == -1:
                 # Wait for the process to terminate itself.
                 finished_waiting = False
