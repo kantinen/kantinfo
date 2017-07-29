@@ -100,6 +100,7 @@ Dependencies
   + `surf`: Simple browser -- consider using
     https://github.com/Jobindex/surf for nicer transitions between
     slides.
+  + `youtube-dl`: video fetcher
   + `feh`: Simple image viewer
   + `lxterminal`: Simple graphical terminal
 
