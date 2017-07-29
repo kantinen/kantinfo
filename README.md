@@ -1,12 +1,12 @@
 The Canteen's Infoscreen system
 ==========================
 
-`kantinfo.py` runs in an instance of tmux on the `infoscreen` machine and the `cokepc` machine in
-K@ntinen -- and maybe elsewhere?
+`kantinfo.py` runs in an instance of tmux on the `infoscreen` machine
+and the `cokepc` machine in K@ntinen -- and maybe elsewhere?
 
 See https://github.com/datalogisk-kantineforening/infoscreen and
-https://github.com/datalogisk-kantineforening/cokepc for the two most important
-systems using the `kantinfo` software.
+https://github.com/datalogisk-kantineforening/cokepc for the two most
+important systems using the `kantinfo` software.
 
 
 Content
@@ -14,41 +14,53 @@ Content
 
 Supported file types and their corresponding actions:
 
-  * `.html`, `.gif`: Shown in a browser
-  * `.jpg`, `.png`: Shown in an image viewe 
-  * `.url`: The URL in the file is either opened in a browser, or in a video player,
-            depending on the form of the URL.
-  * `.sh`: The script is executed
-  * `.<ext>.eval`: The executable is run, and its output is stored in  `something.<ext>`, which is then displayed
-  * `.terminal`: The programme is run in a graphical terminal on screen.
+  * `.html`, `.gif`: Shown in a browser.
+  * `.jpg`, `.png`: Shown in an image viewer.
+  * `.url`: The URL in the file is either opened in a browser, or in a
+    video player, depending on the form of the URL.
+  * `.sh`: Is executed.
+  * `.<ext>.eval`: The executable is run, and its output is stored in
+    `something.<ext>`, which is then displayed.
+  * `.terminal`: The program is run in a graphical terminal on the screen.
 
 
 Configuration of slides
 -----------------------
 
-Each slide can have a YAML file configuring it. If a slide is called `something.ext`, then the corresponding
-configuration file is located in `something.ext.yaml`.
-If no configuration file exists, then defaults are used.
+Each slide can have a YAML file configuring it.  If a slide is called
+`something.ext`, then the corresponding configuration file is located in
+`something.ext.yaml`.  If no configuration file exists, then defaults
+are used.
 
 The following fields are supported:
 
-  * `duration`: Specifies how long to display the slide, in seconds. The default value is 20 seconds.
-    If the `duration` is `-1`, the system will not terminate the slide automatically, but rather wait for
-    the slide to terminate itself.
+  * `duration`: Specifies how long to display the slide, in seconds.
+    The default value is 20 seconds.  If the `duration` is `-1`, the
+    system will not terminate the slide automatically, but rather wait
+    for the slide to terminate itself.
+
   * `start_at` and `end_at` (both have to be specified, or neither):
     Describes when to display the slide, in a 24 hour clock format.
-  * `probability`: Specifies the probability that a slide will be shown. Must be in the range 0 to 1.
-     The default value is `1`, meaning that the slides is always shown.
-  * `intervals`: For video slides only. Specifies segments from the video, one of which will play
-     when the slide is shown. Supports either timestamps or whole seconds.
-  * `start_pos` and `end_pos`: For video slides only. Specifies what part of the video to play when the
-    slide is shown. Supports either timestamps or whole seconds.
 
-Example of a configuration that specifies, that the slide is only shown for 10 seconds:
+  * `probability`: Specifies the probability that a slide will be
+    shown. Must be in the range 0 to 1.  The default value is `1`,
+    meaning that the slides is always shown.
+
+  * `intervals`: For video slides only.  Specifies segments from the
+    video, one of which will play when the slide is shown.  Supports
+    either timestamps or whole seconds.
+
+  * `start_pos` and `end_pos`: For video slides only.  Specifies what
+    part of the video to play when the slide is shown.  Supports either
+    timestamps or whole seconds.
+
+Example of a configuration that specifies, that the slide is only shown
+for 10 seconds:
 
     duration: 10
 
-Example of a configuration that specifies, that the slide is only shown between 13 and 14:
+Example of a configuration that specifies, that the slide is only shown
+between 13 and 14:
 
     start_at: 13:00
     end_at: 14:00
@@ -71,9 +83,9 @@ or
 Command interface
 -------------
 
-You can control a running instance of `kantinfo.py`, by running `kantinfo-order.py`, and
-giving it commands on standard in. `kantinfo.py` understands the following commands:
-Man kan sende ordrer til en kørende `kantinfo.py` ved at køre
+You can control a running instance of `kantinfo.py`, by running
+`kantinfo-order.py`, and giving it commands on standard in.
+`kantinfo.py` understands the following commands:
 
   * `goto <slide>`: Stop the current slide, and go to `<slide>`.
 
@@ -83,24 +95,26 @@ Dependencies
 
 `kantinfo` depends on the following software:
 
-  + `python`
+  + `python3`
   + `pyyaml`: YAML library for Python
-  + `surf`: Simple browser -- consider using https://github.com/Jobindex/surf
-    for nicer transitions between slides.
+  + `surf`: Simple browser -- consider using
+    https://github.com/Jobindex/surf for nicer transitions between
+    slides.
   + `feh`: Simple image viewer
   + `lxterminal`: Simple graphical terminal
 
 
-Kodekopiering
--------------
+Copying
+-------
 
 Copyright © 2014-2017 The Infoscreen Group <infoskaerm@dikumail.dk>
 
 This work is free. You can redistribute it and/or modify it under the
-terms of the Do What The Fuck You Want To Public License, Version 2,
-as published by Sam Hocevar. See the COPYING file for more details.
+terms of the Do What The Fuck You Want To Public License, Version 2, as
+published by Sam Hocevar. See the COPYING file for more details.
+
 
 The Infoscreen Group
-------------------
+--------------------
 
 Mostly coded by Troels and Niels.
