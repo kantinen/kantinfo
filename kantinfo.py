@@ -199,6 +199,7 @@ def _show_url_in_browser(url):
     return _run_program('surf',
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
+                        '-d', # Disable the cache.
                         '-F', # Run in fullscreen.
                         # '-r', snowstorm_filename,
                         url])
