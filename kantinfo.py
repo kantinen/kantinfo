@@ -237,17 +237,9 @@ def _show_image(filename):
                         ['-F', '-Z', os.path.join(os.getcwd(), filename)])
 
 def _eval_program(filename):
-    try:
-        _, typ, eval_ending = filename.rsplit('.', 2)
-        assert eval_ending == 'eval'
-    except (ValueError, AssertionError):
-        print('.eval script is not proper .eval script: {}'.format(filename))
-
-    content = subprocess.check_output([filename]).decode('utf-8')
-    with tempfile.NamedTemporaryFile(suffix=('.' + typ)) as tfile:
-        with open(tfile.name, 'w') as f:
-            f.write(content)
-        return show_content(tfile.name)
+    actual_file = subprocess.check_output([filename]).decode('utf-8').strip()
+    if actual_file:
+        return show_content(actual_file)
 
 def _run_in_terminal(filename):
     return _run_program('lxterminal',
@@ -441,38 +433,33 @@ class Infoscreen:
             if self._check_new_messages():
                 continue
 
+            if proc is None:
+                continue
+
             if dur == -1:
                 # Wait for the process to terminate itself.
-                finished_waiting = False
                 while True:
                     try:
                         proc.wait(timeout=1)
                         proc_prev = None
-                        finished_waiting = True
                         break
                     except subprocess.TimeoutExpired:
                         pass
                     if self._check_new_messages():
                         break
-                if not finished_waiting:
-                    continue
             else:
                 # Sleep for the remaining time of the duration.
-                finished_waiting = False
                 for end_cur in range(1, dur + 1):
                     elapsed = time.time() - time_start
                     dur = max(end_cur - elapsed, 0.5)
                     try:
                         proc.wait(timeout=dur)
                         proc_prev = None
-                        finished_waiting = True
                         break
                     except subprocess.TimeoutExpired:
                         pass
                     if self._check_new_messages():
                         break
-                if not finished_waiting:
-                    continue
 
 def run_infoscreen(args):
     '''
@@ -501,7 +488,8 @@ def run_infoscreen(args):
         # Test a file instead of waiting for it to show.
         try:
             proc = show_content(filename)
-            proc.wait()
+            if proc is not None:
+                proc.wait()
         except KeyboardInterrupt:
             pass
     else:

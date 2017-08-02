@@ -19,8 +19,10 @@ Supported file types and their corresponding actions:
   * `.url`: The URL in the file is either opened in a browser, or in a
     video player, depending on the form of the URL.
   * `.sh`: Is executed.
-  * `.<ext>.eval`: The executable is run, and its output is stored in
-    `something.<ext>`, which is then displayed.
+  * `.eval`: The executable is run, and its output is expected to be
+    either a single line with a file path `something.<ext>`, which is
+    then displayed according to these rules, or zero lines, which means
+    that nothing is shown.
   * `.terminal`: The program is run in a graphical terminal on the screen.
 
 
