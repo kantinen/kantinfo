@@ -10,4 +10,4 @@ trap 'xdotool mousemove 2000 2000' INT QUIT TERM EXIT
 # Actually play the file, but use an old SDL backend, since ODroids are silly.
 video_path="$1"
 shift
-mplayer -really-quiet "$@" "$video_path" -fs -vo sdl
+mplayer -really-quiet -nolirc "$@" "$video_path" -fs -vo sdl
