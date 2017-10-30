@@ -179,7 +179,10 @@ def _play_video(path):
         cur_dir = os.getcwd()
         try:
             os.chdir(video_cache_dir)
-            out = subprocess.check_output(['youtube-dl', path])
+            out = subprocess.check_output(['youtube-dl',
+                                           # At most 720p.  Limits space usage.
+                                           '-f', '[height <=? 720]',
+                                           path])
             try:
                 dest = re.findall(br'\[download\] (.+?) has already been downloaded', out)[0]
             except IndexError:
