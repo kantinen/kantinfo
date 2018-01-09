@@ -406,6 +406,7 @@ class Infoscreen:
             if proc_prev is not None:
                 # SIGKILL (or similar on other platforms)
                 try:
+                    print('Killing previous process {}.'.format(proc_prev))
                     os.killpg(proc_prev.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
