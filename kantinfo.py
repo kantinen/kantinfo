@@ -202,7 +202,6 @@ def _show_url_in_browser(url):
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
                         '-d', # Disable the cache.
-                        '-F', # Run in fullscreen.
                         url])
 
 def _url_handler(url):
@@ -333,7 +332,7 @@ class Infoscreen:
         self._setup_socket()
 
         proc_prev = None
-        sleep_dur_start = 1
+        sleep_dur_start = 5
         pull_time_prev = 0
 
         while True:
