@@ -275,6 +275,7 @@ class Infoscreen:
         self.content = None
         self.content_list = []
         self.goto_next = None
+        self.ignore_conf_next = []
 
     def _setup_socket(self):
         self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
@@ -305,6 +306,7 @@ class Infoscreen:
 
         if goto is not None:
             self.goto_next = goto
+            self.ignore_conf_next = ['start_at', 'end_at', 'probability']
         return goto is not None
 
     def _choose_next_content(self):
@@ -345,6 +347,9 @@ class Infoscreen:
                 with open(content_conf) as f:
                     conf = f.read()
                 conf = yaml.load(conf)
+                for ignore in self.ignore_conf_next:
+                    del conf[ignore]
+                self.ignore_conf_next = []
                 globs['current_conf'] = conf
             except (IOError, yaml.YAMLError, AttributeError):
                 pass
