@@ -202,6 +202,7 @@ def _show_url_in_browser(url):
                        ['-p', # Disable plugins.
                         '-b', # Disable scrollbars.
                         '-d', # Disable the cache.
+                        '-F', # Run in fullscreen.
                         url])
 
 def _url_handler(url):
