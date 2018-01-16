@@ -333,7 +333,7 @@ class Infoscreen:
         self._setup_socket()
 
         proc_prev = None
-        sleep_dur_start = 1
+        sleep_dur_start = 5
         pull_time_prev = 0
 
         while True:
@@ -406,7 +406,7 @@ class Infoscreen:
             if proc_prev is not None:
                 # SIGKILL (or similar on other platforms)
                 try:
-                    print('Killing previous process {}.'.format(proc_prev))
+                    print('Killing previous process {}.'.format(proc_prev.pid))
                     os.killpg(proc_prev.pid, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
