@@ -300,7 +300,7 @@ class Infoscreen:
             order = order.decode('utf-8')
             order = order.split()
 
-            print('Order from socket: ' + order)
+            print('Order from socket: {}'.format(order))
             if len(order) == 2 and order[0] == 'goto':
                 goto = order[1]
             elif len(order) == 1 and order[0] == 'goto_next':
