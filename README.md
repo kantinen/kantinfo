@@ -30,9 +30,10 @@ Configuration of slides
 -----------------------
 
 Each slide can have a YAML file configuring it.  If a slide is called
-`something.ext`, then the corresponding configuration file is located in
-`something.ext.yaml`.  If no configuration file exists, then defaults
-are used.
+`something.ext`, then the corresponding configuration file is located
+in `something.ext.yaml` (**not** `something.yaml`, since there can be
+both a `something.ext1` and a `something.ext2`).  If no configuration
+file exists, then defaults are used.
 
 The following fields are supported:
 
