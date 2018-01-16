@@ -340,6 +340,8 @@ class Infoscreen:
 
         while True:
             content = self._choose_next_content()
+            ignore_conf = self.ignore_conf_next[:]
+            self.ignore_conf_next = []
 
             content_conf = content + globs['config_ending']
             dur = globs['duration_default']
@@ -347,10 +349,9 @@ class Infoscreen:
                 with open(content_conf) as f:
                     conf = f.read()
                 conf = yaml.load(conf)
-                for ignore in self.ignore_conf_next:
+                for ignore in ignore_conf:
                     if ignore in conf:
                         del conf[ignore]
-                self.ignore_conf_next = []
                 globs['current_conf'] = conf
             except (IOError, yaml.YAMLError, AttributeError):
                 pass
