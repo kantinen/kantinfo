@@ -348,7 +348,8 @@ class Infoscreen:
                     conf = f.read()
                 conf = yaml.load(conf)
                 for ignore in self.ignore_conf_next:
-                    del conf[ignore]
+                    if ignore in conf:
+                        del conf[ignore]
                 self.ignore_conf_next = []
                 globs['current_conf'] = conf
             except (IOError, yaml.YAMLError, AttributeError):
