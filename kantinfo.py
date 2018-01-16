@@ -291,7 +291,7 @@ class Infoscreen:
     def _check_new_messages(self):
         # Return whether any new gotos were found.
 
-        goto = None
+        goto, goto_next = None, None
 
         events = self.selector.select(0)
         for key, _mask in events:
@@ -300,14 +300,16 @@ class Infoscreen:
             order = order.decode('utf-8')
             order = order.split()
 
-            print(order)
+            print('Order from socket: ' + order)
             if len(order) == 2 and order[0] == 'goto':
                 goto = order[1]
+            elif len(order) == 1 and order[0] == 'goto_next':
+                goto_next = True
 
         if goto is not None:
             self.goto_next = goto
             self.ignore_conf_next = ['start_at', 'end_at', 'probability']
-        return goto is not None
+        return goto is not None or goto_next is not None
 
     def _choose_next_content(self):
         old_selection = self.content

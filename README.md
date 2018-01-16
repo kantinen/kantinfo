@@ -89,7 +89,8 @@ You can control a running instance of `kantinfo.py`, by running
 `kantinfo-order.py`, and giving it commands on standard in.
 `kantinfo.py` understands the following commands:
 
-  * `goto <slide>`: Stop the current slide, and go to `<slide>`.
+  * `goto_next`: Stop the current slide and go to the next one.
+  * `goto <slide>`: Stop the current slide and go to `<slide>`.
 
 
 Dependencies
