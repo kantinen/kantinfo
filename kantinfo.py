@@ -26,6 +26,7 @@ import tempfile
 import traceback
 import atexit
 import selectors
+import datetime
 import yaml
 
 
@@ -308,7 +309,7 @@ class Infoscreen:
 
         if goto is not None:
             self.goto_next = goto
-            self.ignore_conf_next = ['start_at', 'end_at', 'probability']
+            self.ignore_conf_next = ['start_at', 'end_at', 'show_when', 'probability']
         return goto is not None or goto_next is not None
 
     def _choose_next_content(self):
@@ -374,6 +375,17 @@ class Infoscreen:
                         pass
                     elif random.random() >= show_probability:
                         print('The probability was not in the favor of {}.'.format(content))
+                        continue
+
+                try:
+                    show_when = conf['show_when']
+                except (TypeError, KeyError):
+                    pass
+                else:
+                    now = datetime.datetime.today()
+                    print(repr(show_when))
+                    if not eval(show_when, {'now': now}):
+                        print('Not the time for {}.'.format(content))
                         continue
 
                 try:

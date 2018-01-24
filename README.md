@@ -42,8 +42,15 @@ The following fields are supported:
     system will not terminate the slide automatically, but rather wait
     for the slide to terminate itself.
 
+  * `show_when`: Specifies when to display the slide.  Should contain
+    a Python expression.  A variable `now` of type `datetime.datetime`
+    is available.  Example: This will only show the slide on Tuesdays:
+    `show_when: now.isoweekday() == 2`
+
   * `start_at` and `end_at` (both have to be specified, or neither):
     Describes when to display the slide, in a 24 hour clock format.
+    Incompatible with `show_when` (performs a subset of the
+    functionality of that field).
 
   * `probability`: Specifies the probability that a slide will be
     shown. Must be in the range 0 to 1.  The default value is `1`,
