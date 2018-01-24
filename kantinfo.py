@@ -122,6 +122,7 @@ def find_slides():
     content = [p for p in paths
                if os.path.isfile(p) and
                not p.endswith(globs['config_ending'])]
+    content.sort()
     return content
 
 def _time_to_min(t):
