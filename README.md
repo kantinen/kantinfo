@@ -43,9 +43,10 @@ The following fields are supported:
     for the slide to terminate itself.
 
   * `show_when`: Specifies when to display the slide.  Should contain
-    a Python expression.  A variable `now` of type `datetime.datetime`
-    is available.  Example: This will only show the slide on Tuesdays:
-    `show_when: now.isoweekday() == 2`
+    a Python expression.  Can use the variables `now` of type
+    `datetime.datetime`, and `now_timestamp` of type `int`.  Example:
+    This will only show the slide on Tuesdays: `show_when:
+    now.isoweekday() == 2`
 
   * `start_at` and `end_at` (both have to be specified, or neither):
     Describes when to display the slide, in a 24 hour clock format.
