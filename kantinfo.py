@@ -394,9 +394,9 @@ class Infoscreen:
                         traceback.print_exc()
                         continue
                     else:
-                    if not do_show:
-                        print('Not the time for {}.'.format(content))
-                        continue
+                        if not do_show:
+                            print('Not the time for {}.'.format(content))
+                            continue
 
                 try:
                     start_at = conf['start_at']
