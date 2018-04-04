@@ -383,9 +383,11 @@ class Infoscreen:
                 except (TypeError, KeyError):
                     pass
                 else:
-                    now = datetime.datetime.today()
-                    print(repr(show_when))
-                    if not eval(show_when, {'now': now}):
+                    locals = {
+                        'now': datetime.datetime.today(),
+                        'now_timestamp': time.time(),
+                    }
+                    if not eval(show_when, None, locals):
                         print('Not the time for {}.'.format(content))
                         continue
 
