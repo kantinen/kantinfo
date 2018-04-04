@@ -387,7 +387,14 @@ class Infoscreen:
                         'now': datetime.datetime.today(),
                         'now_timestamp': time.time(),
                     }
-                    if not eval(show_when, None, locals):
+                    try:
+                        do_show = eval(show_when, None, locals)
+                    except Exception as e:
+                        print('show_when code block failed for {}.'.format(content))
+                        traceback.print_exc()
+                        continue
+                    else:
+                    if not do_show:
                         print('Not the time for {}.'.format(content))
                         continue
 
