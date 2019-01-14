@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# Kør dette script hvis du vil se en infoskærm på din egen datamat.  Hos dig
-# selv, kør så:
+# Run this script on the infoscreen machine if you want to see an infoscreen on
+# your own computer.  On your own machine, run:
 #
 #   ssh -L 5900:localhost:5900 host
 #
-# hvor 'hot' er dit navn for serveren -- se README.md for en opsætningsguide.  I
-# en anden terminal hos dig selv, kør så:
+# where 'host' is the server name -- see the README for a setup guide.  In
+# another terminal on your machine, run:
 #
 #   xtightvncviewer localhost
 
