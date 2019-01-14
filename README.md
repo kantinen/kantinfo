@@ -1,12 +1,12 @@
-The Canteen's Infoscreen system
-==========================
+kantinfo: a simple infoscreen system
+====================================
 
-`kantinfo.py` runs in an instance of tmux on the `infoscreen` machine
-and the `cokepc` machine in K@ntinen -- and maybe elsewhere?
+`kantinfo.py` shows slides in rotation on a screen.  It was originally
+developed for the student-driven canteen at [DIKU](https://di.ku.dk/),
+but is now also used elsewhere.
 
-See https://github.com/datalogisk-kantineforening/infoscreen and
-https://github.com/datalogisk-kantineforening/cokepc for the two most
-important systems using the `kantinfo` software.
+See https://github.com/kantinen/infoscreen for the most prominent
+infoscreen using the `kantinfo` system.
 
 
 Content
@@ -120,7 +120,7 @@ Dependencies
 Copying
 -------
 
-Copyright © 2014-2018 The Infoscreen Group <infoskaerm@dikumail.dk>
+Copyright © 2014-2019 The Infoscreen Group <infoskaerm@dikumail.dk>
 
 This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2, as
