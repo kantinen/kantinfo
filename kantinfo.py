@@ -6,10 +6,6 @@
 # terms of the Do What The Fuck You Want To Public License, Version 2,
 # as published by Sam Hocevar. See the COPYING file for more details.
 
-# This is the control script for the informational monitors in the DIKU
-# canteen, but it can be (and is) used in other places as well.  See the
-# README.md file to find out how to use it.
-
 '''
 Run an infoscreen.
 '''
