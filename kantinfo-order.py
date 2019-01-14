@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright © 2014-2019 Infoskærms-gruppen <infoskaerm@dikumail.dk>
+# Copyright © 2014-2019 The Infoscreen Group
 #
 # This work is free. You can redistribute it and/or modify it under the
 # terms of the Do What The Fuck You Want To Public License, Version 2,
