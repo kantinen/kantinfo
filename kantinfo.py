@@ -348,7 +348,7 @@ class Infoscreen:
             try:
                 with open(content_conf) as f:
                     conf = f.read()
-                conf = yaml.load(conf)
+                conf = yaml.safe_load(conf)
                 for ignore in ignore_conf:
                     if ignore in conf:
                         del conf[ignore]
