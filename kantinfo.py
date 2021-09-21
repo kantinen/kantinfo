@@ -197,8 +197,7 @@ def _play_video(path):
 
 def _show_url_in_browser(url):
     return _run_program('surf',
-                       ['-p', # Disable plugins.
-                        '-b', # Disable scrollbars.
+                       ['-b', # Disable scrollbars.
                         '-d', # Disable the cache.
                         '-F', # Run in fullscreen.
                         url])
