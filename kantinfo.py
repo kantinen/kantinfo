@@ -350,6 +350,7 @@ class Infoscreen:
 
             content_conf = content + globs['config_ending']
             dur = globs['duration_default']
+            globs['current_conf'] = {}
             try:
                 with open(content_conf) as f:
                     conf = f.read()
