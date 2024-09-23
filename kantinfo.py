@@ -242,7 +242,13 @@ def _eval_program(filename):
         return show_content(actual_file)
 
 def _run_in_terminal(filename):
-    return _run_program('lxterminal',
+    conf = globs['current_conf']
+    opts = []
+    print(conf)
+    if 'fontsize' in conf:
+        opts += ['--option', 'font.size={}'.format(conf['fontsize'])]
+    return _run_program('alacritty',
+                        opts +
                         ['-e', # Start program
                          os.path.join(os.getcwd(), filename)])
 
