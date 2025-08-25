@@ -437,8 +437,12 @@ class Infoscreen:
 
             # Then kill it.
             if proc_prev is not None:
-                # SIGKILL (or similar on other platforms)
+                # SIGTERM first, then SIGKILL (or similar on other platforms)
+                # This is to give the process a chance to clean up.
                 try:
+                    print('Terminating previous process {}.'.format(proc_prev.pid))
+                    os.killpg(proc_prev.pid, signal.SIGTERM)
+                    time.sleep(sleep_dur_start)
                     print('Killing previous process {}.'.format(proc_prev.pid))
                     os.killpg(proc_prev.pid, signal.SIGKILL)
                 except ProcessLookupError:
